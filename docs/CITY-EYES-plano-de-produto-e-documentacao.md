@@ -1,7 +1,7 @@
 # CITY EYES — plano de produto e documentação do MVP
 
-**Versão:** 0.8 · **Contexto:** hackathon de 17–19/11/2026  
-**Status:** Expo, multi-cidade, conta para publicar e fotos em camadas aprovados; combinação visual preferida registrada; design system, backend e mapa ainda não aprovados
+**Versão:** 0.9 · **Contexto:** hackathon de 17–19/11/2026  
+**Status:** decisões de produto e arquitetura registradas como aprovadas em 16/11; fonte portátil, tokens visuais finais, provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
 ## 0. Contexto do desafio PUCPR
@@ -12,11 +12,11 @@ O evento informado é o **Desafio Replit PUCPR 2026 — “Da ideia ao software�
 
 **Presença e benefícios:** o edital citado no material exige participação integral nos três dias; o site menciona 75% para a declaração de horas. Trate o edital como requisito de participação e confirme com a organização qualquer divergência sobre declaração ou elegibilidade aos benefícios.
 
-## Acordos de trabalho e decisões pendentes
+## Acordos de trabalho e decisões
 
-O resumo-base indica que este é um projeto solo. A plataforma nativa Expo já foi escolhida; backend, mapas e repositório continuam pendentes. Vou reaproveitar as regras gerais relevantes — documentação em pt-BR, identificadores de código em inglês, Yarn para projetos JS/TS, nenhuma publicação/commit/push sem pedido explícito e nenhuma credencial em código — sem importar a arquitetura específica do projeto Plataforma de Cursos. O projeto CITY EYES não é uma plataforma de cursos; padrões de outro produto só entram se forem úteis aqui.
+O resumo-base indica que este é um projeto solo. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação e o repositório GitHub continuam pendentes. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês, nenhuma publicação/commit/push sem pedido explícito e nenhuma credencial em código.
 
-**Processo proposto antes de implementar:** fechar perfil e stack; aprovar arquitetura e estratégia de testes; aprovar os protótipos das telas antes de construir a interface. Repo GitHub, issues, regras de branch e secrets só serão criados/configurados quando forem solicitados. A documentação pode seguir uma estrutura leve inspirada no resumo-base: `CONTEXT.md`, `docs/PRD.md`, `ARCHITECTURE.md`, `TESTING.md`, `DATA.md`, `API.md`, `BACKLOG.md`, `DESIGN.md` e ADRs para decisões relevantes. Requisitos e testes terão IDs rastreáveis; decisões ainda não aprovadas ficam marcadas como propostas.
+**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9. A combinação visual preferida ainda precisa ser formalizada como tokens e testada em uma prévia combinada antes de orientar as telas Expo. Repo GitHub, issues, regras de branch e secrets só serão criados/configurados quando forem solicitados. Requisitos e testes terão IDs rastreáveis; decisões ainda não aprovadas ficam marcadas como propostas.
 
 ### Recomendação provisória para decidir
 
@@ -27,13 +27,13 @@ O resumo-base indica que este é um projeto solo. A plataforma nativa Expo já f
 | Plataforma | App nativo multiplataforma | **Escolhido:** uma codebase para Android/iOS com Expo; a demonstração não depende de publicação em loja. |
 | Acesso cidadão | Consulta pública; conta para publicar e confirmar | **Aprovado:** autenticação obrigatória no backend para envio e confirmação. Conta não comprova identidade civil nem autenticidade da foto. |
 | Escopo geográfico | Várias cidades desde o MVP | **Escolhido:** um banco compartilhado, `city_id` em todos os dados municipais e permissões por cidade; sem banco separado por município no início. |
-| Dados | PostgreSQL gerenciado no Replit + Object Storage, se disponível | Menos operação e fotos fora do banco; confirmar recursos habilitados no projeto. |
-| Mapa | Biblioteca/provedor nativo ainda pendente | A escolha precisa ser testada nos previews Android/iOS antes de fixar; o mapa não deve bloquear uma lista funcional. |
+| Dados | PostgreSQL gerenciado no Replit + Object Storage | **Aprovado:** API TypeScript modular, sem PostGIS (geocell + distância no backend); fotos fora do banco. |
+| Mapa | `react-native-maps` | **Aprovado:** já incluído no Expo Go (Apple Maps no iOS, Google Maps no Android); lista funcional como fallback se o mapa falhar. |
 | Fotos | Object Storage compatível com o ambiente, se disponível | Evita usar o banco para binários; se não houver, limitar a imagens seedadas ou fluxo de demonstração. |
 | Envio e validação de fotos | Câmera e galeria, com validação em camadas | **Aprovado:** validar arquivo, registrar origem/recebimento, conferir município e sinalizar repetições; detector de IA não bloqueia automaticamente nem certifica autenticidade. |
 | IA | Serviço multimodal chamado somente pelo backend, opcional | Mantém segredo fora do navegador; falha de serviço não pode bloquear denúncia. Alternativa: análise simulada explicitamente rotulada. |
 
-Expo nativo e suporte a várias cidades desde o MVP são escolhas já feitas. A forma do backend, mapa e serviços de dados ainda é uma **proposta**, aguardando aprovação. A arquitetura de referência do Plataforma de Cursos (Laravel separado, Redis, RabbitMQ, serviço de IA separado etc.) é deliberadamente considerada excessiva para este MVP, a menos que você queira priorizá-la por experiência ou requisito.
+As escolhas da tabela são a base aprovada para o MVP, com as pendências explicitadas no cabeçalho e na seção 16. A arquitetura de referência do Plataforma de Cursos (Laravel separado, Redis, RabbitMQ, serviço de IA separado etc.) é deliberadamente considerada excessiva para este MVP, a menos que você queira priorizá-la por experiência ou requisito.
 
 ### Decisão de plataforma: Android e iOS
 
@@ -42,7 +42,7 @@ Expo nativo e suporte a várias cidades desde o MVP são escolhas já feitas. A 
 | Web responsiva/PWA | Um app web abre em navegadores Android e iOS e pode ser compartilhado por link | Não é binário nativo; recursos/instalação variam por navegador | Considerada, mas não escolhida |
 | App nativo multiplataforma com Expo | Um código React Native/TypeScript para Android e iOS, com experiência e APIs de dispositivo mais próprias de app | Exige um backend e teste de builds/permissões nos dois sistemas | **Escolhida** |
 
-“Monólito” aqui será tratado como **um repositório e um backend modular, sem microserviços**. O app Expo é um cliente nativo compartilhado entre Android/iOS e consumirá essa API; cliente e servidor são partes separadas. O banco/storage e o provedor de mapas ainda aguardam decisão técnica final.
+“Monólito” aqui será tratado como **um repositório e um backend modular, sem microserviços**. O app Expo é um cliente nativo compartilhado entre Android/iOS e consumirá essa API; cliente e servidor são partes separadas.
 
 > **Decisão de escopo:** entregar um fluxo de ponta a ponta que funcione ao vivo. O diferencial apresentado será a combinação de evidência visual, prioridade explicável, contexto geográfico e acompanhamento público — não prometer previsão ou decisão automática da prefeitura.
 
@@ -72,7 +72,7 @@ Demonstrar em poucos minutos uma denúncia nova percorrendo o caminho **registro
 - A apresentação tem dados de demonstração, incluindo um caso resolvido.
 
 ### Fora do MVP de amanhã
-Previsão de falhas, integração real com prefeitura, despacho de equipes, notificações por e-mail/SMS, login social, moderação em escala, análise de vídeo, detector automático de autenticidade como autoridade, classificação automática juridicamente vinculante, confirmação de identidade e garantia de que uma obra foi concluída. São hipóteses de evolução, não capacidades prometidas.
+Previsão de falhas, integração real com prefeitura, despacho de equipes, notificações por e-mail/SMS, múltiplos provedores de login (o MVP usa um único provedor gerenciado, mesmo que ele ofereça entrada via conta Google/Replit), moderação em escala, análise de vídeo, detector automático de autenticidade como autoridade, classificação automática juridicamente vinculante, confirmação de identidade e garantia de que uma obra foi concluída. São hipóteses de evolução, não capacidades prometidas.
 
 ## 3. Atores e permissões
 
@@ -92,9 +92,9 @@ Previsão de falhas, integração real com prefeitura, despacho de equipes, noti
 | ID | Funcionalidade | Prioridade | Escopo para amanhã |
 |---|---|---|---|
 | F-01 | Criar ocorrência com categoria, descrição, imagem e localização | P0 | Obrigatória; se câmera/upload falhar, aceitar imagem de exemplo e seleção de mapa |
-| F-02 | Análise assistida: categoria, severidade e resumo | P0 | IA real se acessível; fallback claramente identificado como demonstração |
-| F-03 | Detecção de possíveis duplicatas por proximidade/categoria | P0 | Heurística geográfica simples; sugerir, nunca fundir automaticamente |
-| F-04 | Seletor de cidade, mapa e lista sincronizados | P0 | Pins e filtros limitados à cidade selecionada |
+| F-02 | Análise assistida: categoria, severidade e resumo | P1 | IA real se acessível; fallback claramente identificado como demonstração |
+| F-03 | Detecção de possíveis duplicatas por proximidade/categoria | P1 | Heurística geográfica simples; sugerir, nunca fundir automaticamente |
+| F-04 | Seletor de cidade, lista e detalhe públicos | P0 | Conteúdo limitado à cidade selecionada; lista é o fallback funcional |
 | F-05 | Fila municipal e mudança de status | P0 | Operador só vê/altera registros das cidades em que tem vínculo |
 | F-06 | Evidência de reparo | P1 | Foto/nota adicionada ao concluir; comparação visual automatizada é demonstração ou fase futura |
 | F-07 | Confirmação por cidadãos | P1 | Botão “ainda está acontecendo” ou contagem de confirmações |
@@ -102,8 +102,9 @@ Previsão de falhas, integração real com prefeitura, despacho de equipes, noti
 | F-09 | Notificações de atualização | P2 | Fora do hackathon |
 | F-10 | Previsão de problemas futuros | P2 | Fora do hackathon; exige histórico e validação |
 | F-11 | Registrar origem da foto e localização | P0 | Distinguir câmera/galeria/demo e GPS/pin; sinal de contexto, não prova de autenticidade |
+| F-12 | Mapa interativo sincronizado com a lista | P1 | Pins e filtros da cidade selecionada; mapa pode ser cortado sem perder a lista |
 
-**Regra de corte:** se o prazo apertar, entregar F-01, F-04 e F-05 com registros de exemplo e análise simulada explícita. Não sacrificar o fluxo principal por funcionalidades P2.
+**Regra de corte:** F-01, F-04, F-05 e F-11 formam o fluxo essencial. Se faltar tempo, cortar F-06–F-08, depois F-02/F-03 e F-12. A análise simulada só aparece se estiver claramente rotulada; não sacrificar o fluxo de publicação e a autorização municipal por funcionalidades P1/P2.
 
 ## 5. Histórias de usuário e critérios de aceite
 
@@ -174,11 +175,12 @@ A análise expira/falha. A ocorrência continua utilizável, marcada como “an�
 Estados: **aberta → em análise → em atendimento → resolvida**. Estado adicional **inviável/duplicada** pode ser usado por operador com justificativa; manter vínculo para ocorrência duplicada. Reabertura pode voltar de resolvida para aberta, registrando evento e motivo.
 
 - **Gravidade estimada (0–100):** sugestão da IA, acompanhada por fatores/justificativa. Não equivale a risco certificado. Se não houver modelo, usar estado “demo” e dados pré-definidos.
-- **Prioridade operacional:** combinação configurável de gravidade sugerida, tipo de local, tempo aberto e confirmações. Mostrar como recomendação, não decisão automática.
+- **Prioridade operacional:** `priority = severity_score * 0.5 + dias_aberto * 2 + confirmações_still_exists * 5` (severidade ausente conta como 50). Pesos são constantes no backend, ajustáveis depois. Mostrar como recomendação, não decisão automática.
 - **Possível duplicidade:** distância e categoria semelhantes dentro da mesma cidade; limiar ajustável. Deve ser revisada por pessoa.
 - **Origem da evidência:** registrar se a imagem veio da câmera no app, da galeria ou de dados de demonstração. Isso descreve o caminho de envio, não comprova quando/onde a cena aconteceu.
 - **Privacidade:** remover metadados EXIF quando possível; não exigir nome/endereço; evitar publicar rostos/placas; política de retenção e denúncia de conteúdo abusivo são necessárias antes de produção.
 - **Localização:** pedir permissão foreground explicitamente e usar GPS como sugestão única; deixar a pessoa confirmar ou ajustar o pin. Oferecer escolha manual, não rastrear em segundo plano e rejeitar pontos fora dos limites da cidade ativa.
+- **Limite municipal (MVP):** bbox retangular por cidade (`min_lat`, `min_lng`, `max_lat`, `max_lng`), rotulada como aproximação; pode aceitar pontos de municípios vizinhos nas bordas. Polígono oficial (malha municipal do IBGE) entra depois em `boundary_geojson`.
 - **Bairros:** não pedir que a equipe cadastre uma lista para cada cidade no MVP. Usar coordenada e limite municipal; exibir bairro somente quando houver polígonos municipais confiáveis.
 
 ### Confiança e validação das imagens
@@ -213,7 +215,8 @@ cities
 - id UUID PK
 - name TEXT NOT NULL
 - slug TEXT UNIQUE NOT NULL
-- boundary_geojson JSONB NULL (limite municipal; geometria espacial se PostGIS estiver disponível)
+- min_lat, min_lng, max_lat, max_lng DECIMAL(9,6) NOT NULL (bbox aproximada usada no MVP)
+- boundary_geojson JSONB NULL (polígono oficial futuro; não usado no MVP)
 - created_at TIMESTAMPTZ
 
 users
@@ -236,7 +239,7 @@ reports
 - id UUID PK
 - city_id UUID NOT NULL REFERENCES cities(id)
 - public_code TEXT UNIQUE NOT NULL
-- title TEXT NOT NULL
+- title TEXT NOT NULL (gerado pelo backend a partir da categoria + endereço/código, ex.: "Buraco — CTB-0042"; não é campo do formulário)
 - description TEXT
 - category ENUM('pothole','lighting','drainage','sidewalk','other')
 - status ENUM('open','reviewing','in_progress','resolved','invalid','duplicate')
@@ -249,7 +252,7 @@ reports
 - address_label TEXT NULL
 - severity_score SMALLINT NULL CHECK (0..100)
 - severity_reason TEXT NULL
-- ai_state ENUM('pending','complete','unavailable','demo')
+- ai_state ENUM('pending','complete','unavailable','demo') (na UI, 'demo' sempre aparece como "Simulação")
 - duplicate_of UUID NULL REFERENCES reports(id)
 - reporter_id UUID NOT NULL REFERENCES users(id)
 - created_at, updated_at TIMESTAMPTZ
@@ -314,7 +317,7 @@ Para suportar várias cidades desde o MVP e crescer sem redesenhar tudo:
 
 **Referências Replit:** [Native Mobile Apps](https://docs.replit.com/features/artifact-types/building-mobile-apps), [Preview and test on your phone](https://docs.replit.com/build/mobile-preview-testing), [Database](https://docs.replit.com/features/data-and-storage/sql-database), [Data recovery](https://docs.replit.com/features/data-and-storage/data-recovery), [Object Storage](https://docs.replit.com/features/data-and-storage/object-storage) e [Deployment types](https://docs.replit.com/features/publishing/deployment-types).
 
-## 9. Arquitetura recomendada para o prazo (proposta, aguarda aprovação)
+## 9. Arquitetura para o prazo (aprovada em 16/11)
 
 **Stack proposta após a decisão de app nativo:** Expo + React Native + TypeScript para uma codebase Android/iOS; um backend/API TypeScript modular no mesmo repositório, sem microserviços; PostgreSQL gerenciado do Replit para dados e App Storage/Object Storage para fotos; IA multimodal chamada apenas pelo backend. Isso mantém o backend como monólito modular e um app mobile compartilhado, mas são dois processos (cliente nativo e servidor), não um único binário. A documentação do Replit descreve preview em simuladores iOS/Android e teste em aparelho via Expo Go; publicação na Google Play não é suportada pelo fluxo do Replit, enquanto há fluxo guiado para App Store. O hackathon pode demonstrar sem publicar nas lojas.
 
@@ -330,7 +333,7 @@ App Expo (Android/iOS)
 
 **Endpoints indicativos:** `GET /api/cities`, `GET /api/cities/:cityId/reports?bbox=&status=&category=`, `POST /api/cities/:cityId/reports`, `GET /api/cities/:cityId/reports/:reportId`, `POST /api/cities/:cityId/reports/:reportId/confirmations`, `POST /api/cities/:cityId/reports/:reportId/status` (operador), `POST /api/cities/:cityId/reports/:reportId/media` (upload/evidência), `POST /api/cities/:cityId/reports/:reportId/analyze` (interno/servidor). Todo endpoint administrativo valida membership do usuário e cidade no servidor. Validar payloads e limitar tamanho/tipo de arquivo.
 
-**Autenticação aprovada:** mapa e detalhes públicos; conta obrigatória para publicar e confirmar; acesso de operador protegido por vínculo municipal. Usar um provedor de autenticação gerenciado compatível com Expo e backend; a escolha/configuração do provedor depende de validação técnica, sem implementar autenticação criptográfica própria. Testar login, logout, expiração e retorno ao fluxo. Não confiar em esconder botões; a API valida sessão e permissões e protege uploads contra uso anônimo. O app não recebe credenciais privilegiadas de banco/storage. Se o login ainda não funcionar, a entrega não atende ao requisito aprovado; modo demonstrativo deve ser declarado, não usado como substituto silencioso.
+**Autenticação aprovada:** mapa e detalhes públicos; conta obrigatória para publicar e confirmar; acesso de operador protegido por vínculo municipal. Usar um provedor de autenticação gerenciado compatível com Expo e backend; a escolha/configuração do provedor depende de validação técnica, sem implementar autenticação criptográfica própria. Testar login, logout, expiração e retorno ao fluxo. Não confiar em esconder botões; a API valida sessão e permissões e protege uploads contra uso anônimo. O app não recebe credenciais privilegiadas de banco/storage. Se o login gerenciado não funcionar, aplicar o fallback de autenticação da seção 14 (contas seed, rotulado e declarado no pitch), nunca como substituto silencioso.
 
 ## 10. Protótipos e design system
 
@@ -354,13 +357,13 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 **Recomendação para este hackathon:** fazer um protótipo clicável simples em HTML/CSS/JavaScript para aprovar fluxo e telas, mantendo-o sem backend e sem bibliotecas pesadas. Usar `?cidade=`, `?estado=` e `?tema=escuro` para alternar contextos e estados. Depois de aprovado, fazer uma única build mobile Expo e reutilizar tokens, conteúdo, dados seed, rótulos e decisões — não tentar converter DOM/CSS para React Native. Se a prioridade mudar para reutilizar código de tela, abandonar o HTML e prototipar diretamente em Expo com dados falsos.
 
-**Protótipo em revisão:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. Todos os relatos, pontos, login, IA e ações do operador são simulados. O método de prototipagem foi aprovado; as telas ainda aguardam revisão antes de qualquer implementação nativa.
+**Protótipo em revisão:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. Todos os relatos, pontos, login, IA e ações do operador são simulados. **Telas aprovadas em 16/11**; liberadas para implementação nativa.
 
-**Direções visuais em comparação:** três cópias independentes exploram serviço cívico claro, participação comunitária e operação municipal. A preferência registrada é combinar as cores de Participação comunitária com a tipografia de Operação municipal. Os tokens candidatos e trade-offs estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md); a fonte exata e o restante do sistema aguardam definição.
+**Direção visual aprovada:** cores de Participação comunitária + tipografia de Operação municipal. Os tokens estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md) e devem ser colados no bloco DESIGN do prompt da build antes de usá-lo.
 
 **Sobre créditos:** a documentação do Replit afirma que ajustes simples no Visual Editor não consomem créditos, mas o Design “Build” gera um artefato web e não entrega componentes nativos. Não há base para prometer que toda geração de frames ou build será gratuita. Referências: [Replit Design](https://docs.replit.com/design/what-is-replit-design), [Build your design](https://docs.replit.com/design/build-your-design), [preview de apps mobile](https://docs.replit.com/build/mobile-preview-testing).
 
-**Sistema visual final ainda não definido:** depois de escolher uma direção, formalizar tokens semânticos, temas claro/escuro, tipografia, escala de espaçamento, raios, componentes, estados, contraste WCAG AA, foco visível, alvos de toque de 44 px, VoiceOver/TalkBack e microcopy em português brasileiro.
+**Formalização do sistema visual (direção aprovada):** formalizar tokens semânticos, temas claro/escuro, tipografia, escala de espaçamento, raios, componentes, estados, contraste WCAG AA, foco visível, alvos de toque de 44 px, VoiceOver/TalkBack e microcopy em português brasileiro.
 
 ## 11. UX e telas
 
@@ -397,11 +400,10 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 | T-21 | Sessão expirada durante envio | API exige novo acesso; app explica o erro sem afirmar que publicou | P0 |
 | T-22 | Cliente envia outro reporter_id | Autor é derivado da sessão; não publica em nome de outra conta | P0 |
 | T-23 | Conta confirma duas vezes o mesmo tipo de apoio | Restrição no banco impede duplicidade de contagem | P1 |
-| T-15 | Operador de cidade A tenta ler/alterar cidade B | API nega a operação e não revela dados privados | P0 |
-| T-16 | Relato fora dos limites da cidade selecionada | App pede correção/seleção de outra cidade; não grava no município incorreto | P0 |
-| T-17 | Duplicata próxima em outra cidade | Não aparece como duplicata do relato atual | P1 |
 
-**Smoke test antes da apresentação:** testar Android e iOS no simulador, e localização/câmera em um aparelho real via Expo Go; criar relato; verificar análise/fallback; abrir relato; entrar no painel; mudar status; confirmar evento e indicador. Manter três registros seedados e uma conta de operador disponíveis caso rede/IA falhe.
+**Ambiente de teste aprovado:** iOS no Simulator do Mac controlado por `idb` (toque, texto, screenshot, árvore de acessibilidade, `xcrun simctl location` para GPS simulado); Android no aparelho físico controlado por `adb` (`adb shell input`, `adb exec-out screencap`, `uiautomator dump`), que também cobre câmera e GPS reais. Os dois rodam o app via Expo Go apontando para o servidor de dev do Replit. Validação é feita por esses controles, não pelo agente do Replit.
+
+**Smoke test antes da apresentação:** iOS no Simulator (idb) e Android no aparelho (adb, incluindo câmera e localização reais); criar relato; verificar análise/fallback; abrir relato; entrar no painel; mudar status; confirmar evento e indicador. Manter três registros seedados e uma conta de operador disponíveis caso rede/IA falhe.
 
 **Estratégia automatizada proposta (depende da stack aprovada):** cobrir regras de negócio e autorização com testes unitários; validar API, validação e persistência com integração; testar a jornada mobile com ferramenta compatível com Expo após confirmar o setup; testar estados de falha da IA/storage com dependências simuladas. Para Expo, avaliar Jest/jest-expo + React Native Testing Library para componentes, testes da API e smoke manual em simulador/aparelho. O padrão de cobertura de 75% indicado no resumo-base pode ser usado no CI do repositório, mas é uma decisão de fundação a confirmar; para o hackathon, o essencial é proteger os fluxos e riscos P0 sem inflar o escopo.
 
@@ -435,10 +437,9 @@ Ao final, revisar de forma independente **requisitos ↔ casos de uso ↔ protó
 2. Os fluxos de cidadão e operador passam em Android e iOS; permissões concedidas/negadas, falhas de rede e IA indisponível foram verificadas, incluindo a negação de acesso entre cidades.
 3. As telas reais são comparadas aos protótipos aprovados; checar legibilidade, estados, safe areas, navegação, VoiceOver/TalkBack e consistência visual nos dois sistemas.
 4. Regras, autorização, isolamento entre cidades, validação de upload e consultas geográficas têm testes fora da camada de UI.
-5. Performance é observada em build de release, não somente em modo de desenvolvimento: tempo de início, fluidez nas transições/listas/mapa, latência da API, upload e consultas ao banco. Em caso de queda, perfilar com Android Studio Profiler e Xcode Instruments; para API, rodar carga com dataset distribuído entre cidades e monitorar consultas/recursos do banco.
-6. Bugs encontrados são classificados por impacto e nenhum problema crítico de segurança, perda de dados ou bloqueio do fluxo principal fica oculto no pitch.
+5. Bugs encontrados são classificados por impacto e nenhum problema crítico de segurança, perda de dados ou bloqueio do fluxo principal fica oculto no pitch.
 
-Não fixar metas de p95, volume simultâneo ou FPS específicos sem antes definir cenário/dispositivos e medir baseline; registrar método, ambiente, resultado e limitações da validação.
+**Pós-hackathon (fora do gate):** performance em build de release (Android Studio Profiler, Xcode Instruments, carga na API com dataset entre cidades) e pipeline Maestro/EAS. Não fixar metas de p95, volume simultâneo ou FPS sem cenário/dispositivos definidos e baseline medida.
 
 ## 13. Segurança, privacidade e confiabilidade
 
@@ -452,20 +453,36 @@ Não fixar metas de p95, volume simultâneo ou FPS específicos sem antes defini
 
 ## 14. Plano de execução para amanhã
 
+### Prioridades de desenvolvimento
+
+Tempo real: 3 dias × 3h, solo. Construir em ondas; cada onda só começa com a anterior funcionando ponta a ponta em iOS (idb) e Android (adb).
+
+| Onda | Entrega | Requisitos | Critério de pronto |
+|---|---|---|---|
+| 1 | Seed de 4 cidades (bbox) + relatos demo; seletor de cidade; lista e detalhe públicos | F-04 (lista), US-04, US-09, T-19 | Trocar cidade muda a lista; detalhe abre |
+| 2 | Criar relato: categoria, descrição, foto (câmera/galeria), localização GPS/pin, validação de bbox | F-01, F-11, T-01, T-02, T-03, T-16 | Relato novo aparece na lista sem recarregar |
+| 3 | Autenticação para publicar + contas seed de operador; fila municipal, mudança de status com nota, histórico | F-05, US-06, US-10, T-07, T-08, T-15, T-20, T-22 | Operador de Curitiba muda status; operador de Londrina é negado |
+| 4 | Mapa (`react-native-maps`) sincronizado com a lista | F-04 (mapa) | Pins da cidade ativa; lista continua como fallback |
+| 5 | Análise de IA (ou "Simulação" rotulada) + possível duplicata | F-02, F-03, T-04, T-05 | Falha de IA não perde relato; duplicata só sugere |
+| 6 | Evidência de reparo, confirmações, indicadores | F-06, F-07, F-08 | Caso resolvido com evidência visível ao público |
+
+**Fallback de autenticação:** se o login gerenciado não funcionar até o fim da onda 3, usar contas seed com seletor "Entrar como (modo demonstração)", rotulado na tela e declarado no pitch. A API continua derivando autor e papel da sessão; o fallback troca só o provedor, nunca a checagem.
+
+**Ordem de corte:** remover de baixo para cima (6 → 5 → 4). Ondas 1–3 não são cortáveis.
+
 ### Dia 1 — 17/11: ideia para plano
 - Validar o problema e o público: cidadãos reportam, equipes municipais triagem e priorizam.
 - Definir a proposta de negócio/gestão: reduzir fragmentação e dar visibilidade à fila e ao andamento; não afirmar ganhos medidos sem dados.
 - Fechar o recorte demonstrável: recomenda-se começar por **buracos e infraestrutura viária** para a narrativa ficar concreta; manter outras categorias como evolução.
 - Preparar dados seedados para Curitiba, Londrina, Maringá e Ponta Grossa; a repetição de Ponta Grossa na lista recebida foi tratada como duplicata.
 - Desenhar seletor de cidade, fluxo de denúncia e fila municipal; revisar histórias, aceite e limites do MVP.
-- Preparar registros de demonstração e decidir quem apresenta cada parte, mesmo que a inscrição seja individual.
+- Preparar registros de demonstração (categoria buraco) e as contas seed de operador.
 
 ### Dia 2 — 18/11: plano para app nativo
 - Antes da primeira build, colar o prompt completo abaixo no modo Power, depois de verificar o modo, a disponibilidade dos créditos e as condições de uso.
-- Fazer uma prova rápida do mapa e permissões em Android/iOS; não seguir com uma biblioteca que não funcione nos dois previews.
-- Validar primeiro o caminho feliz completo: criar ocorrência → vê-la no mapa/lista → triagem → mudança de status.
+- Seguir as ondas 1–3 primeiro; mapa só na onda 4, com a lista funcionando antes.
 - Ajustar falhas uma por vez; usar o modo Gratuito quando fizer sentido, como recomenda o guia.
-- Testar no simulador Android/iOS e em um aparelho via Expo Go para câmera e localização; manter dados de demonstração caso mapa, IA ou rede falhem.
+- Validar cada onda no Simulator iOS (idb) e no aparelho Android (adb, câmera e GPS reais); manter dados de demonstração caso mapa, IA ou rede falhem.
 
 ### Dia 3 — 19/11: app para pitch
 - Corrigir somente problemas que atrapalhem o fluxo ao vivo; evitar novas funcionalidades.
@@ -491,10 +508,10 @@ FLUXO PRINCIPAL
 3. Ao enviar, salvar a ocorrência antes de chamar IA. Mostrar categoria sugerida, gravidade estimada de 0 a 100 e justificativa curta, sempre rotuladas como estimativas. Se IA ou mapa falhar, o relato deve continuar salvo e a tela deve mostrar uma alternativa clara.
 4. Sinalizar ocorrências de categoria semelhante próximas na mesma cidade como “possíveis duplicatas”; permitir abrir a existente ou continuar. Nunca combinar registros automaticamente nem misturar cidades.
 5. O detalhe mostra localização, imagem, categoria, gravidade sugerida, status e histórico cronológico.
-6. O painel de operador mostra fila priorizável, filtros e contadores de abertas/em análise/em atendimento/resolvidas. O operador pode mudar status e adicionar nota; ao resolver, oferecer envio de foto de evidência.
+6. O painel de operador mostra fila ordenada por prioridade sugerida = severidade*0.5 + dias aberto*2 + confirmações*5 (severidade ausente = 50), rotulada como recomendação, com filtros e contadores de abertas/em análise/em atendimento/resolvidas. O operador pode mudar status e adicionar nota; ao resolver, oferecer envio de foto de evidência.
 
 ESTADOS
-Aberta → Em análise → Em atendimento → Resolvida; também pode haver “Inválida” ou “Possível duplicata” com justificativa. Guardar histórico de quem mudou, quando e por quê. A IA não altera status nem decide prioridade final.
+Aberta → Em análise → Em atendimento → Resolvida; também pode haver “Inválida” ou “Duplicada” (só por decisão de operador, com justificativa e vínculo ao relato original). “Possível duplicata” é apenas sugestão exibida, nunca status. Guardar histórico de quem mudou, quando e por quê. A IA não altera status nem decide prioridade final.
 
 IMPLEMENTAÇÃO E DADOS
 - Use uma codebase Expo/React Native/TypeScript para o app e um único backend/API TypeScript modular no mesmo projeto; não criar microserviços.
@@ -502,17 +519,24 @@ IMPLEMENTAÇÃO E DADOS
 - A política de fotos foi aprovada: aceitar câmera e galeria, validar formato/tamanho, registrar origem e horário de recebimento no servidor, conferir município e sinalizar reenvios idênticos por hash. Detector de IA não deve bloquear automaticamente nem declarar autenticidade; manter revisão humana separada da análise de gravidade.
 - Persistir cidades, associação usuário-cidade, ocorrências e eventos no PostgreSQL gerenciado do Replit, se disponível. O app chama a API; não expor credenciais privilegiadas de banco no cliente.
 - Guardar fotos no App Storage/Object Storage, mantendo apenas referências no banco. Se os serviços não estiverem disponíveis, usar dados seedados e evidência demo rotulada; não fingir persistência real.
-- Escolher biblioteca/provedor de mapa somente após validar configuração em Android e iOS. Se o mapa não carregar, oferecer lista funcional.
-- Incluir `city_id` desde o início, filtrar por cidade e por área visível; não carregar todos os relatos no mapa. PostGIS só se a extensão estiver disponível; senão, usar geocell indexado e cálculo de distância no backend.
+- Mapa com `react-native-maps` (compatível com Expo Go). Se o mapa não carregar, oferecer lista funcional.
+- Incluir `city_id` desde o início, filtrar por cidade e por área visível; não carregar todos os relatos no mapa. Sem PostGIS: usar geocell indexado e cálculo de distância no backend.
+- Limite municipal: cada cidade tem bbox (min_lat, min_lng, max_lat, max_lng); a API rejeita ponto fora da bbox da cidade selecionada.
+- O título do relato é gerado pelo backend (categoria + código público); não pedir título no formulário.
+- Criar contas seed: um operador de Curitiba e um de Londrina, credenciais lidas de Secrets, nunca no código.
+- Se a IA não estiver configurada, `ai_state = 'demo'` e a UI mostra “Simulação”.
 - Toda API administrativa valida o vínculo do operador com a cidade; incluir teste em que um operador de uma cidade tenta ler/alterar outra.
 - Nunca expor segredo no frontend. Validar categoria, descrição, localização e upload.
-- Se IA não estiver configurada, usar resultado de demonstração claramente marcado “simulação”; não afirmar que houve análise real.
+- Não afirmar que houve análise real quando o resultado for simulação.
 
 DESIGN
-Visual limpo e profissional, pensado para uma apresentação de negócios/gestão: azul escuro, verde de status, boa legibilidade em celular, acessibilidade para VoiceOver/TalkBack e estados de carregamento, vazio e erro. Não usar dados de cidade real como se fossem verificados: identificar seed/demo.
+Visual limpo e profissional, pensado para uma apresentação de negócios/gestão. Use estes tokens: [COLAR AQUI os tokens de cores de Participação comunitária e a tipografia de Operação municipal de CITY-EYES-direcoes-visuais.md]. Boa legibilidade em celular, acessibilidade para VoiceOver/TalkBack e estados de carregamento, vazio e erro. Não usar dados de cidade real como se fossem verificados: identificar seed/demo.
 
 ENTREGA E TESTE
-Inclua as quatro cidades de demonstração (Curitiba, Londrina, Maringá e Ponta Grossa), dados variados em cada uma e um caso resolvido com evidência. Use relatos sintéticos, claramente identificados como demo, não ocorrências verificadas. Teste no Android e iOS: selecionar cidade, criar relato, vê-lo no mapa/lista, abrir painel de operador autorizado, mudar status e confirmar histórico/contadores; validar que um operador não acessa outra cidade. Testar câmera e localização em aparelho real. Priorize esse fluxo antes de qualquer funcionalidade secundária. Não implemente previsão de falhas, notificações ou integração com prefeitura nesta versão.
+Inclua as quatro cidades de demonstração (Curitiba, Londrina, Maringá e Ponta Grossa), dados variados em cada uma e um caso resolvido com evidência. Use relatos sintéticos, claramente identificados como demo, não ocorrências verificadas. Inclua testes automatizados da API para: operador de uma cidade negado em outra, requisição anônima negada ao publicar, ponto fora da bbox rejeitado. Não implemente previsão de falhas, notificações ou integração com prefeitura nesta versão.
+
+ORDEM DE CONSTRUÇÃO (se travar, corte nesta ordem)
+Construa nesta ordem e só avance com a etapa anterior funcionando: 1) cidades seed + lista/detalhe públicos; 2) criar relato com foto e localização; 3) login, fila do operador, status e histórico, isolamento entre cidades; 4) mapa; 5) IA/simulação e possíveis duplicatas; 6) evidência de reparo, confirmações e indicadores. Se faltar tempo, remova 6, depois 5, depois 4. Nunca remova 1–3. Se o login gerenciado falhar, use contas seed com “Entrar como (modo demonstração)” rotulado na tela, mantendo a checagem de sessão e papel no backend.
 ```
 
 Se faltar tempo, remover previsões, notificações e confirmação avançada. Não remover autenticação para publicar, isolamento municipal, persistência quando disponível, tratamento de erro nem o fluxo principal.
@@ -532,13 +556,14 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 
 - Cidades da demo: Curitiba, Londrina, Maringá e Ponta Grossa (Ponta Grossa apareceu duas vezes no resumo recebido); confirmar somente se a repetição indicava outra cidade.
 - IA: testar disponibilidade cedo; se não houver acesso ou estabilidade, usar análise simulada, rotulada como demo, com revisão manual.
-- Backend, banco e fotos: proposta é API TypeScript + PostgreSQL + App Storage do Replit; confirmar disponibilidade e configuração no projeto.
-- PostGIS: não confirmado na documentação consultada; testar disponibilidade ou usar geocell/geohash sem extensão.
-- Mapas: escolher biblioteca/provedor após um teste técnico curto nos dois sistemas, antes de fechar o protótipo de alta fidelidade.
+- Backend, banco e fotos: aprovado API TypeScript + PostgreSQL + App Storage do Replit; confirmar só a disponibilidade no projeto.
+- PostGIS: fora do MVP; geocell/geohash sem extensão.
+- Mapas: aprovado `react-native-maps`.
+- Limite municipal: bbox por cidade no MVP; polígono IBGE depois.
 - Método de prototipagem: HTML/CSS/JavaScript clicável aprovado; código é referência visual/funcional e não será convertido diretamente para componentes Expo.
 - Escala alvo: definir volume, número de cidades, usuários simultâneos e retenção antes de qualquer promessa de capacidade.
 - Provedor de autenticação: selecionar e validar solução gerenciada compatível com Expo; conta para publicar/confirmar e autorização municipal já foram aprovadas como requisitos.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.
 - Idioma inicial: português do Brasil; acessibilidade e celular desde o começo.
 
-**Próxima decisão de produto recomendada:** manter a demo focada em **buracos e infraestrutura viária** ou incluir desde já iluminação e drenagem? O documento assume as cinco categorias acima, mas a demo pode ganhar clareza ao começar com uma só.
+**Decisão de categorias:** o enum mantém as cinco categorias; dados seed e roteiro da demo usam só **buraco**, para a narrativa ficar concreta.
