@@ -1,9 +1,11 @@
 # CITY EYES — direções visuais em avaliação
 
-**Status:** opções para comparação; nenhuma direção ou token foi aprovado  
+**Status:** combinação preferida registrada; sistema e tokens finais ainda não foram aprovados  
 **Data:** 16/11/2026
 
 Este documento compara três hipóteses de sistema visual para o CITY EYES. O primeiro protótipo verde/creme é somente uma referência funcional e não representa uma escolha. Os três protótipos mantêm os mesmos dados e fluxos, mas variam identidade visual e hierarquia para ajudar a decidir.
+
+**Preferência registrada:** combinar a paleta de **Participação comunitária** com a tipografia de **Operação municipal**. Isso orienta uma quarta proposta combinada; não significa que o design system esteja fechado. A fonte exata depende de existir um arquivo licenciado utilizável ou da escolha de uma alternativa multiplataforma.
 
 ## O que permanece igual
 
