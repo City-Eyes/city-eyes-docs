@@ -7,7 +7,7 @@ Este documento registra três hipóteses comparadas e a combinação escolhida p
 
 **Direção escolhida:** combinar a paleta de **Participação comunitária** com a intenção tipográfica de **Operação municipal**. Como Avenir Next não foi fornecida como fonte licenciada, esta proposta usa **Nunito Sans**: alternativa gratuita e portátil, próxima da família Avenir, mas não idêntica. O usuário aceitou fechar fonte e tokens usando essa recomendação.
 
-O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. Essa aprovação é distinta da aparência final. A proposta combinada está formalizada no artefato `CITY EYES — Design System`; revisar a prévia antes de aplicar tokens às telas Expo.
+O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. Essa aprovação é distinta da aparência final. A proposta combinada foi aprovada em 16/11 no artefato `CITY EYES — Design System` e aplicada à quarta variante clicável no canvas. Usar o pacote como fonte visual do app Expo.
 
 ## O que permanece igual
 
@@ -113,11 +113,11 @@ O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. Essa apr
 - Raios: 6, 9, 12, 16 e 999 px.
 - Elevação: `0 2px 7px` para cartões e `0 12px 32px` para painéis.
 
-## Revisão antes da aprovação final
+## Revisão da aplicação ao protótipo
 
-Os valores das três hipóteses acima são candidatos extraídos dos protótipos. A proposta combinada abaixo já está no artefato, mas ainda precisa de revisão visual de cada componente, foco, leitor de tela, escala de texto e comportamento em celular.
+Os valores das três hipóteses acima são candidatos extraídos dos protótipos; eles não substituem os tokens aprovados abaixo. A quarta variante combinada usa os componentes do pacote em um preview de 390×844. Sua interação e acessibilidade ainda devem ser verificadas separadamente.
 
-Os tokens estão formalizados como candidata única no artefato de design system. A aprovação da prévia libera o uso como base visual; a aprovação do fluxo existente não aprova automaticamente esta aparência.
+Os tokens estão formalizados e aprovados no artefato de design system. O HTML/CSS/JavaScript original e as três direções anteriores permanecem preservados.
 
 ## 4. Proposta combinada — CITY EYES
 
@@ -138,4 +138,4 @@ Os tokens estão formalizados como candidata única no artefato de design system
 - **Espaçamento proposto:** base 4 px; escala 4, 8, 12, 16, 20, 24, 32 e 40 px.
 - **Raios propostos:** base 14 px; famílias 8, 14, 20, 28 px e pill 999 px.
 - **Elevação proposta:** `0 2px 8px #3b49351a` para cartões; `0 16px 38px #3443371c` para painéis.
-- **Ajuste de acessibilidade:** texto secundário claro usa `#536457` (em vez do `#637368` da amostra) para atingir contraste AA nas superfícies clara, creme e verde-claro. Os pares de texto/ação primários, acento, sucesso, atenção e perigo foram medidos; testar os componentes completos, foco, zoom e temas claro/escuro antes de aprovar.
+- **Ajuste de acessibilidade:** texto secundário claro usa `#536457` (em vez do `#637368` da amostra) para atingir contraste AA nas superfícies clara, creme e verde-claro. Os pares semânticos foram medidos e a primeira tela da variante foi verificada em 390×844. Ainda é necessário testar os fluxos completos, foco, leitor de tela, escala de texto e tema escuro no app.
