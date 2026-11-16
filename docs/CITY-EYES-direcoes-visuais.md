@@ -1,13 +1,13 @@
-# CITY EYES — direções visuais em avaliação
+# CITY EYES — direção visual e tokens
 
-**Status:** combinação preferida registrada; sistema e tokens finais ainda não foram aprovados  
+**Status:** direção escolhida; proposta de tokens em revisão antes da implementação Expo  
 **Data:** 16/11/2026
 
-Este documento compara três hipóteses de sistema visual para o CITY EYES. O primeiro protótipo verde/creme é somente uma referência funcional e não representa uma escolha. Os três protótipos mantêm os mesmos dados e fluxos, mas variam identidade visual e hierarquia para ajudar a decidir.
+Este documento registra três hipóteses comparadas e a combinação escolhida para a proposta de design system. O primeiro protótipo verde/creme é somente uma referência funcional e não representa a escolha. Os três protótipos comparados mantêm os mesmos dados e fluxos, mas variam identidade visual e hierarquia.
 
-**Preferência registrada:** combinar a paleta de **Participação comunitária** com a tipografia de **Operação municipal**. Isso orienta uma quarta proposta combinada; não significa que o design system esteja fechado. A fonte exata depende de existir um arquivo licenciado utilizável ou da escolha de uma alternativa multiplataforma.
+**Direção escolhida:** combinar a paleta de **Participação comunitária** com a intenção tipográfica de **Operação municipal**. Como Avenir Next não foi fornecida como fonte licenciada, esta proposta usa **Nunito Sans**: alternativa gratuita e portátil, próxima da família Avenir, mas não idêntica. O usuário aceitou fechar fonte e tokens usando essa recomendação.
 
-O plano v0.9 recebido registra a aprovação funcional dos fluxos do protótipo. Essa aprovação é distinta da aparência final: nenhuma quarta proposta combinada foi aplicada, e não há escolha concluída de fonte portátil, escala, raios ou estados. Não marcar o sistema completo como aprovado por causa da escolha da direção.
+O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. Essa aprovação é distinta da aparência final. A proposta combinada está formalizada no artefato `CITY EYES — Design System`; revisar a prévia antes de aplicar tokens às telas Expo.
 
 ## O que permanece igual
 
@@ -113,8 +113,29 @@ O plano v0.9 recebido registra a aprovação funcional dos fluxos do protótipo.
 - Raios: 6, 9, 12, 16 e 999 px.
 - Elevação: `0 2px 7px` para cartões e `0 12px 32px` para painéis.
 
-## Revisão antes de escolher
+## Revisão antes da aprovação final
 
-Os valores acima são candidatos extraídos dos protótipos, não tokens finais. Ainda é necessário conferir contraste WCAG AA de cada par de texto/fundo, tamanhos mínimos, foco, estados, leitor de tela e comportamento com ampliação de texto. A direção vencedora deve funcionar tanto no mapa e formulário do cidadão quanto na fila do operador; se necessário, podemos combinar uma linguagem visual com a hierarquia de outra opção, mas isso será registrado como uma nova proposta.
+Os valores das três hipóteses acima são candidatos extraídos dos protótipos. A proposta combinada abaixo já está no artefato, mas ainda precisa de revisão visual de cada componente, foco, leitor de tela, escala de texto e comportamento em celular.
 
-Depois da escolha, formalizar um único sistema com nomes semânticos estáveis, tema claro/escuro, escala tipográfica, espaçamentos, raios, elevação, componentes e estados. Só então marcar os protótipos como aprovados para orientar a implementação Expo.
+Os tokens estão formalizados como candidata única no artefato de design system. A aprovação da prévia libera o uso como base visual; a aprovação do fluxo existente não aprova automaticamente esta aparência.
+
+## 4. Proposta combinada — CITY EYES
+
+| Papel | Claro | Escuro |
+|---|---|---|
+| Fundo / texto | `#f4f0e6` / `#263b32` | `#1e2b25` / `#f1ecdc` |
+| Superfície / texto | `#fffcf4` / `#263b32` | `#29382f` / `#f1ecdc` |
+| Primária / texto do botão | `#315c45` / `#fffcf4` | `#b8d0ae` / `#1e2b25` |
+| Secundária / texto | `#e3e9dc` / `#263b32` | `#39453a` / `#f1ecdc` |
+| Acento / texto | `#a85032` / `#fffcf4` | `#edaa83` / `#1e2b25` |
+| Sucesso | `#35694e` | `#abd0a9` |
+| Atenção | `#80521f` | `#edc58c` |
+| Perigo | `#963f35` | `#f0a79a` |
+| Borda / foco | `#d8d2c3` / `#a85032` | `#48574a` / `#f1b393` |
+
+- **Fonte de interface:** `Nunito Sans`, carregada na prévia e prevista para ser empacotada na versão Expo; `system-ui, sans-serif` como fallback. É uma substituição por portabilidade, não a fonte original Avenir Next.
+- **Monoespaçada:** `SFMono-Regular`, `Consolas`, `Liberation Mono`, monospace.
+- **Espaçamento proposto:** base 4 px; escala 4, 8, 12, 16, 20, 24, 32 e 40 px.
+- **Raios propostos:** base 14 px; famílias 8, 14, 20, 28 px e pill 999 px.
+- **Elevação proposta:** `0 2px 8px #3b49351a` para cartões; `0 16px 38px #3443371c` para painéis.
+- **Ajuste de acessibilidade:** texto secundário claro usa `#536457` (em vez do `#637368` da amostra) para atingir contraste AA nas superfícies clara, creme e verde-claro. Os pares de texto/ação primários, acento, sucesso, atenção e perigo foram medidos; testar os componentes completos, foco, zoom e temas claro/escuro antes de aprovar.

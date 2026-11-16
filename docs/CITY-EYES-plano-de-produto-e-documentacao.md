@@ -1,7 +1,7 @@
 # CITY EYES — plano de produto e documentação do MVP
 
 **Versão:** 0.9 · **Contexto:** hackathon de 17–19/11/2026  
-**Status:** decisões de produto e arquitetura registradas como aprovadas em 16/11; fonte portátil, tokens visuais finais, provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
+**Status:** decisões de produto e arquitetura registradas como aprovadas em 16/11; direção visual e fonte Nunito Sans definidas, tokens em prévia para aprovação; provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
 **Revisão de consistência do workspace:** 16/11/2026. Esta cópia canônica incorpora o v0.9 anexado e os ajustes de prioridades, segurança do modo demo, geografia aproximada e pendências visuais; os anexos originais foram preservados.
@@ -367,11 +367,11 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 **Protótipo funcional aprovado conforme v0.9:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. Todos os relatos, pontos, login, IA e ações do operador são simulados. A aprovação funcional não significa que a combinação visual final já tenha sido aplicada ou validada nas telas.
 
-**Direção visual escolhida:** cores de Participação comunitária + intenção tipográfica de Operação municipal. Os valores de origem estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md). Avenir Next é uma fonte local/proprietária, não um arquivo já disponível para empacotamento; a escolha entre arquivo licenciado e alternativa multiplataforma continua pendente. Formalizar tokens, conferir contraste e revisar a prévia combinada antes de liberar a aparência final das telas.
+**Direção visual escolhida:** cores de Participação comunitária + intenção tipográfica de Operação municipal. Como Avenir Next não foi fornecida como fonte licenciada, a proposta usa Nunito Sans como substituição gratuita e multiplataforma, não idêntica à original. Tokens estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md) e no pacote de design system; a prévia ainda precisa de aprovação, e o app Expo precisará carregar a fonte via `expo-font`.
 
 **Sobre créditos:** a documentação do Replit afirma que ajustes simples no Visual Editor não consomem créditos, mas o Design “Build” gera um artefato web e não entrega componentes nativos. Não há base para prometer que toda geração de frames ou build será gratuita. Referências: [Replit Design](https://docs.replit.com/design/what-is-replit-design), [Build your design](https://docs.replit.com/design/build-your-design), [preview de apps mobile](https://docs.replit.com/build/mobile-preview-testing).
 
-**Formalização do sistema visual (pendente):** formalizar tokens semânticos, temas claro/escuro, fonte empacotável, escala de espaçamento, raios, componentes e estados; verificar contraste WCAG AA e foco visível. Usar alvos mínimos de 44 pt em iOS e 48 dp em Android, testar escala de texto e VoiceOver/TalkBack e manter microcopy em português brasileiro.
+**Sistema visual candidato:** tokens semânticos, temas claro/escuro, família Nunito Sans, espaçamento, raios e componentes estão no pacote `@workspace/city-eyes-system`. Ainda faltam aprovação da prévia, verificação dos componentes em uso e a integração da fonte ao app Expo. Usar alvos mínimos de 44 pt em iOS e 48 dp em Android; testar escala de texto, contraste WCAG AA, foco, VoiceOver/TalkBack e microcopy em português brasileiro.
 
 ## 11. UX e telas
 
@@ -546,9 +546,7 @@ IMPLEMENTAÇÃO E DADOS
 - Não afirmar que houve análise real quando o resultado for simulação.
 
 DESIGN
-Direção escolhida: cores de Participação comunitária com intenção tipográfica de Operação municipal. Fonte canônica: docs/CITY-EYES-direcoes-visuais.md. Paleta clara: fundo #f4f0e6; superfície #fffcf4; texto #263b32; secundário #637368; borda #d8d2c3; primária #315c45; acento/foco #a85032; sucesso #35694e; atenção #80521f; perigo #963f35. Paleta escura: fundo #1e2b25; superfície #29382f; texto #f1ecdc; secundário #bdc5b5; borda #48574a; primária #b8d0ae; acento #edaa83; foco #f1b393; sucesso #abd0a9; atenção #edc58c; perigo #f0a79a.
-Avenir Next/Avenir é a referência de intenção, não uma fonte já licenciada/empacotada. BLOQUEIO VISUAL: antes de gerar telas finais, decidir a fonte portátil, formalizar tamanhos, pesos, espaçamentos, raios e estados, verificar contraste e revisar a prévia combinada. Não escolher silenciosamente entre as escalas das variantes. O protótipo funcional aprovado não é aprovação desses tokens finais.
-Manter legibilidade, VoiceOver/TalkBack, escala de texto e estados de carregamento/vazio/erro; alvos mínimos 44 pt em iOS e 48 dp em Android. Identificar seed/demo; não apresentar dados fictícios como ocorrências verificadas.
+Direção escolhida: cores de Participação comunitária e fonte Nunito Sans como alternativa portátil à intenção Avenir Next/Operação municipal. Use os tokens de [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md) e do pacote `@workspace/city-eyes-system`; não copie ou invente novos valores. Revisar a prévia antes das telas finais. Manter legibilidade, VoiceOver/TalkBack, escala de texto e estados de carregamento/vazio/erro; alvos mínimos 44 pt em iOS e 48 dp em Android. Identificar seed/demo; não apresentar dados fictícios como ocorrências verificadas.
 
 ENTREGA E TESTE
 Inclua as quatro cidades de demonstração (Curitiba, Londrina, Maringá e Ponta Grossa), dados variados em cada uma e um caso resolvido com evidência. Use relatos sintéticos, claramente identificados como demo, não ocorrências verificadas. Inclua testes automatizados da API para: operador de uma cidade negado em outra, requisição anônima negada ao publicar, ponto fora da bbox rejeitado. Não implemente previsão de falhas, notificações ou integração com prefeitura nesta versão.
@@ -582,7 +580,7 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Escala alvo: definir volume, número de cidades, usuários simultâneos e retenção antes de qualquer promessa de capacidade.
 - Provedor de autenticação: selecionar e validar solução gerenciada compatível com Expo; conta para publicar/confirmar e autorização municipal já foram aprovadas como requisitos.
 - Geodados: levantar bbox das quatro cidades de fonte identificada, com data e ordem latitude/longitude; bbox é aproximação, não polígono municipal. Não inventar coordenadas de limite.
-- Visual: escolher fonte portátil/licenciada, formalizar escala e componentes, verificar contraste e revisar a combinação. A direção está escolhida; sistema final não está fechado.
+- Visual: aprovar a prévia do pacote, validar componentes/estados e carregar Nunito Sans no app Expo. A direção e os tokens candidatos estão definidos; a aprovação visual final continua pendente.
 - Execução: confirmar acesso ao Mac/idb e Android/adb. Este container não controla automaticamente os dispositivos locais do usuário.
 - Gerenciador neste projeto: pnpm com lockfile preservado. GitHub permanece não solicitado; não criar repositório.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.
