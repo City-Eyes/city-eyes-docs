@@ -365,7 +365,7 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 **Recomendação para este hackathon:** fazer um protótipo clicável simples em HTML/CSS/JavaScript para aprovar fluxo e telas, mantendo-o sem backend e sem bibliotecas pesadas. Usar `?cidade=`, `?estado=` e `?tema=escuro` para alternar contextos e estados. Depois de aprovado, fazer uma única build mobile Expo e reutilizar tokens, conteúdo, dados seed, rótulos e decisões — não tentar converter DOM/CSS para React Native. Se a prioridade mudar para reutilizar código de tela, abandonar o HTML e prototipar diretamente em Expo com dados falsos.
 
-**Protótipo funcional aprovado conforme v0.9:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. A quarta variante `artifacts/mockup-sandbox/src/ds/city-eyes-system/mockups/CityEyesCombined.tsx` aplica o sistema visual aprovado, sem alterar as fontes anteriores. Relatos, pontos, login, IA e ações do operador continuam simulados; a nova variante é um mockup, não o app de produção.
+**Protótipo funcional aprovado conforme v0.9:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. A quarta variante `artifacts/mockup-sandbox/src/ds/city-eyes-system/mockups/CityEyesCombined.tsx` aplica o sistema visual aprovado, sem alterar as fontes anteriores, e foi aprovada visualmente em 16/11. Relatos, pontos, login, IA e ações do operador continuam simulados; a nova variante é um mockup, não o app de produção.
 
 **Direção visual aprovada em 16/11:** cores de Participação comunitária + intenção tipográfica de Operação municipal. Como Avenir Next não foi fornecida como fonte licenciada, foi adotada Nunito Sans como substituição gratuita e multiplataforma, não idêntica à original. Tokens estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md) e no pacote de design system; o app Expo precisará carregar a fonte via `expo-font`.
 
@@ -580,7 +580,7 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Escala alvo: definir volume, número de cidades, usuários simultâneos e retenção antes de qualquer promessa de capacidade.
 - Provedor de autenticação: selecionar e validar solução gerenciada compatível com Expo; conta para publicar/confirmar e autorização municipal já foram aprovadas como requisitos.
 - Geodados: levantar bbox das quatro cidades de fonte identificada, com data e ordem latitude/longitude; bbox é aproximação, não polígono municipal. Não inventar coordenadas de limite.
-- Visual: revisar a quarta variante clicável, validar estados/componentes e carregar Nunito Sans no app Expo.
+- Visual: testar acessibilidade e estados interativos da quarta variante; carregar Nunito Sans no app Expo.
 - Execução: confirmar acesso ao Mac/idb e Android/adb. Este container não controla automaticamente os dispositivos locais do usuário.
 - Gerenciador neste projeto: pnpm com lockfile preservado. GitHub permanece não solicitado; não criar repositório.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.

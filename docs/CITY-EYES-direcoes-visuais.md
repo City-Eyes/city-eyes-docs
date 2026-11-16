@@ -7,7 +7,7 @@ Este documento registra três hipóteses comparadas e a combinação escolhida p
 
 **Direção escolhida:** combinar a paleta de **Participação comunitária** com a intenção tipográfica de **Operação municipal**. Como Avenir Next não foi fornecida como fonte licenciada, esta proposta usa **Nunito Sans**: alternativa gratuita e portátil, próxima da família Avenir, mas não idêntica. O usuário aceitou fechar fonte e tokens usando essa recomendação.
 
-O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. Essa aprovação é distinta da aparência final. A proposta combinada foi aprovada em 16/11 no artefato `CITY EYES — Design System` e aplicada à quarta variante clicável no canvas. Usar o pacote como fonte visual do app Expo.
+O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. A direção visual foi aprovada no artefato `CITY EYES — Design System` e a quarta variante combinada também foi aprovada em 16/11. Usar o pacote como fonte visual do app Expo.
 
 ## O que permanece igual
 
@@ -117,7 +117,7 @@ O plano v0.9 registra a aprovação funcional dos fluxos do protótipo. Essa apr
 
 Os valores das três hipóteses acima são candidatos extraídos dos protótipos; eles não substituem os tokens aprovados abaixo. A quarta variante combinada usa os componentes do pacote em um preview de 390×844. Sua interação e acessibilidade ainda devem ser verificadas separadamente.
 
-Os tokens estão formalizados e aprovados no artefato de design system. O HTML/CSS/JavaScript original e as três direções anteriores permanecem preservados.
+Os tokens estão formalizados e aprovados no artefato de design system. A quarta variante recebeu aprovação visual; a validação de interação, acessibilidade e dispositivo nativo continua separada. O HTML/CSS/JavaScript original e as três direções anteriores permanecem preservados.
 
 ## 4. Proposta combinada — CITY EYES
 
