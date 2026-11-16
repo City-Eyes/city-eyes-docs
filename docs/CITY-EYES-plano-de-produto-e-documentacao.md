@@ -1,7 +1,7 @@
 # CITY EYES — plano de produto e documentação do MVP
 
-**Versão:** 0.6 · **Contexto:** hackathon de 17–19/11/2026  
-**Status:** Expo, multi-cidade, conta para publicar e fotos em camadas aprovados; protótipo HTML criado para revisão; backend/mapa pendentes
+**Versão:** 0.7 · **Contexto:** hackathon de 17–19/11/2026  
+**Status:** Expo, multi-cidade, conta para publicar e fotos em camadas aprovados; três direções visuais em revisão; design system, backend e mapa ainda não aprovados
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
 ## 0. Contexto do desafio PUCPR
@@ -356,9 +356,11 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 **Protótipo em revisão:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. Todos os relatos, pontos, login, IA e ações do operador são simulados. O método de prototipagem foi aprovado; as telas ainda aguardam revisão antes de qualquer implementação nativa.
 
+**Direções visuais em comparação:** três cópias independentes exploram serviço cívico claro, participação comunitária e operação municipal. Os tokens candidatos e trade-offs estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md). Nenhuma paleta, fonte, escala de espaçamento ou direção está aprovada.
+
 **Sobre créditos:** a documentação do Replit afirma que ajustes simples no Visual Editor não consomem créditos, mas o Design “Build” gera um artefato web e não entrega componentes nativos. Não há base para prometer que toda geração de frames ou build será gratuita. Referências: [Replit Design](https://docs.replit.com/design/what-is-replit-design), [Build your design](https://docs.replit.com/design/build-your-design), [preview de apps mobile](https://docs.replit.com/build/mobile-preview-testing).
 
-**Sistema visual inicial (proposta):** tokens semânticos para fundo, superfície, borda, texto, primária, alerta e sucesso; contraste WCAG AA; texto com escala dinâmica; alvos de toque de 44 px; rótulos persistentes nos campos; compatibilidade com VoiceOver e TalkBack; português brasileiro simples. O tema e tipografia finais ficam para revisão do protótipo, não precisam atrasar a primeira definição.
+**Sistema visual final ainda não definido:** depois de escolher uma direção, formalizar tokens semânticos, temas claro/escuro, tipografia, escala de espaçamento, raios, componentes, estados, contraste WCAG AA, foco visível, alvos de toque de 44 px, VoiceOver/TalkBack e microcopy em português brasileiro.
 
 ## 11. UX e telas
 
