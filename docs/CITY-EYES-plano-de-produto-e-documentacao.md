@@ -4,6 +4,8 @@
 **Status:** decisões de produto e arquitetura registradas como aprovadas em 16/11; fonte portátil, tokens visuais finais, provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
+**Revisão de consistência do workspace:** 16/11/2026. Esta cópia canônica incorpora o v0.9 anexado e os ajustes de prioridades, segurança do modo demo, geografia aproximada e pendências visuais; os anexos originais foram preservados.
+
 ## 0. Contexto do desafio PUCPR
 
 O evento informado é o **Desafio Replit PUCPR 2026 — “Da ideia ao software”**, de **17 a 19 de novembro de 2026, das 14h às 17h**, com pitch no último dia. A jornada sugerida é: dia 1 para problema, público, funcionalidades, telas e fluxo; dia 2 para construir e ajustar o app; dia 3 para refinar e apresentar. O desafio é voltado a ideias de negócio ou gestão, não exige experiência prévia em programação nem equipe. Assim, o CITY EYES deve ser apresentado principalmente como uma ferramenta de **gestão e priorização da manutenção urbana**, apoiada por participação cidadã e IA — não apenas como um mapa de denúncias.
@@ -62,6 +64,7 @@ O CITY EYES permite que uma pessoa registre um problema urbano com foto, categor
 Demonstrar em poucos minutos uma denúncia nova percorrendo o caminho **registro → análise → mapa/fila → atualização administrativa → evidência de reparo**.
 
 ### Critérios de sucesso da demo
+O núcleo obrigatório é publicar com sessão, consultar lista/detalhe e atualizar status com isolamento municipal. Os critérios abaixo descrevem a demo ampliada; análise/duplicatas/mapa/evidência só são exigidos se as respectivas funcionalidades P1 forem entregues. Adaptar o pitch aos cortes, sem simular silenciosamente uma capacidade ausente.
 - Uma denúncia pode ser criada com categoria, descrição, foto (ou imagem de demonstração) e ponto no mapa.
 - A análise mostra categoria, severidade estimada, justificativa curta e confiança/estado da análise; falha de IA não impede o registro.
 - A interface distingue foto capturada no app, foto escolhida da galeria e imagem de demonstração; nenhuma recebe rótulo de “autêntica” somente por IA.
@@ -91,7 +94,7 @@ Previsão de falhas, integração real com prefeitura, despacho de equipes, noti
 
 | ID | Funcionalidade | Prioridade | Escopo para amanhã |
 |---|---|---|---|
-| F-01 | Criar ocorrência com categoria, descrição, imagem e localização | P0 | Obrigatória; se câmera/upload falhar, aceitar imagem de exemplo e seleção de mapa |
+| F-01 | Criar ocorrência com categoria, descrição, imagem e localização | P0 | Obrigatória; GPS ou coordenadas manuais; falha de câmera permite galeria/evidência demo rotulada, sem fingir upload concluído |
 | F-02 | Análise assistida: categoria, severidade e resumo | P1 | IA real se acessível; fallback claramente identificado como demonstração |
 | F-03 | Detecção de possíveis duplicatas por proximidade/categoria | P1 | Heurística geográfica simples; sugerir, nunca fundir automaticamente |
 | F-04 | Seletor de cidade, lista e detalhe públicos | P0 | Conteúdo limitado à cidade selecionada; lista é o fallback funcional |
@@ -109,7 +112,7 @@ Previsão de falhas, integração real com prefeitura, despacho de equipes, noti
 ## 5. Histórias de usuário e critérios de aceite
 
 **US-01 — Registrar problema.** Como cidadã, quero enviar foto e localização para registrar um problema sem preencher um formulário longo.  
-Aceite: publicar exige sessão válida; cidade é escolhida ou verificada pela localização; campos obrigatórios são validados; a foto pode vir da câmera ou galeria com a origem registrada; o mapa permite escolher ponto; a ocorrência recebe identificador, autor da sessão, data e status inicial na cidade correta; erro da análise não perde o relato.
+Aceite: publicar exige sessão válida; cidade é escolhida ou sugerida pela localização; campos obrigatórios são validados; a foto pode vir da câmera ou galeria com a origem registrada; a localização pode ser obtida por GPS ou informada manualmente (pin quando F-12 estiver disponível); a API aplica a bbox aproximada da cidade ativa, sem prometer pertencimento municipal exato; a ocorrência recebe identificador, autor da sessão, data e status inicial; erro da análise não perde o relato.
 
 **US-02 — Entender a análise.** Como cidadã, quero saber que categoria e gravidade foram sugeridas e por quê.  
 Aceite: resultado exibe categoria, faixa/nota de gravidade, justificativa e indicação de que é uma estimativa; baixa confiança pede revisão humana.
@@ -146,7 +149,7 @@ Aceite: a origem (câmera/galeria) e o estado de revisão são distintos do resu
 ### UC-01: registrar e localizar uma ocorrência
 1. Cidadão abre “Reportar problema”; se não estiver autenticado, conclui o acesso à conta antes de publicar.
 2. Escolhe cidade (ou aceita a cidade sugerida pela localização), categoria (buraco, iluminação, drenagem, calçada/acessibilidade, outro), descreve brevemente e envia foto.
-3. Permite localização do dispositivo ou escolhe o ponto no mapa; pode corrigir o pin, mas não registrar fora dos limites da cidade selecionada.
+3. Permite localização do dispositivo ou informa coordenadas manualmente; com F-12, pode ajustar o pin. Não registra fora da bbox aproximada da cidade selecionada. A bbox pode incluir território vizinho e não equivale à validação por polígono.
 4. Sistema valida entrada e procura ocorrências da mesma categoria e cidade dentro do raio configurado.
 5. Sistema apresenta possíveis semelhantes; cidadão pode abrir uma ocorrência ou continuar.
 6. Backend persiste ocorrência e evidência; análise fica pendente.
@@ -166,20 +169,20 @@ A análise expira/falha. A ocorrência continua utilizável, marcada como “an�
 ### UC-04: escolher cidade e isolar a operação
 1. Cidadão seleciona uma cidade de uma lista demonstrativa ou aceita a sugestão de localização.
 2. App carrega somente relatos públicos daquela cidade.
-3. Para novo relato, backend verifica que a coordenada pertence ao município selecionado.
+3. Para novo relato, backend verifica que a coordenada está dentro da bbox aproximada da cidade selecionada; a mensagem não deve prometer pertencimento municipal exato.
 4. Operador autenticado recebe a lista das cidades às quais tem vínculo; escolhe o contexto de trabalho.
 5. API nega leitura e mutação de dados privados fora desse vínculo e registra o teste de isolamento.
 
 ## 7. Estados e regras de negócio
 
-Estados: **aberta → em análise → em atendimento → resolvida**. Estado adicional **inviável/duplicada** pode ser usado por operador com justificativa; manter vínculo para ocorrência duplicada. Reabertura pode voltar de resolvida para aberta, registrando evento e motivo.
+Estados: **aberta → em análise → em atendimento → resolvida**. Estados adicionais **inválida** e **duplicada** podem ser usados por operador com justificativa; somente “duplicada” exige vínculo para a ocorrência original, na mesma cidade. Reabertura pode voltar de resolvida para aberta, registrando evento e motivo.
 
 - **Gravidade estimada (0–100):** sugestão da IA, acompanhada por fatores/justificativa. Não equivale a risco certificado. Se não houver modelo, usar estado “demo” e dados pré-definidos.
 - **Prioridade operacional:** `priority = severity_score * 0.5 + dias_aberto * 2 + confirmações_still_exists * 5` (severidade ausente conta como 50). Pesos são constantes no backend, ajustáveis depois. Mostrar como recomendação, não decisão automática.
 - **Possível duplicidade:** distância e categoria semelhantes dentro da mesma cidade; limiar ajustável. Deve ser revisada por pessoa.
 - **Origem da evidência:** registrar se a imagem veio da câmera no app, da galeria ou de dados de demonstração. Isso descreve o caminho de envio, não comprova quando/onde a cena aconteceu.
 - **Privacidade:** remover metadados EXIF quando possível; não exigir nome/endereço; evitar publicar rostos/placas; política de retenção e denúncia de conteúdo abusivo são necessárias antes de produção.
-- **Localização:** pedir permissão foreground explicitamente e usar GPS como sugestão única; deixar a pessoa confirmar ou ajustar o pin. Oferecer escolha manual, não rastrear em segundo plano e rejeitar pontos fora dos limites da cidade ativa.
+- **Localização:** pedir permissão foreground explicitamente e usar GPS como sugestão única; deixar a pessoa confirmar ou informar coordenadas manualmente, com pin quando F-12 estiver disponível. Não rastrear em segundo plano; rejeitar pontos fora da bbox aproximada da cidade ativa.
 - **Limite municipal (MVP):** bbox retangular por cidade (`min_lat`, `min_lng`, `max_lat`, `max_lng`), rotulada como aproximação; pode aceitar pontos de municípios vizinhos nas bordas. Polígono oficial (malha municipal do IBGE) entra depois em `boundary_geojson`.
 - **Bairros:** não pedir que a equipe cadastre uma lista para cada cidade no MVP. Usar coordenada e limite municipal; exibir bairro somente quando houver polígonos municipais confiáveis.
 
@@ -189,7 +192,7 @@ Estados: **aberta → em análise → em atendimento → resolvida**. Estado adi
 
 - **IA visual:** sugerir categoria, descrição e gravidade aparente do problema; não certificar autenticidade nem rejeitar automaticamente.
 - **Origem declarada pelo app:** oferecer câmera no app e galeria; guardar `capture_source` e horário de recebimento do servidor. “Câmera no app” é apenas o caminho usado, não uma prova criptográfica.
-- **Localização:** GPS de uso único como sugestão, com precisão informada quando disponível; usuário confirma o ponto; API verifica se o ponto está dentro do município selecionado. Coordenadas/EXIF podem ser alterados, então não são prova isolada.
+- **Localização:** GPS de uso único como sugestão, com precisão informada quando disponível; usuário confirma o ponto; API verifica a bbox aproximada da cidade selecionada. Coordenadas/EXIF podem ser alterados, então não são prova isolada nem garantia de pertencimento municipal exato.
 - **Corroboração:** confirmações independentes e relatos semelhantes aumentam sinal para triagem, mas não provam verdade por si só.
 - **Revisão humana:** imagens repetidas, incompatíveis com a categoria/local ou marcadas por usuários vão para revisão. Não esconder nem apagar sem um motivo e trilha de auditoria.
 - **Rótulos públicos:** “Recebida”, “Corroborada pela comunidade” ou “Revisada pela equipe”. Separar isso do status operacional (aberta/em atendimento/resolvida) e do resultado da análise de IA.
@@ -206,7 +209,7 @@ Estados: **aberta → em análise → em atendimento → resolvida**. Estado adi
 
 ## 8. Modelo de dados inicial
 
-PostgreSQL, IDs UUID, timestamps UTC; coordenadas em latitude/longitude (usar PostGIS se disponível, caso contrário consulta por distância aproximada para o MVP).
+PostgreSQL, IDs UUID, timestamps UTC; coordenadas em latitude/longitude. **PostGIS não será usado no MVP**; busca aproximada com geocell/geohash indexado e cálculo de distância no backend.
 
 Não cadastrar todos os bairros manualmente. A coordenada e o limite municipal são os dados principais; `neighborhood_label` é opcional e só deve ser preenchido a partir de polígonos de bairros confiáveis. Sem esses dados, mostrar o pin/endereço disponível sem inventar bairro.
 
@@ -221,6 +224,9 @@ cities
 
 users
 - id UUID PK
+- auth_provider TEXT NOT NULL
+- auth_subject TEXT NOT NULL
+- UNIQUE (auth_provider, auth_subject)
 - display_name TEXT NULL
 - email TEXT UNIQUE NULL
 - created_at TIMESTAMPTZ
@@ -245,7 +251,7 @@ reports
 - status ENUM('open','reviewing','in_progress','resolved','invalid','duplicate')
 - latitude DECIMAL(9,6) NOT NULL
 - longitude DECIMAL(9,6) NOT NULL
-- location_source ENUM('device','user_pin') NOT NULL
+- location_source ENUM('device','user_pin','manual_coordinates') NOT NULL
 - location_accuracy_m NUMERIC NULL
 - geocell TEXT NULL (célula geográfica para busca aproximada sem PostGIS)
 - neighborhood_label TEXT NULL (rótulo opcional derivado; coordenada é a fonte principal)
@@ -264,6 +270,7 @@ media
 - capture_source ENUM('in_app_camera','gallery','seed_demo')
 - review_state ENUM('received','community_corroborated','staff_reviewed','disputed')
 - storage_key TEXT NOT NULL
+- content_hash_sha256 CHAR(64) NULL (calculado no servidor; sinaliza reenvio idêntico)
 - created_by UUID NULL REFERENCES users(id)
 - created_at TIMESTAMPTZ
 
@@ -274,6 +281,7 @@ report_events
 - event_type TEXT NOT NULL
 - from_status TEXT NULL
 - to_status TEXT NULL
+- visibility ENUM('public','internal') NOT NULL
 - note TEXT NULL
 - created_at TIMESTAMPTZ
 
@@ -297,7 +305,7 @@ ai_analyses (opcional; pode iniciar como colunas em reports)
 - created_at TIMESTAMPTZ
 ```
 
-Índices: `reports(city_id, status, created_at)`, `reports(city_id, category, status)`, `reports(city_id, geocell)` se não houver PostGIS, índice espacial em `geography(Point)` se houver PostGIS, `city_memberships(city_id, role)`, `media(report_id)`, `report_events(report_id, created_at)`. Guardar imagens em storage de objetos; banco mantém apenas chave/URL controlada. Não armazenar chave pública de upload aberta em produção.
+Índices: `reports(city_id, status, created_at)`, `reports(city_id, category, status)`, `reports(city_id, geocell)`, `city_memberships(city_id, role)`, `media(report_id)`, `media(content_hash_sha256)` e `report_events(report_id, created_at)`. Consultas públicas retornam somente eventos `visibility='public'`, sem identidade privada do autor; eventos internos exigem vínculo municipal válido. A API verifica que `duplicate_of` aponta para ocorrência da mesma cidade. Guardar imagens no App Storage; banco mantém apenas referências controladas, nunca credenciais de acesso público irrestrito.
 
 ### Estratégia de escala do banco
 
@@ -311,7 +319,7 @@ Para suportar várias cidades desde o MVP e crescer sem redesenhar tudo:
 - monitorar latência, consultas lentas, conexões, armazenamento e tráfego; usar réplicas/cache só quando métricas mostrarem gargalo;
 - particionar por cidade/período ou migrar para uma oferta dedicada apenas quando volume, requisitos de disponibilidade/região, governança ou custo justificarem.
 
-**Geodados:** a documentação consultada não confirmou se PostGIS está habilitado no PostgreSQL do Replit. Por isso, não assumir essa extensão sem testar. O MVP pode usar `geocell`/geohash indexado para selecionar candidatos próximos e calcular distância exata sobre o conjunto reduzido; se PostGIS estiver disponível, preferir `geography(Point)` com índice espacial. O app deve enviar limites geográficos e categoria para a API, não executar varreduras completas.
+**Geodados:** PostGIS está fora do MVP, independentemente da disponibilidade. Usar `geocell`/geohash indexado para selecionar candidatos, incluindo células vizinhas, e calcular distância sobre o conjunto reduzido; consultar apenas a mesma célula perde casos próximos às bordas. PostGIS e índice espacial são evoluções, não decisões automáticas durante a build. A API valida os filtros geográficos, aplica cidade e paginação e não executa varreduras completas.
 
 **Limite da recomendação:** não há um número de usuários/relatos que eu possa prometer com as fontes atuais. “Aguentar uma cidade” depende de simultaneidade, frequência de consulta ao mapa, tamanho/quantidade de fotos, retenção e tempo de resposta. A base proposta é um plano de crescimento gradual, não uma garantia de capacidade para qualquer cidade ou carga.
 
@@ -357,13 +365,13 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 **Recomendação para este hackathon:** fazer um protótipo clicável simples em HTML/CSS/JavaScript para aprovar fluxo e telas, mantendo-o sem backend e sem bibliotecas pesadas. Usar `?cidade=`, `?estado=` e `?tema=escuro` para alternar contextos e estados. Depois de aprovado, fazer uma única build mobile Expo e reutilizar tokens, conteúdo, dados seed, rótulos e decisões — não tentar converter DOM/CSS para React Native. Se a prioridade mudar para reutilizar código de tela, abandonar o HTML e prototipar diretamente em Expo com dados falsos.
 
-**Protótipo em revisão:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. Todos os relatos, pontos, login, IA e ações do operador são simulados. **Telas aprovadas em 16/11**; liberadas para implementação nativa.
+**Protótipo funcional aprovado conforme v0.9:** `artifacts/mockup-sandbox/public/city-eyes-prototype.html` é a fonte HTML/CSS/JavaScript autocontida; `artifacts/mockup-sandbox/src/components/mockups/CityEyesPrototype.tsx` apenas a exibe no canvas. Todos os relatos, pontos, login, IA e ações do operador são simulados. A aprovação funcional não significa que a combinação visual final já tenha sido aplicada ou validada nas telas.
 
-**Direção visual aprovada:** cores de Participação comunitária + tipografia de Operação municipal. Os tokens estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md) e devem ser colados no bloco DESIGN do prompt da build antes de usá-lo.
+**Direção visual escolhida:** cores de Participação comunitária + intenção tipográfica de Operação municipal. Os valores de origem estão em [CITY-EYES-direcoes-visuais.md](CITY-EYES-direcoes-visuais.md). Avenir Next é uma fonte local/proprietária, não um arquivo já disponível para empacotamento; a escolha entre arquivo licenciado e alternativa multiplataforma continua pendente. Formalizar tokens, conferir contraste e revisar a prévia combinada antes de liberar a aparência final das telas.
 
 **Sobre créditos:** a documentação do Replit afirma que ajustes simples no Visual Editor não consomem créditos, mas o Design “Build” gera um artefato web e não entrega componentes nativos. Não há base para prometer que toda geração de frames ou build será gratuita. Referências: [Replit Design](https://docs.replit.com/design/what-is-replit-design), [Build your design](https://docs.replit.com/design/build-your-design), [preview de apps mobile](https://docs.replit.com/build/mobile-preview-testing).
 
-**Formalização do sistema visual (direção aprovada):** formalizar tokens semânticos, temas claro/escuro, tipografia, escala de espaçamento, raios, componentes, estados, contraste WCAG AA, foco visível, alvos de toque de 44 px, VoiceOver/TalkBack e microcopy em português brasileiro.
+**Formalização do sistema visual (pendente):** formalizar tokens semânticos, temas claro/escuro, fonte empacotável, escala de espaçamento, raios, componentes e estados; verificar contraste WCAG AA e foco visível. Usar alvos mínimos de 44 pt em iOS e 48 dp em Android, testar escala de texto e VoiceOver/TalkBack e manter microcopy em português brasileiro.
 
 ## 11. UX e telas
 
@@ -377,11 +385,11 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 | ID | Cenário | Resultado esperado | Prioridade |
 |---|---|---|---|
-| T-01 | Criar relato completo | Salva e aparece no mapa/lista | P0 |
+| T-01 | Criar relato completo | Salva e aparece na lista; também no mapa se F-12 entregue | P0 |
 | T-02 | Enviar sem categoria/localização | Validação explica campo faltante; nada parcial é perdido | P0 |
 | T-03 | Negar geolocalização | Seleção manual continua funcionando | P0 |
-| T-04 | IA demora ou falha | Relato permanece salvo e análise é marcada indisponível | P0 |
-| T-05 | Ocorrência semelhante próxima | Sugestão aparece; usuário ainda decide | P0 |
+| T-04 | IA demora ou falha (se F-02 entregue) | Relato permanece salvo e análise é marcada indisponível | P1 |
+| T-05 | Ocorrência semelhante próxima (se F-03 entregue) | Sugestão aparece; usuário ainda decide | P1 |
 | T-06 | Ocorrência distante ou categoria diferente | Não é marcada como duplicata indevidamente | P1 |
 | T-07 | Cidadão tenta alterar status | API retorna não autorizado; estado não muda | P0 |
 | T-08 | Operador muda status com nota | Atualiza e evento entra na linha do tempo | P0 |
@@ -392,7 +400,7 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 | T-13 | Acessibilidade mobile | Fluxo utilizável com leitor de tela, escala de texto e alvos de toque adequados | P1 |
 | T-14 | Conteúdo sem imagem ou endereço | Detalhe continua informativo e não quebra | P1 |
 | T-15 | Operador de cidade A tenta ler/alterar cidade B | API nega a operação e não revela dados privados | P0 |
-| T-16 | Relato fora dos limites da cidade selecionada | App pede correção/seleção de outra cidade; não grava no município incorreto | P0 |
+| T-16 | Relato fora da bbox aproximada da cidade selecionada | API recusa e app pede correção; não promete validação de fronteira exata | P0 |
 | T-17 | Duplicata próxima em outra cidade | Não aparece como duplicata do relato atual | P1 |
 | T-18 | IA analisa uma imagem | Resultado nunca a declara autêntica; imagem segue como recebida ou para revisão humana | P1 |
 | T-19 | Visitante consulta mapa/detalhe | Conteúdo público acessível sem conta; identidade e notas internas não aparecem | P0 |
@@ -400,12 +408,17 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 | T-21 | Sessão expirada durante envio | API exige novo acesso; app explica o erro sem afirmar que publicou | P0 |
 | T-22 | Cliente envia outro reporter_id | Autor é derivado da sessão; não publica em nome de outra conta | P0 |
 | T-23 | Conta confirma duas vezes o mesmo tipo de apoio | Restrição no banco impede duplicidade de contagem | P1 |
+| T-24 | Visitante consulta histórico com nota interna | API não retorna nota interna nem identidade privada | P0 |
+| T-25 | Cliente tenta ativar login demo em ambiente real | Endpoint demo não existe ou recusa; não concede papel por dados do cliente | P0 |
+| T-26 | Mesmo arquivo é reenviado (hash disponível) | Sinaliza repetição, sem declarar fraude ou autenticidade | P1 |
 
-**Ambiente de teste aprovado:** iOS no Simulator do Mac controlado por `idb` (toque, texto, screenshot, árvore de acessibilidade, `xcrun simctl location` para GPS simulado); Android no aparelho físico controlado por `adb` (`adb shell input`, `adb exec-out screencap`, `uiautomator dump`), que também cobre câmera e GPS reais. Os dois rodam o app via Expo Go apontando para o servidor de dev do Replit. Validação é feita por esses controles, não pelo agente do Replit.
+**Ambiente de teste planejado:** iOS no Simulator do Mac do usuário via `idb` e `xcrun simctl location`; Android no aparelho físico via `adb`, incluindo câmera e GPS reais. Ambos usam Expo Go com uma URL de desenvolvimento alcançável. Esses dispositivos e comandos locais não estão automaticamente acessíveis ao agente neste container Linux: confirmar conexão, versões e responsável pela execução antes de tratá-los como disponíveis. Registrar evidências e resultado; ferramenta instalada ou tela exibida não equivale a teste aprovado. Maestro é automação de fluxo; idb/adb são controles auxiliares.
 
 **Smoke test antes da apresentação:** iOS no Simulator (idb) e Android no aparelho (adb, incluindo câmera e localização reais); criar relato; verificar análise/fallback; abrir relato; entrar no painel; mudar status; confirmar evento e indicador. Manter três registros seedados e uma conta de operador disponíveis caso rede/IA falhe.
 
-**Estratégia automatizada proposta (depende da stack aprovada):** cobrir regras de negócio e autorização com testes unitários; validar API, validação e persistência com integração; testar a jornada mobile com ferramenta compatível com Expo após confirmar o setup; testar estados de falha da IA/storage com dependências simuladas. Para Expo, avaliar Jest/jest-expo + React Native Testing Library para componentes, testes da API e smoke manual em simulador/aparelho. O padrão de cobertura de 75% indicado no resumo-base pode ser usado no CI do repositório, mas é uma decisão de fundação a confirmar; para o hackathon, o essencial é proteger os fluxos e riscos P0 sem inflar o escopo.
+Aplicar o smoke somente às capacidades entregues e registrar cortes; sem conectividade, seed no servidor não garante acesso offline. Não apresentar o fluxo offline como suportado sem implementação e teste específicos.
+
+**Estratégia automatizada:** testes unitários de regras; integração da API com banco de teste para validação, persistência, autoria e isolamento; Jest/jest-expo + React Native Testing Library para componentes Expo; Maestro para os fluxos críticos quando o setup estiver estável. Simular falhas de IA/storage. Escolher o runner da API compatível com o código existente, sem impor outra migração. Cobertura percentual não substitui os cenários P0; 75% continua proposta, não gate aprovado.
 
 ### Avaliação do Maestro
 
@@ -433,11 +446,13 @@ Flows sugeridos:
 
 Ao final, revisar de forma independente **requisitos ↔ casos de uso ↔ protótipos ↔ telas implementadas ↔ testes**. A entrega só fica pronta para pitch quando:
 
-1. Todos os requisitos P0 têm tela/fluxo e caso de teste associados; divergências são listadas como pendências.
+1. Todos os requisitos P0 têm tela/fluxo e caso de teste associados; divergências são listadas como pendências. Funcionalidades P1 cortadas são declaradas e seus testes ficam “não aplicável — não entregue”, nunca “aprovados”.
 2. Os fluxos de cidadão e operador passam em Android e iOS; permissões concedidas/negadas, falhas de rede e IA indisponível foram verificadas, incluindo a negação de acesso entre cidades.
 3. As telas reais são comparadas aos protótipos aprovados; checar legibilidade, estados, safe areas, navegação, VoiceOver/TalkBack e consistência visual nos dois sistemas.
 4. Regras, autorização, isolamento entre cidades, validação de upload e consultas geográficas têm testes fora da camada de UI.
 5. Bugs encontrados são classificados por impacto e nenhum problema crítico de segurança, perda de dados ou bloqueio do fluxo principal fica oculto no pitch.
+
+**Desempenho mínimo no gate:** registrar dispositivo, tamanho do seed e tempos observados de abrir lista/detalhe e publicar; verificar que não há bloqueio perceptível, consultas sem limite ou uploads sem limite. Isso é um baseline de demonstração, não teste de capacidade urbana.
 
 **Pós-hackathon (fora do gate):** performance em build de release (Android Studio Profiler, Xcode Instruments, carga na API com dataset entre cidades) e pipeline Maestro/EAS. Não fixar metas de p95, volume simultâneo ou FPS sem cenário/dispositivos definidos e baseline medida.
 
@@ -455,18 +470,18 @@ Ao final, revisar de forma independente **requisitos ↔ casos de uso ↔ protó
 
 ### Prioridades de desenvolvimento
 
-Tempo real: 3 dias × 3h, solo. Construir em ondas; cada onda só começa com a anterior funcionando ponta a ponta em iOS (idb) e Android (adb).
+Tempo total do evento: 3 dias × 3h, solo, incluindo planejamento e pitch; não são nove horas exclusivas de programação. Ondas indicam ordem, não promessa de conclusão. Fazer verificações baratas de API/tipos por entrega e uma passagem coerente dos fluxos nativos ao estabilizar o conjunto, com smoke final nos dois sistemas; não repetir a suíte completa a cada edição.
 
 | Onda | Entrega | Requisitos | Critério de pronto |
 |---|---|---|---|
-| 1 | Seed de 4 cidades (bbox) + relatos demo; seletor de cidade; lista e detalhe públicos | F-04 (lista), US-04, US-09, T-19 | Trocar cidade muda a lista; detalhe abre |
-| 2 | Criar relato: categoria, descrição, foto (câmera/galeria), localização GPS/pin, validação de bbox | F-01, F-11, T-01, T-02, T-03, T-16 | Relato novo aparece na lista sem recarregar |
-| 3 | Autenticação para publicar + contas seed de operador; fila municipal, mudança de status com nota, histórico | F-05, US-06, US-10, T-07, T-08, T-15, T-20, T-22 | Operador de Curitiba muda status; operador de Londrina é negado |
-| 4 | Mapa (`react-native-maps`) sincronizado com a lista | F-04 (mapa) | Pins da cidade ativa; lista continua como fallback |
+| 1 | Seed de 4 cidades (bbox) + relatos demo; seletor de cidade; lista e detalhe públicos | F-04, US-09, T-19 | Trocar cidade muda a lista; detalhe abre |
+| 2 | Sessão e proteção de uploads/publicação; criar relato com foto, GPS/coordenadas manuais e bbox | F-01, F-11, US-01, T-01–T-03, T-16, T-20–T-22 | Relato autenticado aparece na lista; anônimo é negado |
+| 3 | Contas seed de operador; fila municipal, status com nota pública/interna, histórico | F-05, US-06, US-10, T-07, T-08, T-15, T-24, T-25 | Operador muda status na própria cidade; outra cidade é negada |
+| 4 | Mapa (`react-native-maps`) sincronizado com a lista e pin no formulário | F-12, US-04 | Pins da cidade ativa; lista continua como fallback |
 | 5 | Análise de IA (ou "Simulação" rotulada) + possível duplicata | F-02, F-03, T-04, T-05 | Falha de IA não perde relato; duplicata só sugere |
 | 6 | Evidência de reparo, confirmações, indicadores | F-06, F-07, F-08 | Caso resolvido com evidência visível ao público |
 
-**Fallback de autenticação:** se o login gerenciado não funcionar até o fim da onda 3, usar contas seed com seletor "Entrar como (modo demonstração)", rotulado na tela e declarado no pitch. A API continua derivando autor e papel da sessão; o fallback troca só o provedor, nunca a checagem.
+**Fallback de autenticação:** validar o provedor antes da onda 2. Se não funcionar, usar identidades seed de cidadão e operadores com sessão emitida pelo servidor e seletor “Entrar como (modo demonstração)”. O servidor mapeia identidades predefinidas; nunca aceita papel, autor ou cidade arbitrários do cliente. Endpoint demo só existe em ambiente de demonstração explicitamente habilitado, sem dados reais, e fica desativado por padrão fora dele. O seletor permite impersonar contas de teste: não é autenticação segura para produção. Se forem usadas senhas seed, entram por Secrets, nunca no código. Rotular na tela e declarar no pitch.
 
 **Ordem de corte:** remover de baixo para cima (6 → 5 → 4). Ondas 1–3 não são cortáveis.
 
@@ -482,7 +497,7 @@ Tempo real: 3 dias × 3h, solo. Construir em ondas; cada onda só começa com a 
 - Antes da primeira build, colar o prompt completo abaixo no modo Power, depois de verificar o modo, a disponibilidade dos créditos e as condições de uso.
 - Seguir as ondas 1–3 primeiro; mapa só na onda 4, com a lista funcionando antes.
 - Ajustar falhas uma por vez; usar o modo Gratuito quando fizer sentido, como recomenda o guia.
-- Validar cada onda no Simulator iOS (idb) e no aparelho Android (adb, câmera e GPS reais); manter dados de demonstração caso mapa, IA ou rede falhem.
+- Validar a entrega coerente no Simulator iOS e no aparelho Android, conforme o ambiente disponível; manter seed de demonstração e não confundir seed com funcionamento offline ou persistência real.
 
 ### Dia 3 — 19/11: app para pitch
 - Corrigir somente problemas que atrapalhem o fluxo ao vivo; evitar novas funcionalidades.
@@ -503,15 +518,16 @@ USUÁRIOS E PAPÉIS
 - Ações administrativas devem ser autorizadas no servidor; não confie apenas no city_id enviado pelo app.
 
 FLUXO PRINCIPAL
+As capacidades abaixo seguem as prioridades da seção 4 e as ondas da seção 14: mapa, IA/duplicatas e evidência/indicadores são P1 cortáveis. Não entregar nem testar recursos cortados como se estivessem implementados.
 1. Na tela inicial, permitir escolher entre Curitiba, Londrina, Maringá e Ponta Grossa; mostrar mapa/lista sincronizados apenas da cidade selecionada, filtros e botão “Reportar problema”.
-2. O formulário permite selecionar categoria (começar com buraco; incluir iluminação, drenagem, calçada/acessibilidade e outro), escrever descrição curta, tirar/escolher foto e obter/ajustar localização. Verificar no backend que o ponto pertence à cidade selecionada. Se câmera ou GPS forem negados, oferecer alternativa manual.
+2. O formulário permite selecionar categoria (começar com buraco; incluir iluminação, drenagem, calçada/acessibilidade e outro), escrever descrição curta, tirar/escolher foto e obter/ajustar localização. Validar no backend a bbox aproximada da cidade selecionada, sem prometer fronteira municipal exata. Se GPS for negado, aceitar coordenadas manuais; pin quando o mapa for entregue. Se câmera for negada, oferecer galeria ou evidência demo explicitamente rotulada.
 3. Ao enviar, salvar a ocorrência antes de chamar IA. Mostrar categoria sugerida, gravidade estimada de 0 a 100 e justificativa curta, sempre rotuladas como estimativas. Se IA ou mapa falhar, o relato deve continuar salvo e a tela deve mostrar uma alternativa clara.
 4. Sinalizar ocorrências de categoria semelhante próximas na mesma cidade como “possíveis duplicatas”; permitir abrir a existente ou continuar. Nunca combinar registros automaticamente nem misturar cidades.
 5. O detalhe mostra localização, imagem, categoria, gravidade sugerida, status e histórico cronológico.
 6. O painel de operador mostra fila ordenada por prioridade sugerida = severidade*0.5 + dias aberto*2 + confirmações*5 (severidade ausente = 50), rotulada como recomendação, com filtros e contadores de abertas/em análise/em atendimento/resolvidas. O operador pode mudar status e adicionar nota; ao resolver, oferecer envio de foto de evidência.
 
 ESTADOS
-Aberta → Em análise → Em atendimento → Resolvida; também pode haver “Inválida” ou “Duplicada” (só por decisão de operador, com justificativa e vínculo ao relato original). “Possível duplicata” é apenas sugestão exibida, nunca status. Guardar histórico de quem mudou, quando e por quê. A IA não altera status nem decide prioridade final.
+Aberta → Em análise → Em atendimento → Resolvida; também pode haver “Inválida” ou “Duplicada” (só por decisão de operador, com justificativa; vínculo ao original da mesma cidade é obrigatório apenas para “Duplicada”). “Possível duplicata” é só sugestão, nunca status. Guardar histórico e distinguir notas públicas/internas; não retornar notas internas nem identidade privada nas consultas públicas. A IA não altera status nem decide prioridade final.
 
 IMPLEMENTAÇÃO E DADOS
 - Use uma codebase Expo/React Native/TypeScript para o app e um único backend/API TypeScript modular no mesmo projeto; não criar microserviços.
@@ -520,23 +536,25 @@ IMPLEMENTAÇÃO E DADOS
 - Persistir cidades, associação usuário-cidade, ocorrências e eventos no PostgreSQL gerenciado do Replit, se disponível. O app chama a API; não expor credenciais privilegiadas de banco no cliente.
 - Guardar fotos no App Storage/Object Storage, mantendo apenas referências no banco. Se os serviços não estiverem disponíveis, usar dados seedados e evidência demo rotulada; não fingir persistência real.
 - Mapa com `react-native-maps` (compatível com Expo Go). Se o mapa não carregar, oferecer lista funcional.
-- Incluir `city_id` desde o início, filtrar por cidade e por área visível; não carregar todos os relatos no mapa. Sem PostGIS: usar geocell indexado e cálculo de distância no backend.
+- Incluir `city_id` desde o início, filtrar por cidade e por área visível; não carregar todos os relatos no mapa. Sem PostGIS: usar geocell indexado, células vizinhas e cálculo de distância no backend.
 - Limite municipal: cada cidade tem bbox (min_lat, min_lng, max_lat, max_lng); a API rejeita ponto fora da bbox da cidade selecionada.
 - O título do relato é gerado pelo backend (categoria + código público); não pedir título no formulário.
-- Criar contas seed: um operador de Curitiba e um de Londrina, credenciais lidas de Secrets, nunca no código.
+- Criar identidades seed: cidadão, operador de Curitiba e operador de Londrina. Se houver senha, ler de Secrets. Login demo só em ambiente explicitamente habilitado e sem dados reais; servidor emite sessão e determina papel/cidade, nunca o cliente.
 - Se a IA não estiver configurada, `ai_state = 'demo'` e a UI mostra “Simulação”.
 - Toda API administrativa valida o vínculo do operador com a cidade; incluir teste em que um operador de uma cidade tenta ler/alterar outra.
 - Nunca expor segredo no frontend. Validar categoria, descrição, localização e upload.
 - Não afirmar que houve análise real quando o resultado for simulação.
 
 DESIGN
-Visual limpo e profissional, pensado para uma apresentação de negócios/gestão. Use estes tokens: [COLAR AQUI os tokens de cores de Participação comunitária e a tipografia de Operação municipal de CITY-EYES-direcoes-visuais.md]. Boa legibilidade em celular, acessibilidade para VoiceOver/TalkBack e estados de carregamento, vazio e erro. Não usar dados de cidade real como se fossem verificados: identificar seed/demo.
+Direção escolhida: cores de Participação comunitária com intenção tipográfica de Operação municipal. Fonte canônica: docs/CITY-EYES-direcoes-visuais.md. Paleta clara: fundo #f4f0e6; superfície #fffcf4; texto #263b32; secundário #637368; borda #d8d2c3; primária #315c45; acento/foco #a85032; sucesso #35694e; atenção #80521f; perigo #963f35. Paleta escura: fundo #1e2b25; superfície #29382f; texto #f1ecdc; secundário #bdc5b5; borda #48574a; primária #b8d0ae; acento #edaa83; foco #f1b393; sucesso #abd0a9; atenção #edc58c; perigo #f0a79a.
+Avenir Next/Avenir é a referência de intenção, não uma fonte já licenciada/empacotada. BLOQUEIO VISUAL: antes de gerar telas finais, decidir a fonte portátil, formalizar tamanhos, pesos, espaçamentos, raios e estados, verificar contraste e revisar a prévia combinada. Não escolher silenciosamente entre as escalas das variantes. O protótipo funcional aprovado não é aprovação desses tokens finais.
+Manter legibilidade, VoiceOver/TalkBack, escala de texto e estados de carregamento/vazio/erro; alvos mínimos 44 pt em iOS e 48 dp em Android. Identificar seed/demo; não apresentar dados fictícios como ocorrências verificadas.
 
 ENTREGA E TESTE
 Inclua as quatro cidades de demonstração (Curitiba, Londrina, Maringá e Ponta Grossa), dados variados em cada uma e um caso resolvido com evidência. Use relatos sintéticos, claramente identificados como demo, não ocorrências verificadas. Inclua testes automatizados da API para: operador de uma cidade negado em outra, requisição anônima negada ao publicar, ponto fora da bbox rejeitado. Não implemente previsão de falhas, notificações ou integração com prefeitura nesta versão.
 
 ORDEM DE CONSTRUÇÃO (se travar, corte nesta ordem)
-Construa nesta ordem e só avance com a etapa anterior funcionando: 1) cidades seed + lista/detalhe públicos; 2) criar relato com foto e localização; 3) login, fila do operador, status e histórico, isolamento entre cidades; 4) mapa; 5) IA/simulação e possíveis duplicatas; 6) evidência de reparo, confirmações e indicadores. Se faltar tempo, remova 6, depois 5, depois 4. Nunca remova 1–3. Se o login gerenciado falhar, use contas seed com “Entrar como (modo demonstração)” rotulado na tela, mantendo a checagem de sessão e papel no backend.
+Construa nesta ordem: 1) cidades seed + lista/detalhe públicos; 2) sessão e proteção da API + criar relato com foto e GPS/coordenadas manuais; 3) fila de operador, status e histórico público/interno, isolamento entre cidades; 4) mapa/pin; 5) IA/simulação e possíveis duplicatas; 6) evidência de reparo, confirmações e indicadores. Se faltar tempo, remova 6, depois 5, depois 4 e adapte pitch/aceite ao entregue. Nunca remova 1–3 nem crie publicação anônima temporária. Se o provedor falhar, aplique o fallback demo seguro e limitado da seção 14 antes da publicação.
 ```
 
 Se faltar tempo, remover previsões, notificações e confirmação avançada. Não remover autenticação para publicar, isolamento municipal, persistência quando disponível, tratamento de erro nem o fluxo principal.
@@ -563,6 +581,10 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Método de prototipagem: HTML/CSS/JavaScript clicável aprovado; código é referência visual/funcional e não será convertido diretamente para componentes Expo.
 - Escala alvo: definir volume, número de cidades, usuários simultâneos e retenção antes de qualquer promessa de capacidade.
 - Provedor de autenticação: selecionar e validar solução gerenciada compatível com Expo; conta para publicar/confirmar e autorização municipal já foram aprovadas como requisitos.
+- Geodados: levantar bbox das quatro cidades de fonte identificada, com data e ordem latitude/longitude; bbox é aproximação, não polígono municipal. Não inventar coordenadas de limite.
+- Visual: escolher fonte portátil/licenciada, formalizar escala e componentes, verificar contraste e revisar a combinação. A direção está escolhida; sistema final não está fechado.
+- Execução: confirmar acesso ao Mac/idb e Android/adb. Este container não controla automaticamente os dispositivos locais do usuário.
+- Gerenciador neste projeto: pnpm com lockfile preservado. GitHub permanece não solicitado; não criar repositório.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.
 - Idioma inicial: português do Brasil; acessibilidade e celular desde o começo.
 

@@ -7,6 +7,8 @@ Este documento compara três hipóteses de sistema visual para o CITY EYES. O pr
 
 **Preferência registrada:** combinar a paleta de **Participação comunitária** com a tipografia de **Operação municipal**. Isso orienta uma quarta proposta combinada; não significa que o design system esteja fechado. A fonte exata depende de existir um arquivo licenciado utilizável ou da escolha de uma alternativa multiplataforma.
 
+O plano v0.9 recebido registra a aprovação funcional dos fluxos do protótipo. Essa aprovação é distinta da aparência final: nenhuma quarta proposta combinada foi aplicada, e não há escolha concluída de fonte portátil, escala, raios ou estados. Não marcar o sistema completo como aprovado por causa da escolha da direção.
+
 ## O que permanece igual
 
 - Consulta pública do mapa, lista e detalhes, sem exigir conta.
