@@ -111,10 +111,10 @@ Em 18/11/2026, o usuário escolheu a listagem atual de licitações de Londrina 
 | Rota | Portal municipal HTTPS; HTTP redireciona para HTTPS. A listagem atual em Equiplano responde HTTPS. O antigo portal em HTTP:8080 não é rota segura de ingestão. | Confirmado para navegação; aprovação técnica do host ainda necessária |
 | Cobertura | Licitações a partir de 01/04/2026 | Confirmada para a listagem mostrada |
 | Atualização | O rodapé declara “em tempo real”, mas capturas do portal exibiram horários diferentes em 17/11/2026; sem SLA ou data de corte consistente | Declarada, não garantida |
-| Esquema e chave | Colunas visíveis, incluindo número/ano e objeto; sem dicionário nem chave estável verificada | Pendente |
-| Formato e volume | Prefeitura chama a rota de “formato aberto”; a interface oferece “Baixar tabela” e PDF, sem tipo de arquivo confirmado. 8.173 linhas indicadas, 10 por página; tamanho em bytes não medido | Pendente |
+| Esquema e chave | Campos visíveis incluem modalidade, natureza, situação, número/ano, abertura, entidade, resumo do objeto e valores. Tipos aparentes foram inferidos da exibição, sem dicionário; número + exercício é chave candidata, sem unicidade/estabilidade confirmadas | Pendente |
+| Formato e volume | Rechecagem autorizada: resposta da página HTTP 200, `text/html`, 27.419 bytes — não é a exportação. A lista mostra 10 por página e 8.173 linhas (818 páginas); não foi possível confirmar que “Baixar tabela” respeita esse limite. MIME e bytes da exportação não medidos | Pendente; coleta interrompida para evitar baixar a base sem limite |
 | Reuso | Decreto Municipal 667/2024, art. 15 e § 1º, V, estabelece livre utilização de informação de transparência ativa, incluindo licitações, sujeita à LGPD e à Lei 14.129/2021; não indica licença CC BY específica | Base normativa geral documentada; validar os limites legais antes de qualquer uso concreto |
-| Privacidade | Linhas da listagem examinadas sem CPF, telefone ou e-mail visíveis; detalhes, anexos e o conjunto integral não avaliados | Pendente; não coletar dados detalhados |
+| Privacidade | Nas 10 linhas visíveis não foram observados CPF, telefone ou e-mail; detalhes, anexos e o conjunto integral não avaliados | Pendente; não coletar dados detalhados |
 | Ponta Grossa | Portal oficial identificado, mas timeout e erro 500 impediram confirmar conteúdo, licença ou amostra | Não avaliável nesta consulta |
 
 ### Liberação obrigatória antes de qualquer conector
@@ -127,7 +127,7 @@ Em 18/11/2026, o usuário escolheu a listagem atual de licitações de Londrina 
 - Exigir importação idempotente, validação de versões e preservação do último snapshot válido em falhas.
 - Manter os registros identificados como fonte municipal. Não vinculá-los a relato comunitário sem identificador verificável e revisão humana; nunca inferir envio à prefeitura.
 
-Até esses pontos serem confirmados, a fonte serve apenas como link externo contextualizado. Não houve download integral nem implementação de conector.
+**Decisão da amostra limitada:** parar a coleta. A autorização recebida cobria até 10 registros, mas a interface não permitiu confirmar que a exportação pode ser limitada a esse volume. Não foi acionado “Baixar tabela”; o tamanho medido é apenas o da página HTML. Retomar somente se houver recorte verificável de até 10 registros ou nova autorização explícita para outro limite. Até esses pontos serem confirmados, a fonte serve apenas como link externo contextualizado. Não houve download de exportação nem implementação de conector.
 
 A base normativa geral de reutilização está documentada no [Decreto Municipal 667/2024](https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file): o art. 15 prevê livre utilização de informação de transparência ativa e o § 1º, V, inclui licitações, observadas a LGPD e a Lei 14.129/2021. Isso não é uma licença CC BY específica para o sistema Equiplano.
 
