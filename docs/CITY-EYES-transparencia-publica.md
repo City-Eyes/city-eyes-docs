@@ -101,7 +101,35 @@ São testes especificados, **não executados**, porque não há módulo implemen
 
 Depois de implementado e aprovado o fluxo, Maestro pode validar navegação e rótulos. Ele não substitui testes de autorização, importação, semântica financeira, atualização e proteção de dados.
 
-## 9. Decisões para o usuário
+## 9. Validação atual das fontes municipais
+
+Em 18/11/2026, o usuário escolheu a listagem atual de licitações de Londrina como **candidata** para evolução. Isso não aprova importação nem implementação. A matriz completa, as evidências das rotas e a amostra mínima estão em [pesquisa de transparência](../research/transparencia-publica.md#revalidação-manual-de-rotas-e-matriz-de-viabilidade--18112026), [Londrina](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false) e [Ponta Grossa](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/).
+
+| Campo | O que foi possível confirmar | Estado para conector |
+|---|---|---|
+| Órgão | Prefeitura do Município de Londrina; licitações centralizadas segundo a página municipal | Confirmado |
+| Rota | Portal municipal HTTPS; HTTP redireciona para HTTPS. A listagem atual em Equiplano responde HTTPS. O antigo portal em HTTP:8080 não é rota segura de ingestão. | Confirmado para navegação; aprovação técnica do host ainda necessária |
+| Cobertura | Licitações a partir de 01/04/2026 | Confirmada para a listagem mostrada |
+| Atualização | Rodapé declarou atualização em 17/11/2026 às 20:06; sem SLA | Declarada, não garantida |
+| Esquema e chave | Colunas visíveis, incluindo número/ano e objeto; sem dicionário nem chave estável verificada | Pendente |
+| Volume | 8.173 linhas indicadas; 10 por página; arquivo e bytes não medidos | Pendente |
+| Reuso | A licença CC BY 4.0 pertence à página legada; licença do conjunto atual não encontrada | Bloqueia importação |
+| Privacidade | 10 linhas da listagem sem contato ou CPF visível; detalhes e anexos não avaliados | Pendente; não coletar dados detalhados |
+| Ponta Grossa | Portal oficial identificado, mas timeout e erro 500 impediram confirmar conteúdo, licença ou amostra | Não avaliável nesta consulta |
+
+### Liberação obrigatória antes de qualquer conector
+
+- Confirmar por documentação oficial a licença/autorização específica do conjunto atual.
+- Confirmar formato real de exportação, bytes/volume máximo, paginação, esquema, tipos e identificador único e estável.
+- Validar cobertura e cadência; distinguir data de publicação, data de atualização e data de corte.
+- Revisar campos, detalhes e anexos quanto a dados pessoais; aprovar minimização, retenção, correção e acesso ao bruto.
+- Aprovar origem HTTPS, host e redirecionamentos; limitar tamanho, tempo, frequência e tentativas.
+- Exigir importação idempotente, validação de versões e preservação do último snapshot válido em falhas.
+- Manter os registros identificados como fonte municipal. Não vinculá-los a relato comunitário sem identificador verificável e revisão humana; nunca inferir envio à prefeitura.
+
+Até esses pontos serem confirmados, a fonte serve apenas como link externo contextualizado. Não houve download integral nem implementação de conector.
+
+## 10. Decisões para o usuário
 
 1. Aprovar diretório + contexto como primeiro recorte ou escolher também importação de dados?
 2. Confirmar se haverá somente link para canais oficiais, sem envio pelo CITY EYES no MVP.

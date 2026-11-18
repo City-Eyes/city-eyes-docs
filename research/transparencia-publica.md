@@ -1,8 +1,9 @@
 # Transparência pública municipal e o CITY EYES
 
 **Data da pesquisa:** 17/11/2026, America/Sao_Paulo.  
+**Revalidação focalizada de Londrina e Ponta Grossa:** 18/11/2026.
 **Profundidade:** levantamento direcionado (Quick), sem auditoria jurídica ou funcional dos portais.  
-**Fontes consultadas:** 17 — fontes oficiais, listadas ao final.  
+**Fontes consultadas:** 20 — fontes oficiais, listadas ao final.
 **Uso:** pesquisa para decisão de produto; não certifica conformidade legal, disponibilidade ou qualidade dos dados municipais.
 
 ## Resumo executivo
@@ -90,6 +91,34 @@ Londrina apresentou rotas diferentes, incluindo portal legado HTTP:8080 e refer�
 
 **Para uma evolução:** escolher somente uma fonte com licença, esquema, atualização e privacidade confirmados; medir o custo de atualização; testar transformação e isolamento municipal. Só depois avaliar orçamento/obras dentro do aplicativo ou encaminhamento integrado mediante condições oficiais.
 
+## Revalidação manual de rotas e matriz de viabilidade — 18/11/2026
+
+O usuário escolheu a listagem de licitações atual de Londrina como **fonte candidata**. A escolha não aprova importação. A evidência detalhada está em [Londrina — validação da rota atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false) e [Ponta Grossa — validação atual](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/).
+
+| Critério | Londrina — licitações do portal atual | Ponta Grossa — Portal da Transparência |
+|---|---|---|
+| Órgão e rota oficial | Confirmado: página da Prefeitura encaminha à listagem Equiplano; a página municipal diz que as licitações são centralizadas na Prefeitura. | Menu municipal e portal oficial identificados, mas sem acesso direto à página nesta verificação. |
+| HTTPS e redirecionamentos | Página municipal HTTPS respondeu 200; HTTP redirecionou 301 para HTTPS. A listagem Equiplano vinculada respondeu 200 em HTTPS. Rota legada HTTP:8080 ainda respondeu, mas sua versão TLS falhou; não usar essa rota para um conector. | Rota HTTPS e página municipal expiraram em timeout; web fetch retornou 500. Sem resposta não foi possível observar código HTTP ou redirecionamentos. |
+| Cobertura e datas | Conjunto atual de **licitações a partir de 01/04/2026**. Rodapé da plataforma declarou atualização em 17/11/2026 às 20:06 e banco “em tempo real”; isso não é garantia de SLA. A página municipal de navegação foi atualizada em 26/05/2026. | O menu oficial indexado cita Dados Abertos e Obras Públicas; cobertura temporal e data de atualização de qualquer conjunto não confirmadas. |
+| Amostra e tamanho | Leitura da listagem pública paginada: 10 linhas de amostra, total indicado de **8.173 registros**, 10 por página. Sem exportar ou baixar a base. O total de linhas não é tamanho em bytes. | Nenhuma amostra acessível. Contagem e tamanho desconhecidos. |
+| Esquema e identificadores | Colunas visíveis incluem modalidade, natureza, situação, número, abertura, entidade, objeto e valores estimado/homologado. Não há dicionário/tipos confirmados. Número e exercício aparecem, mas uma chave única, estável e imutável não foi confirmada. | Esquema, formato, identificadores e dicionário não confirmados. |
+| Licença e reutilização | **Não confirmadas para a listagem atual.** A CC BY 4.0 está descrita no portal legado, mas não há evidência de que se aplique ao sistema Equiplano atual. A interface oferece “Baixar tabela” e PDF; formato do arquivo e termos do download não confirmados. | Licença e termos do conjunto específico não confirmados. |
+| Dados pessoais | Nas 10 linhas da listagem não apareceram CPF, telefone ou e-mail. Detalhes, anexos e outras páginas não foram inspecionados; não declarar a base inteira livre de dados pessoais. | Conteúdo, campos pessoais e medidas de minimização não examinados. |
+| Viabilidade atual | **Candidata condicionada.** Não importar antes de confirmar termos para este conjunto, formato, chave, esquema, tamanho exportado e privacidade. | **Não avaliável ainda.** Revalidar quando a rota oficial responder e houver conjunto específico identificável. |
+
+### Critérios para liberar um conector
+
+1. Aprovação explícita do conjunto, finalidade, campos necessários e responsável pela curadoria.
+2. Licença ou autorização de reutilização publicada e aplicável ao **portal e conjunto atuais**; acesso público, por si só, não confirma permissão de republicação.
+3. Rota HTTPS oficial estável, redirecionamentos documentados e limitados a hosts previamente aprovados; sem obtenção por HTTP legado.
+4. Metadados oficiais confirmados: órgão produtor, cobertura, frequência e data de corte, esquema/tipos, identificador externo estável e regras de registros completos versus incrementais.
+5. Formato e tamanho real da exportação aferidos em amostra controlada, com limites de linhas, bytes, tempo e paginação antes de qualquer coleta maior.
+6. Revisão de campos pessoais e texto livre; excluir identificadores e contatos pessoais desnecessários, definir retenção e acesso ao bruto, e documentar correção/exclusão.
+7. Importação idempotente e validada, com proveniência e data de corte, isolamento por município, falhas que preservam a última versão válida e limites de taxa/tamanho.
+8. Separação visível entre registro municipal e relato CITY EYES. Não associar registros a ocorrências por proximidade ou semelhança textual; vínculo específico exige identificador externo e revisão humana.
+
+Até todos os critérios serem atendidos, manter somente referências externas e metadados de fonte. Nenhum conector foi implementado ou liberado nesta tarefa.
+
 ## Fontes
 
 1. [Guia para cumprimento da LAI nos estados e municípios — CGU](https://informabr.cgu.gov.br/guia-para-cumprimento-da-lai-nos-estados-e-municipios) — Publicação: 2026-06-24; fonte oficial (nível 1); consulta em 17/11/2026. Evidência: [full page](https://informabr.cgu.gov.br/guia-para-cumprimento-da-lai-nos-estados-e-municipios).
@@ -109,3 +138,6 @@ Londrina apresentou rotas diferentes, incluindo portal legado HTTP:8080 e refer�
 15. [Painel de Obras de Curitiba](https://www.transparencia.curitiba.pr.gov.br/sgp/obras.aspx) — Publicação: data não informada; fonte oficial (nível 1); consulta em 17/11/2026. Evidência: [full page, data declared current through 2026-11-16](https://www.transparencia.curitiba.pr.gov.br/sgp/obras.aspx).
 16. [Sistema Integrado de Atendimento ao Cidadão — SIAC 156, Dados Abertos Curitiba](https://dadosabertos.curitiba.pr.gov.br/conjuntodado/detalhe?chave=0d5a7b06-3940-4be9-876e-bc8f23e96530) — Publicação: 2026-11-16; fonte oficial (nível 1); consulta em 17/11/2026. Evidência: [full page; CSV sample page is large (129.39 MB)](https://dadosabertos.curitiba.pr.gov.br/conjuntodado/detalhe?chave=0d5a7b06-3940-4be9-876e-bc8f23e96530).
 17. [Tratamento de dados pessoais pelo Poder Público — ANPD, guia orientativo v2.0](https://www.gov.br/anpd/pt-br/documentos-e-publicacoes/guia-poder-publico-anpd-versao-final.pdf/@@display-file/file) — Publicação: 2023-06-26; fonte oficial (nível 1); consulta em 17/11/2026. Evidência: [official search excerpts](https://www.gov.br/anpd/pt-br/documentos-e-publicacoes/guia-poder-publico-anpd-versao-final.pdf/@@display-file/file).
+18. [Consulta a contratos e atas — Prefeitura de Londrina](https://portal.londrina.pr.gov.br/consulta-as-licitacoes-contratos-e-atas) — Página oficial consultada em 18/11/2026; redirecionamento HTTP→HTTPS verificado. Evidência: [validação da rota atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false).
+19. [Licitações — Portal da Transparência de Londrina, sistema atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false) — Página vinculada pelo portal municipal; HTTPS consultado em 18/11/2026; somente amostra paginada, sem download integral. Evidência: [validação da rota atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false).
+20. [Portal da Transparência de Ponta Grossa — rota atual revalidada](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/) — Fonte oficial consultada em 18/11/2026; timeout/erro de captura impediu inspeção direta. Evidência: [validação atual](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/).
