@@ -1,10 +1,10 @@
 # CITY EYES — plano de produto e documentação do MVP
 
-**Versão:** 0.9 + proposta de transparência pública · **Contexto:** hackathon de 17–19/11/2026  
-**Status:** decisões de produto, arquitetura e direção visual registradas como aprovadas em 16/11; a proposta de transparência pública foi mapeada em 17/11 e ainda aguarda decisão. Provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
+**Baseline documental:** 18/11/2026 · **Contexto:** hackathon de 17–19/11/2026
+**Status:** direção visual, plataforma Expo, PostgreSQL, acesso e prioridades essenciais registrados como aprovados. O módulo de transparência pública continua como proposta; autenticação gerenciada, limites municipais reais, publicação do repositório e divisão de trabalho continuam pendentes.
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
-**Revisão de consistência do workspace:** 17/11/2026. Esta cópia canônica incorpora o v0.9 anexado, os ajustes de prioridades, segurança do modo demo e geografia aproximada, além da proposta de transparência pública; os anexos originais foram preservados.
+**Revisão de consistência do workspace:** 18/11/2026. Esta cópia canônica integra os acordos aprovados, os protótipos, a pesquisa de transparência e a amostra fictícia de licitações. Não promove propostas a decisões aprovadas; os anexos originais foram preservados.
 
 ## 0. Contexto do desafio PUCPR
 
@@ -16,9 +16,15 @@ O evento informado é o **Desafio Replit PUCPR 2026 — “Da ideia ao software�
 
 ## Acordos de trabalho e decisões
 
-O resumo-base originalmente descrevia um projeto solo; em 17/11 o usuário informou que se juntou a um colega no hackathon. A divisão de trabalho ainda precisa ser combinada. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação e o repositório GitHub continuam pendentes. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês, nenhuma publicação/commit/push sem pedido explícito e nenhuma credencial em código.
+O resumo-base originalmente descrevia um projeto solo; o usuário informou que se juntou a um colega no hackathon. A divisão de trabalho ainda precisa ser combinada. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação continua pendente. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês e nenhuma credencial em código.
 
-**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados em 16/11 e aplicados a uma nova variante combinada no canvas. Revisão interativa/acessível e implementação Expo ainda são etapas separadas. Repo GitHub, issues, regras de branch e secrets só serão criados/configurados quando forem solicitados. Requisitos e testes terão IDs rastreáveis; decisões ainda não aprovadas ficam marcadas como propostas.
+**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados e aplicados à variante combinada no canvas. Revisão interativa/acessível e implementação Expo ainda são etapas separadas. O usuário escolheu criar a organização GitHub `City-Eyes`, dois repositórios públicos (`city-eyes-code` e `city-eyes-docs`) e manter `LucasStop/city-eyes` intacto como backup. A organização ainda precisa ser criada manualmente e a integração GitHub precisa ficar disponível antes de criar os repositórios/Project/issues. Requisitos e testes terão IDs rastreáveis; decisões ainda não aprovadas ficam marcadas como propostas.
+
+### Estado técnico verificado
+
+Em 18/11/2026, o workspace é um monorepo **pnpm** com API Express 5 inicial, pacotes compartilhados de banco/API e artefatos de design e prototipagem. O servidor da API contém somente o health check; o schema Drizzle ainda não define tabelas CITY EYES; a especificação OpenAPI contém apenas o health check; não há app Expo nativo scaffoldado. Portanto, as telas web do sandbox são protótipos, não telas do app nem uma integração de dados.
+
+O componente `ProcurementDemo` no sandbox mostra uma referência oficial da Prefeitura de Londrina/Equiplano e uma tabela de dados 100% fictícios, com busca e filtro por situação. Nenhuma linha foi importada da fonte oficial. O arquivo `artifacts/mockup-sandbox/tests/procurement-demo.test.mjs` cobre oito verificações da amostra e da interação; `node --test tests/procurement-demo.test.mjs` passou com 8/8 no diretório `artifacts/mockup-sandbox`. Isso valida somente a demonstração do sandbox, não uma funcionalidade de produção.
 
 ### Recomendação provisória para decidir
 
@@ -413,6 +419,8 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 | T-25 | Cliente tenta ativar login demo em ambiente real | Endpoint demo não existe ou recusa; não concede papel por dados do cliente | P0 |
 | T-26 | Mesmo arquivo é reenviado (hash disponível) | Sinaliza repetição, sem declarar fraude ou autenticidade | P1 |
 
+**Verificação já concluída no protótipo de licitações:** `node --test tests/procurement-demo.test.mjs` em `artifacts/mockup-sandbox` passou 8/8 em 18/11/2026. Os testes cobrem identificação da amostra fictícia, campos/valores, datas, busca, filtro de situação, combinação de filtros e estado vazio acessível. Isso não testa a API, dados da prefeitura ou o app Expo.
+
 **Ambiente de teste planejado:** iOS no Simulator do Mac do usuário via `idb` e `xcrun simctl location`; Android no aparelho físico via `adb`, incluindo câmera e GPS reais. Ambos usam Expo Go com uma URL de desenvolvimento alcançável. Esses dispositivos e comandos locais não estão automaticamente acessíveis ao agente neste container Linux: confirmar conexão, versões e responsável pela execução antes de tratá-los como disponíveis. Registrar evidências e resultado; ferramenta instalada ou tela exibida não equivale a teste aprovado. Maestro é automação de fluxo; idb/adb são controles auxiliares.
 
 **Smoke test antes da apresentação:** iOS no Simulator (idb) e Android no aparelho (adb, incluindo câmera e localização reais); criar relato; verificar análise/fallback; abrir relato; entrar no painel; mudar status; confirmar evento e indicador. Manter três registros seedados e uma conta de operador disponíveis caso rede/IA falhe.
@@ -467,7 +475,7 @@ Ao final, revisar de forma independente **requisitos ↔ casos de uso ↔ protó
 - Tratar análise de IA como estimativa sujeita a erro, vieses e condições da foto; oferecer revisão humana.
 - Produção precisa de rate limiting, política de retenção, moderação, backups, observabilidade e canal para contestação/exclusão.
 
-## 14. Plano de execução para amanhã
+## 14. Plano de execução do hackathon e primeira build
 
 ### Prioridades de desenvolvimento
 
@@ -486,7 +494,9 @@ Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são n
 
 **Ordem de corte:** remover de baixo para cima (6 → 5 → 4). Ondas 1–3 não são cortáveis.
 
-### Dia 1 — 17/11: ideia para plano
+**Estado em 18/11/2026:** nenhuma onda do app nativo foi implementada no workspace. As ondas abaixo são critérios e ordem de execução, não afirmação de trabalho concluído. Primeiro concluir a documentação/backlog; depois preparar a estrutura GitHub e iniciar a fatia pública Expo prevista. A criação dos recursos externos depende da organização e da conexão GitHub.
+
+### Agenda de referência — dia 1, 17/11: ideia para plano
 - Validar o problema e o público: cidadãos reportam, equipes municipais triagem e priorizam.
 - Definir a proposta de negócio/gestão: reduzir fragmentação e dar visibilidade à fila e ao andamento; não afirmar ganhos medidos sem dados.
 - Fechar o recorte demonstrável: recomenda-se começar por **buracos e infraestrutura viária** para a narrativa ficar concreta; manter outras categorias como evolução.
@@ -494,13 +504,13 @@ Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são n
 - Desenhar seletor de cidade, fluxo de denúncia e fila municipal; revisar histórias, aceite e limites do MVP.
 - Preparar registros de demonstração (categoria buraco) e as contas seed de operador.
 
-### Dia 2 — 18/11: plano para app nativo
+### Agenda de referência — dia 2, 18/11: plano para app nativo
 - Antes da primeira build, colar o prompt completo abaixo no modo Power, depois de verificar o modo, a disponibilidade dos créditos e as condições de uso.
 - Seguir as ondas 1–3 primeiro; mapa só na onda 4, com a lista funcionando antes.
 - Ajustar falhas uma por vez; usar o modo Gratuito quando fizer sentido, como recomenda o guia.
 - Validar a entrega coerente no Simulator iOS e no aparelho Android, conforme o ambiente disponível; manter seed de demonstração e não confundir seed com funcionamento offline ou persistência real.
 
-### Dia 3 — 19/11: app para pitch
+### Agenda de referência — dia 3, 19/11: app para pitch
 - Corrigir somente problemas que atrapalhem o fluxo ao vivo; evitar novas funcionalidades.
 - Ensaiar o pitch de 3–5 minutos da seção 15 e deixar a aplicação aberta no ponto inicial.
 - Demonstrar o caso, o valor para gestão, a transparência da IA e o que ainda é hipótese.
@@ -571,7 +581,7 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 
 ## 16. Decisões em aberto (assumidas para começar)
 
-- Cidades da demo: Curitiba, Londrina, Maringá e Ponta Grossa (Ponta Grossa apareceu duas vezes no resumo recebido); confirmar somente se a repetição indicava outra cidade.
+- Cidades da demo definidas: Curitiba, Londrina, Maringá e Ponta Grossa. A repetição de Ponta Grossa na lista recebida foi tratada como duplicata.
 - IA: testar disponibilidade cedo; se não houver acesso ou estabilidade, usar análise simulada, rotulada como demo, com revisão manual.
 - Backend, banco e fotos: aprovado API TypeScript + PostgreSQL + App Storage do Replit; confirmar só a disponibilidade no projeto.
 - PostGIS: fora do MVP; geocell/geohash sem extensão.
@@ -583,7 +593,8 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Geodados: levantar bbox das quatro cidades de fonte identificada, com data e ordem latitude/longitude; bbox é aproximação, não polígono municipal. Não inventar coordenadas de limite.
 - Visual: testar acessibilidade e estados interativos da quarta variante; carregar Nunito Sans no app Expo.
 - Execução: confirmar acesso ao Mac/idb e Android/adb. Este container não controla automaticamente os dispositivos locais do usuário.
-- Gerenciador neste projeto: pnpm com lockfile preservado. GitHub permanece não solicitado; não criar repositório.
+- Gerenciador neste projeto: pnpm com lockfile preservado.
+- GitHub: organização `City-Eyes`; repositório público de código `city-eyes-code`; repositório público de documentos `city-eyes-docs`; remoto pessoal atual preservado como backup. Não transferir, sobrescrever ou apagar o remoto. A organização precisa ser criada pelo usuário no site do GitHub; a conexão ainda precisa estar operacional antes da criação de repositórios, Project e issues. Auditar arquivos e histórico antes de publicar conteúdo. A declaração `MIT` do `package.json` raiz ainda não tem arquivo `LICENSE`; confirmar a licença antes de anunciar o código como MIT.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.
 - Idioma inicial: português do Brasil; acessibilidade e celular desde o começo.
 
@@ -606,6 +617,14 @@ Não reproduzir todo o portal municipal. Não afirmar que uma obra, contrato ou 
 | MVP candidato | Diretório para Curitiba, Londrina, Maringá e Ponta Grossa; links para portal, dados abertos, obras e e-SIC/Ouvidoria; cartões de relatório com a origem comunitária, histórico CITY EYES e links oficiais relacionados quando houver referência confirmada | Proposta — precisa de aprovação |
 | Evolução | Conectores por cidade para APIs/arquivos abertos com formato, licença, cobertura e atualização verificados; cache e agregações no backend; atualização e falha visíveis | Futuro, depende de validação por fonte |
 | Fora do MVP atual | Scraping, ingestão de arquivos grandes no celular, envio de pedidos e-SIC pelo app, criação de ordem de serviço, painel fiscal completo, integração/encaminhamento em nome da prefeitura | Não aprovado |
+
+### Experimento de transparência no sandbox — não é integração
+
+O sandbox contém `ProcurementDemo`, um protótipo que mantém separadas a referência oficial da Prefeitura de Londrina/Equiplano e cinco linhas de exemplo fictícias (`DEMO-001` a `DEMO-005`). O dataset marca `synthetic_demo`, `not_official` e `dataAsOf: null`; nenhuma linha nem exportação municipal foi importada. O link externo foi conferido, mas isso não valida todos os registros da listagem.
+
+A lista atual da Prefeitura foi validada como fonte candidata para uma futura evolução, não como fonte liberada para ingestão. Ela mostra licitações a partir de 01/04/2026 e 8.173 registros declarados, com 10 por página; a amostra autorizada não estabeleceu se “Baixar tabela” pode ser limitada a 10 linhas, então a exportação não foi acionada. O Decreto Municipal 667/2024 estabelece termos gerais de reutilização para informações de transparência ativa, observados LGPD e Lei 14.129/2021, mas não atribui uma licença CC BY específica à plataforma atual. A coleta foi interrompida; manter link externo e metadados, sem conector, até que os critérios de [validação da fonte](CITY-EYES-transparencia-publica.md#9-validação-atual-das-fontes-municipais) sejam atendidos.
+
+O teste automatizado do sandbox passou 8/8 em 18/11/2026. Isso verifica somente a integridade da amostra sintética, busca, filtro de situação, filtros combinados e estado vazio acessível — não testa importação, API, dados reais nem o app nativo. A decisão sobre entrar no MVP continua em aberto.
 
 ### Atores, permissões e histórias propostas
 

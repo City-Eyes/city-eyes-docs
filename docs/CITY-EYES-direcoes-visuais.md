@@ -1,6 +1,6 @@
 # CITY EYES — direção visual e tokens
 
-**Status:** direção escolhida; proposta de tokens em revisão antes da implementação Expo  
+**Status:** direção visual e tokens aprovados; integração e validação no app Expo pendentes
 **Data:** 16/11/2026
 
 Este documento registra três hipóteses comparadas e a combinação escolhida para a proposta de design system. O primeiro protótipo verde/creme é somente uma referência funcional e não representa a escolha. Os três protótipos comparados mantêm os mesmos dados e fluxos, mas variam identidade visual e hierarquia.
