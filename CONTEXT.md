@@ -21,10 +21,10 @@ Participação cidadã multicípio: moradores consultam e publicam relatos geolo
 
 ## Fontes de verdade
 
-- Produto, atores, requisitos, casos de uso, dados e testes: [plano canônico](CITY-EYES-plano-de-produto-e-documentacao.md).
-- Donos das frentes e limites de paralelismo: [responsabilidades](TEAM-OWNERSHIP.md).
-- Estado e pendências: [handoff](HANDOFF-city-eyes.md).
-- Trabalho planejado: [backlog](GITHUB-ISSUE-BACKLOG.md) e [Project](https://github.com/orgs/City-Eyes/projects/1).
-- Pesquisa municipal: [transparência](CITY-EYES-transparencia-publica.md).
+- Produto, atores, requisitos, casos de uso, dados e testes: [plano canônico](docs/CITY-EYES-plano-de-produto-e-documentacao.md).
+- Donos das frentes e limites de paralelismo: [responsabilidades](docs/TEAM-OWNERSHIP.md).
+- Documentos, fontes e estado aprovado/proposto: [índice público](docs/README.md).
+- Trabalho planejado: [backlog](docs/GITHUB-ISSUE-BACKLOG.md) e [Project](https://github.com/orgs/City-Eyes/projects/1).
+- Pesquisa municipal: [transparência](docs/CITY-EYES-transparencia-publica.md).
 
 Documento resumido de navegação, não uma segunda especificação independente.

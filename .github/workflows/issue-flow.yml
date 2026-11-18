@@ -1,0 +1,62 @@
+name: issue-flow
+
+on:
+  issues:
+    types: [closed]
+  create:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  require-pr-to-close:
+    if: github.event_name == 'issues' && github.event.issue.state_reason == 'completed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const data = await github.graphql(`query($owner:String!,$repo:String!,$n:Int!){
+              repository(owner:$owner,name:$repo){issue(number:$n){
+                timelineItems(itemTypes:CLOSED_EVENT,last:1){nodes{... on ClosedEvent{closer{__typename}}}}
+              }}
+            }`, {owner:context.repo.owner,repo:context.repo.repo,n:context.issue.number});
+            if (data.repository.issue.timelineItems.nodes[0]?.closer?.__typename !== 'PullRequest') {
+              await github.rest.issues.update({...context.repo,issue_number:context.issue.number,state:'open'});
+              await github.rest.issues.createComment({...context.repo,issue_number:context.issue.number,
+                body:'Reaberta: conclua por PR com `Closes #N`. Cancelamentos devem usar “not planned”.'});
+            }
+  in-progress-on-branch:
+    if: github.event_name == 'create' && github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        with:
+          script: |
+            const match = context.payload.ref.match(/^(?:[^/]+\/)?(\d+)-.+/);
+            if (!match) return;
+            if (!process.env.PROJECT_TOKEN) throw new Error('Configure PROJECT_TOKEN nos secrets do GitHub; o cartão não foi movido.');
+            const data = await github.graphql(`query($owner:String!,$repo:String!,$n:Int!){
+              organization(login:"City-Eyes"){projectV2(number:1){
+                id field(name:"Status"){... on ProjectV2SingleSelectField{id options{id name}}}
+              }}
+              repository(owner:$owner,name:$repo){issue(number:$n){id projectItems(first:100){nodes{id project{id}}}}}
+            }`, {owner:context.repo.owner,repo:context.repo.repo,n:Number(match[1])});
+            const project = data.organization.projectV2;
+            const issue = data.repository.issue;
+            if (!issue) throw new Error('Branch aponta para issue inexistente.');
+            let item = issue.projectItems.nodes.find(item => item.project.id === project.id);
+            if (!item) {
+              const added = await github.graphql(`mutation($p:ID!,$c:ID!){addProjectV2ItemById(input:{projectId:$p,contentId:$c}){item{id}}}`,
+                {p:project.id,c:issue.id});
+              item = added.addProjectV2ItemById.item;
+            }
+            const option = project.field.options.find(option => option.name === 'In progress');
+            if (!option) throw new Error('Status In progress ausente.');
+            await github.graphql(`mutation($p:ID!,$i:ID!,$f:ID!,$o:String!){
+              updateProjectV2ItemFieldValue(input:{projectId:$p,itemId:$i,fieldId:$f,value:{singleSelectOptionId:$o}}){projectV2Item{id}}
+            }`, {p:project.id,i:item.id,f:project.field.id,o:option.id});
+          github-token: ${{ secrets.PROJECT_TOKEN || github.token }}
