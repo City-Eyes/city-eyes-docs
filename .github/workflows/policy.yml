@@ -1,0 +1,51 @@
+name: policy
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  issue-link:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (pr.labels.some(label => label.name === 'sem-issue')) return;
+            const refs = [...(pr.body || '').matchAll(/\bCloses\s+(?:(?<owner>[\w.-]+)\/(?<repo>[\w.-]+))?#(?<number>\d+)\b/gi)];
+            if (!refs.length) throw new Error('Informe Closes #N ou Closes organizacao/repo#N.');
+            for (const ref of refs) {
+              const owner = ref.groups.owner || context.repo.owner;
+              const repo = ref.groups.repo || context.repo.repo;
+              if (owner.toLowerCase() !== 'city-eyes' || !['city-eyes-code', 'city-eyes-docs'].includes(repo.toLowerCase())) {
+                throw new Error('A issue deve pertencer a um dos dois repos CITY EYES.');
+              }
+              const {data: issue} = await github.rest.issues.get({owner, repo, issue_number: Number(ref.groups.number)});
+              if (issue.pull_request) throw new Error('Closes deve apontar para uma issue, não um PR.');
+            }
+  commit-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const valid = /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\([^)]+\)!?: .+/;
+            if (!valid.test(context.payload.pull_request.title)) throw new Error('Título deve usar tipo(escopo): resumo.');
+            const commits = await github.paginate(github.rest.pulls.listCommits, {...context.repo, pull_number: context.payload.number, per_page: 100});
+            for (const {commit, parents} of commits) {
+              // Merge commits gerados pelo GitHub não são commits de implementação.
+              if (parents.length > 1) continue;
+              const lines = commit.message.split('\n');
+              if (!valid.test(lines[0]) || lines[1] !== '' || !lines.slice(2).join('\n').trim()) {
+                throw new Error('Cada commit precisa de tipo(escopo), linha em branco e corpo explicando o porquê.');
+              }
+              if (/Co-Authored-By:|Claude-Session:|Generated with Claude Code/i.test(commit.message)) {
+                throw new Error('Remova atribuições automáticas e identificadores de sessão.');
+              }
+            }

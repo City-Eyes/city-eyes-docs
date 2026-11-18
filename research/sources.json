@@ -1,0 +1,172 @@
+{
+  "sources": [
+    {
+      "key": "cgu-lai-guide",
+      "title": "Guia para cumprimento da LAI nos estados e municípios — CGU",
+      "url": "https://informabr.cgu.gov.br/guia-para-cumprimento-da-lai-nos-estados-e-municipios",
+      "published_date": "2026-06-24",
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "lai-law",
+      "title": "Lei nº 12.527/2011 — Planalto",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm",
+      "published_date": "2011-11-18",
+      "tier": 1,
+      "retrieval": "official search excerpts; direct fetch returned generic portal page"
+    },
+    {
+      "key": "lrf-law",
+      "title": "Lei Complementar nº 101/2000 — Planalto",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm",
+      "published_date": "2000-05-04",
+      "tier": 1,
+      "retrieval": "official search excerpts"
+    },
+    {
+      "key": "lc131-law",
+      "title": "Lei Complementar nº 131/2009 — Planalto",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp131.htm",
+      "published_date": "2009-05-27",
+      "tier": 1,
+      "retrieval": "official search excerpts"
+    },
+    {
+      "key": "anpd-public-sector",
+      "title": "Tratamento de dados pessoais pelo Poder Público — ANPD, guia orientativo v2.0",
+      "url": "https://www.gov.br/anpd/pt-br/documentos-e-publicacoes/guia-poder-publico-anpd-versao-final.pdf/@@display-file/file",
+      "published_date": "2023-06-26",
+      "tier": 1,
+      "retrieval": "official search excerpts"
+    },
+    {
+      "key": "cgu-open-data",
+      "title": "Dados Abertos — Controladoria-Geral da União",
+      "url": "https://www.gov.br/cgu/pt-br/acesso-a-informacao/dados-abertos",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "curitiba-transparency",
+      "title": "Portal da Transparência de Curitiba",
+      "url": "https://www.transparencia.curitiba.pr.gov.br/",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page, accessed 2026-11-17"
+    },
+    {
+      "key": "curitiba-works",
+      "title": "Painel de Obras de Curitiba",
+      "url": "https://www.transparencia.curitiba.pr.gov.br/sgp/obras.aspx",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page, data declared current through 2026-11-16"
+    },
+    {
+      "key": "curitiba-open-data",
+      "title": "Dados Abertos de Curitiba",
+      "url": "https://dadosabertos.curitiba.pr.gov.br/",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "curitiba-open-formats",
+      "title": "Quais formatos de dados estão disponíveis no Portal? — Dados Abertos Curitiba",
+      "url": "https://dadosabertos.curitiba.pr.gov.br/conteudo/quais-formatos-de-dados-estao-disponiveis-no-portal/30",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "curitiba-156",
+      "title": "Sistema Integrado de Atendimento ao Cidadão — SIAC 156, Dados Abertos Curitiba",
+      "url": "https://dadosabertos.curitiba.pr.gov.br/conjuntodado/detalhe?chave=0d5a7b06-3940-4be9-876e-bc8f23e96530",
+      "published_date": "2026-11-16",
+      "tier": 1,
+      "retrieval": "full page; CSV sample page is large (129.39 MB)"
+    },
+    {
+      "key": "londrina-transparency",
+      "title": "Perguntas frequentes do Portal da Transparência de Londrina",
+      "url": "http://portaltransparencia.londrina.pr.gov.br:8080/transparencia/faq",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page via legacy HTTP portal"
+    },
+    {
+      "key": "londrina-open-data",
+      "title": "Dados Abertos — Portal da Transparência de Londrina",
+      "url": "http://portaltransparencia.londrina.pr.gov.br:8080/transparencia/dadosAbertos",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page via legacy HTTP portal"
+    },
+    {
+      "key": "londrina-works",
+      "title": "Caderno de Ações e Obras 2026 — Prefeitura de Londrina",
+      "url": "https://portal.londrina.pr.gov.br/caderno-de-acoes-e-obras-pml",
+      "published_date": "2026-11-09",
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "maringa-transparency",
+      "title": "Portal da Transparência de Maringá",
+      "url": "https://transparencia.maringa.pr.gov.br/",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "maringa-esic",
+      "title": "e-SIC: solicitar acesso à informação — Maringá",
+      "url": "https://transparencia.maringa.pr.gov.br/portaltransparencia/1/esic",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "full page"
+    },
+    {
+      "key": "ponta-grossa-transparency",
+      "title": "Portal da Transparência de Ponta Grossa",
+      "url": "https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "official search excerpts; direct page fetch returned 500"
+    },
+    {
+      "key": "londrina-current-licitacoes-index",
+      "title": "Consulta a contratos e atas — Prefeitura de Londrina",
+      "url": "https://portal.londrina.pr.gov.br/consulta-as-licitacoes-contratos-e-atas",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "manual HTTPS check; HTTP redirects to HTTPS; official page links to the current open-format listing"
+    },
+    {
+      "key": "londrina-current-licitacoes",
+      "title": "Licitações — Portal da Transparência de Londrina (current system)",
+      "url": "https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "linked from official municipal page; HTTPS 200; 10-row visible sample; full dataset not downloaded"
+    },
+    {
+      "key": "ponta-grossa-transparency-current-check",
+      "title": "Current route check — Portal da Transparência de Ponta Grossa",
+      "url": "https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/",
+      "published_date": null,
+      "tier": 1,
+      "retrieval": "manual HTTPS attempt timed out; page extraction returned 500; no redirect chain or dataset sample verified"
+    },
+    {
+      "key": "londrina-decree-667-open-data",
+      "title": "Decreto Municipal 667/2024 — reutilização de dados de transparência",
+      "url": "https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file",
+      "published_date": "2024-05-27",
+      "tier": 1,
+      "retrieval": "official municipal repository; full decree; articles 15-16 relevant to open data and transparency"
+    }
+  ]
+}
