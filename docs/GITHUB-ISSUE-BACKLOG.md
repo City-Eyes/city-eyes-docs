@@ -3,6 +3,7 @@
 **Estado:** 15 issues criadas nos repositórios públicos; `B-xx` são IDs locais mapeados aos links GitHub abaixo.  
 **Escopo:** manter rastreabilidade com F-xx, US-xx, UC-xx e T-xx do plano de produto. A proposta F-13 de transparência continua pendente e não entra como requisito aprovado do MVP.
 **Project:** [CITY EYES — MVP](https://github.com/orgs/City-Eyes/projects/1), público, com 15 issues. Os status atuais são Backlog → Ready → In progress → Review → Done; o padrão de repositório recebido pede Todo → In progress → In review → Done e automações, ainda não aplicados.
+**Separação no Project:** `repo:code` nas 12 issues de `city-eyes-code`; `repo:docs` nas 3 issues de `city-eyes-docs`. `area:*`, `priority:*` e `type:*` continuam classificando o assunto, prioridade e natureza do trabalho.
 
 ## Decisões e pré-condições
 
