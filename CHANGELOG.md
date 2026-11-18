@@ -1,9 +1,15 @@
 # Histórico documental
 
+## 2026-11-18 — Transparência incluída no MVP
+
+- Registrado o recorte link-out do diretório por cidade e os limites contra ingestão, scraping e encaminhamento municipal.
+- Separadas as issues da fila municipal (B-18) e do diretório de transparência (B-19), com responsabilidades e revisão cruzada.
+- A validação individual das fontes e a implementação seguem pendentes; esta decisão não certifica disponibilidade ou atualidade dos portais.
+
 ## Preparação da organização
 
 - Publicação inicial de código e documentos concluída com CI, política de fechamento corrigida e automações do Project verificadas.
-- Auto-merge temporário autorizado enquanto só o proprietário tem acesso; revisão obrigatória passa a valer na entrada do parceiro.
+- Auto-merge temporário foi encerrado após a entrada do parceiro lft21; revisão humana e CODEOWNERS são exigidos antes da integração.
 - Documentação canônica separada do contexto privado e do histórico original do workspace.
 
 - Separação de código e documentação para manter uma fonte canônica por assunto.
