@@ -14,16 +14,16 @@
 - Os checks dos quatro PRs e o typecheck local do monorepo passaram. Os testes locais de API não foram repetidos porque `DATABASE_TEST_URL` não está configurado; não usar o banco de desenvolvimento no lugar do banco isolado. Maestro, dispositivos reais/simulados e carga não foram executados nesta revisão.
 - `ProcurementDemo` no sandbox mantém cinco linhas fictícias `DEMO-001`–`DEMO-005`; o teste local passou 8/8. Isso não valida integração municipal nem o app nativo.
 
-### Bloqueios antes da integração da pilha
+### Correções locais e validação pendente
 
-- A revisão manual identificou risco de exibir dados operacionais em cache após logout ou troca de conta: as consultas não incluem identidade na chave, o logout não limpa o cache e as telas não condicionam toda renderização à sessão atual. Exigir isolamento e limpeza do cache e regressão de logout/troca de conta antes de integrar.
-- A URL assinada de upload permanece válida após publicar: o mesmo objeto validado pode ser sobrescrito pelo PUT ainda vigente. Separar objeto temporário de objeto final imutável e testar que reutilizar a URL não altera uma foto publicada.
-- O esquema de redirecionamento do build nativo (`city-eyes-mobile:`) não coincide com o permitido pela API (`cityeyes:`). Alinhar configuração/validação e testar login em build nativo; o fluxo `exp:` do Expo Go pode esconder a falha.
-- Rascunhos de relatos usam chave apenas por cidade e persistem foto local, coordenadas, texto e consentimento entre contas. Isolar por identidade e renovar consentimento após trocar de conta.
-- O PR #23 está atrás da `main`, contém autoria fora do padrão e um commit vazio de checkpoint; normalizar em branch de integração local, preservando CODEOWNERS. Não reescrever branches remotas sem combinar.
-- O PR #23 solicita revisão de lft21; os três PRs seguintes ainda não têm solicitação formal de revisão. Checks verdes não substituem revisão humana nem resolvem os bloqueios acima.
+- Em `sync/code-mvp-review`, cache operacional e rascunhos agora são isolados por conta; logout remove dados protegidos, perda de autorização esconde a tela e reinicia o cache, e consentimento não é reaproveitado entre contas. Typecheck e testes dos utilitários passaram; teste de UI em dispositivo ainda não foi executado.
+- O upload agora valida uma geração fixa, grava os bytes verificados num objeto final novo e bloqueia leitura pública de caminhos temporários. Os testes de API usam storage falso e passaram; replay contra semântica real do Object Storage ainda precisa de validação antes do merge.
+- A allowlist da API agora aceita o scheme `city-eyes-mobile:` configurado no Expo e rejeita o scheme incorreto `cityeyes:`. Teste de contrato passou; login em build nativo ainda não foi executado.
+- A validação local cobriu 17 testes de API em banco PostgreSQL descartável, 2 testes de utilitários mobile e typecheck. Banco de desenvolvimento e armazenamento remoto não foram usados.
+- A branch local normaliza autoria/mensagem do commit de integração, remove o checkpoint vazio e preserva o CODEOWNERS da `main`; nenhuma branch remota foi reescrita.
+- A pilha GitHub #23 → #25 → #26 → #24 ainda não foi atualizada com as correções. #23 precisa ficar em dia com `main`; os quatro PRs precisam de revisão cruzada. Não fazer bypass ou merge até validar o upload real e o fluxo nativo.
 
-A revisão independente confirmou os quatro problemas funcionais acima por inspeção do código. Não houve reprodução em aparelho nem replay contra armazenamento real. A integridade do upload exige validar uma geração fixa e publicá-la em objeto final que não seja gravável pelo cliente; copiar sem fixar a geração ainda permite corrida. Após a substituição, a imagem pode mudar ou ficar indisponível conforme a preservação dos metadados pelo armazenamento.
+A revisão independente confirmou os quatro problemas originais por inspeção do código. Não houve reprodução em aparelho nem replay contra armazenamento real. As correções foram feitas apenas em branches locais e continuam não publicadas.
 
 ## Tamanho relativo
 
