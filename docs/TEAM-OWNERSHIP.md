@@ -12,6 +12,10 @@ Um único repositório de código e um único Project da organização. Use `wor
 
 As labels registram a frente, não uma atribuição de conta. As issues de transparência indicam “parceiro” como responsável por papel. Não convidar nem atribuir conta individual até o usuário GitHub ser confirmado.
 
+## Auto-merge e revisão
+
+Por autorização explícita do usuário, auto-merge fica ativo temporariamente enquanto só sua conta tem acesso. Ao adicionar o parceiro: desativar auto-merge nos PRs abertos e nas configurações dos dois repos, exigir uma aprovação e revisão pelo CODEOWNERS, com a conta confirmada.
+
 ## Sequência da transparência
 
 A transparência permanece como proposta. O trabalho inicial fica limitado à decisão de escopo (B-14) e validação de uma fonte (B-15). Só criar issues de implementação após aprovar o recorte, os dados e as condições de uso. Não transformar pesquisa ou amostra fictícia em integração oficial.
