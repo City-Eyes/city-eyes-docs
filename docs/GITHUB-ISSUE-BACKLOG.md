@@ -1,9 +1,9 @@
 # CITY EYES — inventário do backlog GitHub
 
-**Estado:** 17 issues criadas nos repositórios públicos; `B-xx` são IDs locais mapeados aos links GitHub abaixo.  
+**Estado:** inventário inicial de 17 issues; `B-xx` são IDs locais mapeados aos links GitHub abaixo. Issues posteriores de manutenção da infraestrutura são relacionadas na seção final.
 **Escopo:** manter rastreabilidade com F-xx, US-xx, UC-xx e T-xx do plano de produto. A proposta F-13 de transparência continua pendente e não entra como requisito aprovado do MVP.
-**Project:** [CITY EYES — MVP](https://github.com/orgs/City-Eyes/projects/1), público, com 17 issues e 2 PRs. Status configurados: Todo → In progress → In review → Done. Automações nativas ainda precisam de sessão GitHub autenticada e configuração pelo proprietário.
-**Separação no Project:** `repo:code` nas 13 issues de `city-eyes-code`; `repo:docs` nas 4 issues de `city-eyes-docs`. `area:*`, `priority:*`, `type:*` e `workstream:*` classificam o assunto e a responsabilidade.
+**Project:** [CITY EYES — MVP](https://github.com/orgs/City-Eyes/projects/1), público. Status: Todo → In progress → In review → Done. Automações nativas estão ligadas e Auto-close issue desligado. O código usa auto-add nativo; documentos usam o workflow próprio publicado no PR docs #8. A presença do secret necessário foi conferida sem acessar seu valor.
+**Separação no Project:** `repo:code` identifica `city-eyes-code`; `repo:docs` identifica `city-eyes-docs`. `area:*`, `priority:*`, `type:*` e `workstream:*` classificam o assunto e a responsabilidade.
 **Frentes:** `workstream:city-problems`, `workstream:transparency` e `workstream:shared` registram a divisão de responsabilidade descrita em [TEAM-OWNERSHIP.md](TEAM-OWNERSHIP.md). As labels de frente não são atribuições pessoais.
 
 ## Responsabilidades e paralelismo
@@ -85,9 +85,13 @@ Milestones `MVP do hackathon`: [código](https://github.com/City-Eyes/city-eyes-
 | B-16 | [Publicar a base revisada do repositório de código](https://github.com/City-Eyes/city-eyes-code/issues/13) |
 | B-17 | [Publicar a estrutura canônica do repositório documental](https://github.com/City-Eyes/city-eyes-docs/issues/4) |
 
-## PRs de estrutura em revisão
+## Estrutura publicada e manutenção
 
-- [Documentação #5](https://github.com/City-Eyes/city-eyes-docs/pull/5): fecha B-17 e B-01 após merge; entra antes da base de código.
-- [Código #14](https://github.com/City-Eyes/city-eyes-code/pull/14): fecha B-16 após merge.
+- [Documentação #5](https://github.com/City-Eyes/city-eyes-docs/pull/5): mesclado, concluiu B-17 e B-01 antes da base de código.
+- [Código #14](https://github.com/City-Eyes/city-eyes-code/pull/14): mesclado, concluiu B-16.
+- Correção da política de encerramento: PRs [docs #6](https://github.com/City-Eyes/city-eyes-docs/pull/6) e [code #15](https://github.com/City-Eyes/city-eyes-code/pull/15), mesclados com regressão para fechamento por commit de merge.
+- Auto-add documental: [docs #7](https://github.com/City-Eyes/city-eyes-docs/issues/7), concluída pelo [PR #8](https://github.com/City-Eyes/city-eyes-docs/pull/8).
+- Exclusão de contexto privado no workspace: [code #17](https://github.com/City-Eyes/city-eyes-code/issues/17).
+- Atualização da política e deste registro: [docs #9](https://github.com/City-Eyes/city-eyes-docs/issues/9).
 
-As issues B-01, B-16 e B-17 e os dois PRs estão em `In review`. Não há merge nem auto-merge por iniciativa do agente em trabalho de equipe.
+As issues B-01, B-16 e B-17 e seus PRs estão em `Done`. Auto-merge temporário foi autorizado enquanto só o proprietário tem acesso; quando o parceiro entrar, desativá-lo e exigir revisão conforme [TEAM-OWNERSHIP.md](TEAM-OWNERSHIP.md). O Project é a fonte do estado atual; este arquivo não congela a contagem de itens.
