@@ -110,17 +110,17 @@ Em 18/11/2026, o usuário escolheu a listagem atual de licitações de Londrina 
 | Órgão | Prefeitura do Município de Londrina; licitações centralizadas segundo a página municipal | Confirmado |
 | Rota | Portal municipal HTTPS; HTTP redireciona para HTTPS. A listagem atual em Equiplano responde HTTPS. O antigo portal em HTTP:8080 não é rota segura de ingestão. | Confirmado para navegação; aprovação técnica do host ainda necessária |
 | Cobertura | Licitações a partir de 01/04/2026 | Confirmada para a listagem mostrada |
-| Atualização | Rodapé declarou atualização em 17/11/2026 às 20:06; sem SLA | Declarada, não garantida |
+| Atualização | O rodapé declara “em tempo real”, mas capturas do portal exibiram horários diferentes em 17/11/2026; sem SLA ou data de corte consistente | Declarada, não garantida |
 | Esquema e chave | Colunas visíveis, incluindo número/ano e objeto; sem dicionário nem chave estável verificada | Pendente |
-| Volume | 8.173 linhas indicadas; 10 por página; arquivo e bytes não medidos | Pendente |
-| Reuso | A licença CC BY 4.0 pertence à página legada; licença do conjunto atual não encontrada | Bloqueia importação |
-| Privacidade | 10 linhas da listagem sem contato ou CPF visível; detalhes e anexos não avaliados | Pendente; não coletar dados detalhados |
+| Formato e volume | Prefeitura chama a rota de “formato aberto”; a interface oferece “Baixar tabela” e PDF, sem tipo de arquivo confirmado. 8.173 linhas indicadas, 10 por página; tamanho em bytes não medido | Pendente |
+| Reuso | Decreto Municipal 667/2024, art. 15 e § 1º, V, estabelece livre utilização de informação de transparência ativa, incluindo licitações, sujeita à LGPD e à Lei 14.129/2021; não indica licença CC BY específica | Base normativa geral documentada; validar os limites legais antes de qualquer uso concreto |
+| Privacidade | Linhas da listagem examinadas sem CPF, telefone ou e-mail visíveis; detalhes, anexos e o conjunto integral não avaliados | Pendente; não coletar dados detalhados |
 | Ponta Grossa | Portal oficial identificado, mas timeout e erro 500 impediram confirmar conteúdo, licença ou amostra | Não avaliável nesta consulta |
 
 ### Liberação obrigatória antes de qualquer conector
 
-- Confirmar por documentação oficial a licença/autorização específica do conjunto atual.
-- Confirmar formato real de exportação, bytes/volume máximo, paginação, esquema, tipos e identificador único e estável.
+- Preservar como base de reutilização o Decreto Municipal 667/2024 (arts. 15 e 16) e confirmar que a finalidade/campos concretos continuam dentro dos limites legais; não atribuir CC BY 4.0 à plataforma atual sem fonte específica.
+- Confirmar formato real de exportação, bytes/volume máximo, paginação do arquivo, esquema, tipos e identificador único e estável.
 - Validar cobertura e cadência; distinguir data de publicação, data de atualização e data de corte.
 - Revisar campos, detalhes e anexos quanto a dados pessoais; aprovar minimização, retenção, correção e acesso ao bruto.
 - Aprovar origem HTTPS, host e redirecionamentos; limitar tamanho, tempo, frequência e tentativas.
@@ -128,6 +128,8 @@ Em 18/11/2026, o usuário escolheu a listagem atual de licitações de Londrina 
 - Manter os registros identificados como fonte municipal. Não vinculá-los a relato comunitário sem identificador verificável e revisão humana; nunca inferir envio à prefeitura.
 
 Até esses pontos serem confirmados, a fonte serve apenas como link externo contextualizado. Não houve download integral nem implementação de conector.
+
+A base normativa geral de reutilização está documentada no [Decreto Municipal 667/2024](https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file): o art. 15 prevê livre utilização de informação de transparência ativa e o § 1º, V, inclui licitações, observadas a LGPD e a Lei 14.129/2021. Isso não é uma licença CC BY específica para o sistema Equiplano.
 
 ## 10. Decisões para o usuário
 

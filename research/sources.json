@@ -159,6 +159,14 @@
       "published_date": null,
       "tier": 1,
       "retrieval": "manual HTTPS attempt timed out; page extraction returned 500; no redirect chain or dataset sample verified"
+    },
+    {
+      "key": "londrina-decree-667-open-data",
+      "title": "Decreto Municipal 667/2024 — reutilização de dados de transparência",
+      "url": "https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file",
+      "published_date": "2024-05-27",
+      "tier": 1,
+      "retrieval": "official municipal repository; full decree; articles 15-16 relevant to open data and transparency"
     }
   ]
 }

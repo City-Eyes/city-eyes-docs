@@ -3,7 +3,7 @@
 **Data da pesquisa:** 17/11/2026, America/Sao_Paulo.  
 **Revalidação focalizada de Londrina e Ponta Grossa:** 18/11/2026.
 **Profundidade:** levantamento direcionado (Quick), sem auditoria jurídica ou funcional dos portais.  
-**Fontes consultadas:** 20 — fontes oficiais, listadas ao final.
+**Fontes consultadas:** 21 — fontes oficiais, listadas ao final.
 **Uso:** pesquisa para decisão de produto; não certifica conformidade legal, disponibilidade ou qualidade dos dados municipais.
 
 ## Resumo executivo
@@ -102,14 +102,14 @@ O usuário escolheu a listagem de licitações atual de Londrina como **fonte ca
 | Cobertura e datas | Conjunto atual de **licitações a partir de 01/04/2026**. Rodapé da plataforma declarou atualização em 17/11/2026 às 20:06 e banco “em tempo real”; isso não é garantia de SLA. A página municipal de navegação foi atualizada em 26/05/2026. | O menu oficial indexado cita Dados Abertos e Obras Públicas; cobertura temporal e data de atualização de qualquer conjunto não confirmadas. |
 | Amostra e tamanho | Leitura da listagem pública paginada: 10 linhas de amostra, total indicado de **8.173 registros**, 10 por página. Sem exportar ou baixar a base. O total de linhas não é tamanho em bytes. | Nenhuma amostra acessível. Contagem e tamanho desconhecidos. |
 | Esquema e identificadores | Colunas visíveis incluem modalidade, natureza, situação, número, abertura, entidade, objeto e valores estimado/homologado. Não há dicionário/tipos confirmados. Número e exercício aparecem, mas uma chave única, estável e imutável não foi confirmada. | Esquema, formato, identificadores e dicionário não confirmados. |
-| Licença e reutilização | **Não confirmadas para a listagem atual.** A CC BY 4.0 está descrita no portal legado, mas não há evidência de que se aplique ao sistema Equiplano atual. A interface oferece “Baixar tabela” e PDF; formato do arquivo e termos do download não confirmados. | Licença e termos do conjunto específico não confirmados. |
+| Licença e reutilização | Decreto Municipal 667/2024, art. 15 e § 1º, V, diz que informações de transparência ativa são de livre utilização, observadas LGPD e Lei 14.129/2021, e inclui licitações entre as divulgações. A Prefeitura liga a lista atual como “formato aberto”. A CC BY 4.0 da rota legada não foi estendida à nova plataforma; a norma não nomeia uma licença específica. | Licença e termos do conjunto específico não confirmados. |
 | Dados pessoais | Nas 10 linhas da listagem não apareceram CPF, telefone ou e-mail. Detalhes, anexos e outras páginas não foram inspecionados; não declarar a base inteira livre de dados pessoais. | Conteúdo, campos pessoais e medidas de minimização não examinados. |
-| Viabilidade atual | **Candidata condicionada.** Não importar antes de confirmar termos para este conjunto, formato, chave, esquema, tamanho exportado e privacidade. | **Não avaliável ainda.** Revalidar quando a rota oficial responder e houver conjunto específico identificável. |
+| Viabilidade atual | **Candidata condicionada.** Há base normativa municipal geral para reutilizar informação publicada como transparência ativa, com ressalvas legais. Não importar até confirmar formato e tamanho da exportação, campos/tipos, chave estável e privacidade dos detalhes/anexos. | **Não avaliável ainda.** Revalidar quando a rota oficial responder e houver conjunto específico identificável. |
 
 ### Critérios para liberar um conector
 
 1. Aprovação explícita do conjunto, finalidade, campos necessários e responsável pela curadoria.
-2. Licença ou autorização de reutilização publicada e aplicável ao **portal e conjunto atuais**; acesso público, por si só, não confirma permissão de republicação.
+2. Base oficial de reutilização aplicável ao conjunto e finalidade. Em Londrina, registrar o Decreto Municipal 667/2024, art. 15 e § 1º, V, como fundamento geral para informação de transparência ativa, sujeito à LGPD e à Lei 14.129/2021; não atribuir licença CC BY 4.0 sem fonte específica.
 3. Rota HTTPS oficial estável, redirecionamentos documentados e limitados a hosts previamente aprovados; sem obtenção por HTTP legado.
 4. Metadados oficiais confirmados: órgão produtor, cobertura, frequência e data de corte, esquema/tipos, identificador externo estável e regras de registros completos versus incrementais.
 5. Formato e tamanho real da exportação aferidos em amostra controlada, com limites de linhas, bytes, tempo e paginação antes de qualquer coleta maior.
@@ -117,7 +117,7 @@ O usuário escolheu a listagem de licitações atual de Londrina como **fonte ca
 7. Importação idempotente e validada, com proveniência e data de corte, isolamento por município, falhas que preservam a última versão válida e limites de taxa/tamanho.
 8. Separação visível entre registro municipal e relato CITY EYES. Não associar registros a ocorrências por proximidade ou semelhança textual; vínculo específico exige identificador externo e revisão humana.
 
-Até todos os critérios serem atendidos, manter somente referências externas e metadados de fonte. Nenhum conector foi implementado ou liberado nesta tarefa.
+Até os critérios técnicos e de privacidade serem atendidos, manter somente referências externas e metadados de fonte. Nenhum conector foi implementado ou liberado nesta tarefa. A base normativa municipal encontrada está documentada em [Decreto 667/2024](https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file); ela não equivale a uma licença CC BY específica nem resolve os critérios técnicos.
 
 ## Fontes
 
@@ -141,3 +141,4 @@ Até todos os critérios serem atendidos, manter somente referências externas e
 18. [Consulta a contratos e atas — Prefeitura de Londrina](https://portal.londrina.pr.gov.br/consulta-as-licitacoes-contratos-e-atas) — Página oficial consultada em 18/11/2026; redirecionamento HTTP→HTTPS verificado. Evidência: [validação da rota atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false).
 19. [Licitações — Portal da Transparência de Londrina, sistema atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false) — Página vinculada pelo portal municipal; HTTPS consultado em 18/11/2026; somente amostra paginada, sem download integral. Evidência: [validação da rota atual](https://portal-prefeitura-londrina.equiplano.cloud/relatorio/licitacao-contrato/licitacoes/licitacoes/listagem?flagDescartada=false&flagVideoconferencia=false&updateParams=false).
 20. [Portal da Transparência de Ponta Grossa — rota atual revalidada](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/) — Fonte oficial consultada em 18/11/2026; timeout/erro de captura impediu inspeção direta. Evidência: [validação atual](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/).
+21. [Decreto Municipal 667/2024 — Governo Digital e abertura de dados](https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file) — Fonte oficial consultada em 18/11/2026; arts. 15–16. Evidência: [trechos e aplicação à listagem](https://repositorio.londrina.pr.gov.br/index.php/menu-ouvidoria/legislacao-federal/d3cr3t-s/67331-decreto-667-2024-1/file).
