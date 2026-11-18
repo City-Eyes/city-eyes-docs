@@ -1,10 +1,10 @@
 # CITY EYES — plano de produto e documentação do MVP
 
-**Versão:** 0.9 · **Contexto:** hackathon de 17–19/11/2026  
-**Status:** decisões de produto, arquitetura e direção visual registradas como aprovadas em 16/11; provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
+**Versão:** 0.9 + proposta de transparência pública · **Contexto:** hackathon de 17–19/11/2026  
+**Status:** decisões de produto, arquitetura e direção visual registradas como aprovadas em 16/11; a proposta de transparência pública foi mapeada em 17/11 e ainda aguarda decisão. Provedor de autenticação e limites municipais reais continuam pendentes. Ordem de desenvolvimento revisada na seção 14.
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
-**Revisão de consistência do workspace:** 16/11/2026. Esta cópia canônica incorpora o v0.9 anexado e os ajustes de prioridades, segurança do modo demo, geografia aproximada e pendências visuais; os anexos originais foram preservados.
+**Revisão de consistência do workspace:** 17/11/2026. Esta cópia canônica incorpora o v0.9 anexado, os ajustes de prioridades, segurança do modo demo e geografia aproximada, além da proposta de transparência pública; os anexos originais foram preservados.
 
 ## 0. Contexto do desafio PUCPR
 
@@ -75,7 +75,7 @@ O núcleo obrigatório é publicar com sessão, consultar lista/detalhe e atuali
 - A apresentação tem dados de demonstração, incluindo um caso resolvido.
 
 ### Fora do MVP de amanhã
-Previsão de falhas, integração real com prefeitura, despacho de equipes, notificações por e-mail/SMS, múltiplos provedores de login (o MVP usa um único provedor gerenciado, mesmo que ele ofereça entrada via conta Google/Replit), moderação em escala, análise de vídeo, detector automático de autenticidade como autoridade, classificação automática juridicamente vinculante, confirmação de identidade e garantia de que uma obra foi concluída. São hipóteses de evolução, não capacidades prometidas.
+Previsão de falhas, integração operacional real com prefeitura, ingestão contínua de dados de portais, encaminhamento de relatos ou pedidos e-SIC pelo CITY EYES, despacho de equipes, notificações por e-mail/SMS, múltiplos provedores de login (o MVP usa um único provedor gerenciado, mesmo que ele ofereça entrada via conta Google/Replit), moderação em escala, análise de vídeo, detector automático de autenticidade como autoridade, classificação automática juridicamente vinculante, confirmação de identidade e garantia de que uma obra foi concluída. São hipóteses de evolução, não capacidades prometidas. A proposta da seção 17, ainda não aprovada, é limitada a diretório/link-out e metadados de fontes.
 
 ## 3. Atores e permissões
 
@@ -106,8 +106,9 @@ Previsão de falhas, integração real com prefeitura, despacho de equipes, noti
 | F-10 | Previsão de problemas futuros | P2 | Fora do hackathon; exige histórico e validação |
 | F-11 | Registrar origem da foto e localização | P0 | Distinguir câmera/galeria/demo e GPS/pin; sinal de contexto, não prova de autenticidade |
 | F-12 | Mapa interativo sincronizado com a lista | P1 | Pins e filtros da cidade selecionada; mapa pode ser cortado sem perder a lista |
+| F-13 | Contexto de transparência pública por cidade/ocorrência | Proposta — decisão pendente | Candidato: diretório de fontes oficiais, data de consulta e links externos; sem ingestão contínua nem encaminhamento automático |
 
-**Regra de corte:** F-01, F-04, F-05 e F-11 formam o fluxo essencial. Se faltar tempo, cortar F-06–F-08, depois F-02/F-03 e F-12. A análise simulada só aparece se estiver claramente rotulada; não sacrificar o fluxo de publicação e a autorização municipal por funcionalidades P1/P2.
+**Regra de corte:** F-01, F-04, F-05 e F-11 formam o fluxo essencial. Se faltar tempo, cortar F-06–F-08, depois F-02/F-03 e F-12. F-13 não altera a ordem ou o escopo do MVP até ser aprovado. A análise simulada só aparece se estiver claramente rotulada; não sacrificar o fluxo de publicação e a autorização municipal por funcionalidades P1/P2.
 
 ## 5. Histórias de usuário e critérios de aceite
 
@@ -587,3 +588,73 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Idioma inicial: português do Brasil; acessibilidade e celular desde o começo.
 
 **Decisão de categorias:** o enum mantém as cinco categorias; dados seed e roteiro da demo usam só **buraco**, para a narrativa ficar concreta.
+
+## 17. Proposta de transparência pública (aguarda aprovação)
+
+**Base da proposta:** [pesquisa comparativa de transparência pública](CITY-EYES-transparencia-publica.md) e [relatório e fontes consultadas](../research/transparencia-publica.md). A proposta não torna o CITY EYES um portal oficial, não substitui os portais/SICs municipais e não altera o MVP aprovado até uma decisão explícita.
+
+### Objetivo e limites
+
+Dar contexto verificável sobre informações e canais públicos relacionados à cidade e à manutenção urbana. A recomendação é começar com um **diretório por cidade e cartões de referência**: identificar o órgão e a fonte oficial, informar quando o CITY EYES consultou a fonte e quando o próprio órgão declara ter atualizado os dados, e abrir o portal/serviço municipal original. O app deve avisar que um relato da comunidade **não foi enviado à prefeitura** sem uma integração real.
+
+Não reproduzir todo o portal municipal. Não afirmar que uma obra, contrato ou valor corresponde a um relato apenas por proximidade, categoria ou nome parecido; a associação exige um identificador público e validação humana. Dados de orçamento e de contratos são contexto, não prova de que uma demanda foi atendida. Em especial, “atualização em tempo real” só pode aparecer quando a fonte oficial e a frequência daquele conjunto sustentarem essa afirmação.
+
+### Recorte recomendado
+
+| Fase | Escopo recomendado | Estado |
+|---|---|---|
+| MVP candidato | Diretório para Curitiba, Londrina, Maringá e Ponta Grossa; links para portal, dados abertos, obras e e-SIC/Ouvidoria; cartões de relatório com a origem comunitária, histórico CITY EYES e links oficiais relacionados quando houver referência confirmada | Proposta — precisa de aprovação |
+| Evolução | Conectores por cidade para APIs/arquivos abertos com formato, licença, cobertura e atualização verificados; cache e agregações no backend; atualização e falha visíveis | Futuro, depende de validação por fonte |
+| Fora do MVP atual | Scraping, ingestão de arquivos grandes no celular, envio de pedidos e-SIC pelo app, criação de ordem de serviço, painel fiscal completo, integração/encaminhamento em nome da prefeitura | Não aprovado |
+
+### Atores, permissões e histórias propostas
+
+| Ator | Permissão proposta | Limite |
+|---|---|---|
+| Visitante | Consultar fontes públicas e abrir os portais oficiais sem cadastro | Não cria associação entre fonte e relato |
+| Cidadão autenticado | Consultar as mesmas informações e sugerir uma referência pública | Não altera dado oficial nem muda status municipal |
+| Operador municipal | Gerenciar apenas ocorrências CITY EYES da cidade à qual está vinculado; anexar referência pública com fonte e justificativa | A referência é identificada como vínculo revisado, não como ordem ou confirmação da prefeitura |
+| Curador de fontes (papel proposto) | Revisar URL, órgão, formato, licença, data e disponibilidade do catálogo municipal | Papel ainda não definido; não deve receber acesso global por padrão |
+| Portal/órgão oficial | Continua sendo a fonte de verdade dos dados municipais e pedidos de informação | O CITY EYES não representa nem fala em nome do órgão |
+
+- **US-T-01 — Encontrar fontes oficiais.** Como visitante, quero escolher uma cidade e encontrar seu portal de transparência, obras, dados abertos e canal de informação. Aceite: links identificam órgão/categoria e abrem a fonte oficial; nenhuma autenticação é exigida para consulta.
+- **US-T-02 — Distinguir relato e protocolo oficial.** Como cidadã, quero saber se minha ocorrência existe apenas no CITY EYES ou também em um canal oficial. Aceite: por padrão aparece “Relato da comunidade — não enviado à prefeitura”; só exibir protocolo/estado oficial com referência comprovada e atualização identificada.
+- **US-T-03 — Ver origem e atualidade.** Como pessoa usuária, quero entender de onde veio cada dado e quando foi conferido. Aceite: exibir órgão, URL, formato/licença conhecidos, data de consulta e data declarada pela fonte; datas ausentes são apresentadas como desconhecidas, nunca inventadas.
+- **US-T-04 — Revisar uma referência.** Como operador autorizado, quero anexar um link público relacionado a uma ocorrência. Aceite: só na cidade autorizada, com URL/identificador e justificativa; referência fica como pendente até revisão e mantém histórico de quem a confirmou.
+- **US-T-05 — Recuperar falha de fonte.** Como visitante, quero continuar usando o app quando o portal oficial estiver indisponível. Aceite: erro não se transforma em dado vazio “atual”; mostrar última consulta, aviso de indisponibilidade e link para tentar abrir a fonte original.
+
+### Casos de uso, telas e critérios
+
+1. **UC-T-01 — Consultar fontes da cidade:** selecionar uma das quatro cidades, abrir a seção “Transparência”, filtrar por portal/obras/dados abertos/acesso à informação e abrir a fonte oficial.
+2. **UC-T-02 — Conferir contexto de uma ocorrência:** abrir o detalhe; separar o histórico de participação CITY EYES de qualquer referência oficial; mostrar fonte e datas; explicar quando não existe integração.
+3. **UC-T-03 — Fonte indisponível ou desatualizada:** manter o histórico do CITY EYES, exibir a falha e a última data conhecida e oferecer link-out; nunca apresentar cache como situação atual.
+
+Telas candidatas: diretório por cidade; cartão “Fontes públicas” no detalhe da ocorrência; página externa no navegador/dispositivo. Um catálogo administrativo para manter as fontes é evolução e depende de definição do curador e das permissões.
+
+Critérios mínimos: toda informação municipal tem fonte e cidade; conteúdo comunitário, oficial e demonstrativo usa rótulos diferentes; referência nunca atravessa cidades sem validação; nenhum erro de fonte bloqueia consultas e denúncias; leitor de tela e layout mobile anunciam título, órgão, datas, estado e destino do link; estados carregando/vazio/erro são claros. As páginas de Ponta Grossa e o caminho de dados abertos de Londrina precisam de verificação manual antes de virarem links de produção, pois a captura automatizada nesta pesquisa teve limitações.
+
+### Dados, arquitetura, privacidade e testes propostos
+
+O modelo conceitual futuro pode incluir `public_sources` (cidade, órgão, tipo, URL oficial, formato, licença, método de obtenção, frequência declarada, `last_checked_at`, `data_as_of` e disponibilidade); `source_snapshots`/execuções (fonte, identificador de versão ou hash, datas, resultado e erro); e `report_public_references` (relato, fonte, identificador externo, tipo e justificativa do vínculo, estado pendente/verificado/contestado, pessoa revisora e data). Isso é uma proposta documental, não uma alteração do esquema PostgreSQL atual.
+
+No MVP com links, o cliente abre o portal original; não faz chamadas diretas a sites municipais nem scraping. Se houver conectores numa evolução, executá-los no backend, em tarefas limitadas, com paginação/agregação, cache, controle de origem, licença e atualização. Nunca enviar dumps grandes ao app: um exemplo de dataset municipal de atendimento tem tamanho de 129 MB; expor apenas recortes necessários e avaliar privacidade antes de reutilização. Aplicar minimização, finalidade clara, proteção de dados pessoais e segregação por cidade; não publicar endereço exato ou identidade de quem pediu serviço sem necessidade e autorização.
+
+| ID | Cenário proposto | Resultado esperado |
+|---|---|---|
+| T-27 | Abrir fontes por cidade | Cada link aponta ao município correto e a fonte é rotulada como oficial |
+| T-28 | Abrir relato sem vínculo oficial | UI declara que o relato comunitário não foi enviado à prefeitura |
+| T-29 | Fonte sem data de atualização | Data fica “não informada”; app não afirma atualidade ou tempo real |
+| T-30 | Fonte indisponível/cache antigo | Aviso de indisponibilidade e data da última consulta; sem estado “atual” inferido |
+| T-31 | Referência de outra cidade | API bloqueia associação cruzada sem validação; operador não vê dados privados de outra cidade |
+| T-32 | Referência de obra/contrato sem identificador comum | Não associa automaticamente por proximidade ou texto semelhante |
+| T-33 | Dados municipais com endereço ou dado pessoal | Campos desnecessários são omitidos/agregados antes de exibir; consulta pública não revela identidade de cidadão |
+| T-34 | Fonte ou conteúdo de demonstração | Rótulo “demo”/“simulação” permanece visível e nunca se confunde com dado oficial |
+
+### Decisões ainda abertas
+
+1. A prioridade é um diretório de portais/canais, ou também um resumo de orçamento/obras dentro do CITY EYES? Recomendação: diretório + contexto por ocorrência primeiro.
+2. No MVP, todas as cidades recebem apenas links, ou uma cidade terá integração com conjunto aberto? Recomendação: links nas quatro; nenhum conector até aprovar disponibilidade e privacidade de uma fonte específica.
+3. O cidadão apenas abre canais oficiais ou o produto deve criar algum encaminhamento? Recomendação: link-out; submissão e-SIC/Ouvidoria integrada fica fora do MVP.
+4. Quem pode confirmar uma ligação entre relato e registro oficial? O papel de curador e o nível de evidência ainda precisam ser aprovados.
+5. Quais datasets/colunas podem ser reusados, sua licença e frequência? Confirmar por conjunto e município antes de qualquer coleta.
+6. Qual limite de atualização deve marcar uma fonte como desatualizada? Definir por fonte, sem regra global antes de medir as frequências declaradas.
