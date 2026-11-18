@@ -1,6 +1,9 @@
 name: issue-flow
 
 on:
+  pull_request:
+  push:
+    branches: [main]
   issues:
     types: [closed]
   create:
@@ -10,6 +13,15 @@ permissions:
   issues: write
 
 jobs:
+  test-close-policy:
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --test scripts/test-issue-flow.mjs
   require-pr-to-close:
     if: github.event_name == 'issues' && github.event.issue.state_reason == 'completed'
     runs-on: ubuntu-latest
@@ -19,10 +31,13 @@ jobs:
           script: |
             const data = await github.graphql(`query($owner:String!,$repo:String!,$n:Int!){
               repository(owner:$owner,name:$repo){issue(number:$n){
-                timelineItems(itemTypes:CLOSED_EVENT,last:1){nodes{... on ClosedEvent{closer{__typename}}}}
+                closedByPullRequestsReferences(first:100){nodes{merged}}
               }}
             }`, {owner:context.repo.owner,repo:context.repo.repo,n:context.issue.number});
-            if (data.repository.issue.timelineItems.nodes[0]?.closer?.__typename !== 'PullRequest') {
+            // Merge commits can appear as the closer; inspect closing PRs instead.
+            const references = data.repository?.issue?.closedByPullRequestsReferences?.nodes;
+            if (!Array.isArray(references)) throw new Error('Não foi possível verificar os PRs de encerramento; nenhuma issue foi alterada.');
+            if (!references.some(pr => pr?.merged === true)) {
               await github.rest.issues.update({...context.repo,issue_number:context.issue.number,state:'open'});
               await github.rest.issues.createComment({...context.repo,issue_number:context.issue.number,
                 body:'Reaberta: conclua por PR com `Closes #N`. Cancelamentos devem usar “not planned”.'});
