@@ -1,8 +1,8 @@
-# CITY EYES — rascunho do backlog GitHub
+# CITY EYES — inventário do backlog GitHub
 
-**Estado:** rascunho local para revisão; nenhuma issue foi criada no GitHub.  
-**IDs `B-xx`:** temporários, não são números de issue.  
+**Estado:** 15 issues criadas nos repositórios públicos; `B-xx` são IDs locais mapeados aos links GitHub abaixo.  
 **Escopo:** manter rastreabilidade com F-xx, US-xx, UC-xx e T-xx do plano de produto. A proposta F-13 de transparência continua pendente e não entra como requisito aprovado do MVP.
+**Project:** [CITY EYES — MVP](https://github.com/orgs/City-Eyes/projects/1), público, com os status Backlog → Ready → In progress → Review → Done.
 
 ## Decisões e pré-condições
 
@@ -43,3 +43,25 @@
 
 - `ProcurementDemo` no sandbox tem cinco linhas `DEMO-001`–`DEMO-005`, todas fictícias; a referência municipal e o link Equiplano ficam separados da amostra.
 - `pnpm --filter @workspace/mockup-sandbox test` passou 8/8 verificações de integridade, busca, situação, combinação de filtros e estado vazio. Isso não é um teste da API nem da listagem municipal.
+
+## Links das issues criadas
+
+Milestones `MVP do hackathon`: [código](https://github.com/City-Eyes/city-eyes-code/milestone/1) · [documentos](https://github.com/City-Eyes/city-eyes-docs/milestone/1)
+
+| ID local | Issue |
+|---|---|
+| B-01 | [Confirmar licenças antes da publicação pública](https://github.com/City-Eyes/city-eyes-docs/issues/1) |
+| B-02 | [Definir limites aproximados das quatro cidades](https://github.com/City-Eyes/city-eyes-code/issues/1) |
+| B-03 | [Escolher provedor de autenticação para Expo e API](https://github.com/City-Eyes/city-eyes-code/issues/2) |
+| B-04 | [Iniciar o app Expo com o design system aprovado](https://github.com/City-Eyes/city-eyes-code/issues/3) |
+| B-05 | [Criar modelo e dados seed das quatro cidades](https://github.com/City-Eyes/city-eyes-code/issues/4) |
+| B-06 | [Expor consulta pública paginada de cidades e relatos](https://github.com/City-Eyes/city-eyes-code/issues/5) |
+| B-07 | [Exibir cidade, lista e detalhe no app](https://github.com/City-Eyes/city-eyes-code/issues/6) |
+| B-08 | [Publicar relatos com sessão, localização e foto](https://github.com/City-Eyes/city-eyes-code/issues/7) |
+| B-09 | [Triar relatos com isolamento entre cidades](https://github.com/City-Eyes/city-eyes-code/issues/8) |
+| B-10 | [Sincronizar mapa, lista e busca geográfica](https://github.com/City-Eyes/city-eyes-code/issues/9) |
+| B-11 | [Sugerir análise e possíveis duplicatas com limites claros](https://github.com/City-Eyes/city-eyes-code/issues/10) |
+| B-12 | [Registrar resolução e confirmações de cidadãos](https://github.com/City-Eyes/city-eyes-code/issues/11) |
+| B-13 | [Automatizar fluxos críticos e revisão mobile](https://github.com/City-Eyes/city-eyes-code/issues/12) |
+| B-14 | [Decidir o recorte inicial de transparência pública](https://github.com/City-Eyes/city-eyes-docs/issues/2) |
+| B-15 | [Validar uma fonte municipal antes de qualquer conector](https://github.com/City-Eyes/city-eyes-docs/issues/3) |

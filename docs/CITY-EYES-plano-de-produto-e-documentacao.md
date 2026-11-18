@@ -18,7 +18,7 @@ O evento informado é o **Desafio Replit PUCPR 2026 — “Da ideia ao software�
 
 O resumo-base originalmente descrevia um projeto solo; o usuário informou que se juntou a um colega no hackathon. A divisão de trabalho ainda precisa ser combinada. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação continua pendente. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês e nenhuma credencial em código.
 
-**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados e aplicados à variante combinada no canvas. Revisão interativa/acessível e implementação Expo ainda são etapas separadas. O usuário criou a organização GitHub `City-Eyes` e escolheu dois repositórios públicos (`city-eyes-code` e `city-eyes-docs`), mantendo `LucasStop/city-eyes` intacto como backup. A integração está pronta, mas a restrição OAuth da organização bloqueia o app Replit; o owner deve aprová-lo antes de criar os repositórios/Project/issues. Requisitos e testes terão IDs rastreáveis; decisões ainda não aprovadas ficam marcadas como propostas.
+**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados e aplicados à variante combinada no canvas. Revisão interativa/acessível e implementação Expo ainda são etapas separadas. O usuário criou a organização GitHub `City-Eyes`; os dois repositórios públicos, o Project e 15 issues já existem. MIT foi escolhido para os dois repositórios e o histórico será sanitizado preservando a sequência. O repositório pessoal permanece intacto como backup. Os novos repositórios aguardam confirmação do titular, autoria pública e padrão de configuração antes de receber arquivos.
 
 ### Estado técnico verificado
 
@@ -494,7 +494,7 @@ Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são n
 
 **Ordem de corte:** remover de baixo para cima (6 → 5 → 4). Ondas 1–3 não são cortáveis.
 
-**Estado em 18/11/2026:** nenhuma onda do app nativo foi implementada no workspace. As ondas abaixo são critérios e ordem de execução, não afirmação de trabalho concluído. Primeiro concluir a documentação/backlog; depois preparar a estrutura GitHub e iniciar a fatia pública Expo prevista. A criação dos recursos externos depende da organização e da conexão GitHub.
+**Estado em 18/11/2026:** nenhuma onda do app nativo foi implementada no workspace. As ondas abaixo são critérios e ordem de execução, não afirmação de trabalho concluído. A estrutura GitHub e o backlog já existem; a fatia Expo começa após conectar o código ao repositório público e resolver as decisões de publicação.
 
 ### Agenda de referência — dia 1, 17/11: ideia para plano
 - Validar o problema e o público: cidadãos reportam, equipes municipais triagem e priorizam.
@@ -594,7 +594,7 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Visual: testar acessibilidade e estados interativos da quarta variante; carregar Nunito Sans no app Expo.
 - Execução: confirmar acesso ao Mac/idb e Android/adb. Este container não controla automaticamente os dispositivos locais do usuário.
 - Gerenciador neste projeto: pnpm com lockfile preservado.
-- GitHub: organização `City-Eyes` criada pelo usuário; repositório público de código `city-eyes-code`; repositório público de documentos `city-eyes-docs`; remoto pessoal atual preservado como backup. Não transferir, sobrescrever ou apagar o remoto. A organização restringe aplicativos OAuth de terceiros e ainda não aprovou o app Replit; resolver isso antes de criar repositórios, Project e issues. Auditar arquivos e histórico antes de publicar conteúdo. A declaração `MIT` do `package.json` raiz ainda não tem arquivo `LICENSE`; confirmar a licença antes de anunciar o código como MIT.
+- GitHub: organização `City-Eyes`, repositórios públicos [city-eyes-code](https://github.com/City-Eyes/city-eyes-code) e [city-eyes-docs](https://github.com/City-Eyes/city-eyes-docs), Project público e 15 issues criados. Manter o remoto pessoal como backup sem transferência ou alteração. Ainda não houve push. Auditoria inicial: 36 commits têm autorias não GitHub-noreply, três arquivos `.agents/memory/` são rastreados e nenhum padrão de alta confiança de segredo foi detectado. MIT foi escolhido; faltam titular, decisão de exposição do email, padrão de configuração e filtro do histórico.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.
 - Idioma inicial: português do Brasil; acessibilidade e celular desde o começo.
 
