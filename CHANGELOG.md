@@ -1,5 +1,11 @@
 # Histórico documental
 
+## 2026-11-18 — Correções de segurança publicadas na pilha de PRs
+
+- Registrada a publicação das correções de segurança e isolamento na pilha do código (#23, #25, #26, #24) sem reescrever histórico.
+- Atualizado o inventário do backlog: PR #23 agora fecha code #3, #4, #5 e #6; PR #25 recebeu correções de upload, rascunhos e redirecionamento; PR #24 recebeu isolamento de cache de fila e tratamento de revogação.
+- Validação técnica registrada: typecheck ok, 17 testes de API e 2 testes mobile. Replay contra Object Storage real, login nativo e revisão cruzada de lft21 continuam pendentes.
+
 ## 2026-11-18 — Transparência incluída no MVP
 
 - Registrado o recorte link-out do diretório por cidade e os limites contra ingestão, scraping e encaminhamento municipal.
