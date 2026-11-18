@@ -1,9 +1,18 @@
 # CITY EYES — inventário do backlog GitHub
 
-**Estado:** 15 issues criadas nos repositórios públicos; `B-xx` são IDs locais mapeados aos links GitHub abaixo.  
+**Estado:** 17 issues criadas nos repositórios públicos; `B-xx` são IDs locais mapeados aos links GitHub abaixo.  
 **Escopo:** manter rastreabilidade com F-xx, US-xx, UC-xx e T-xx do plano de produto. A proposta F-13 de transparência continua pendente e não entra como requisito aprovado do MVP.
-**Project:** [CITY EYES — MVP](https://github.com/orgs/City-Eyes/projects/1), público, com 15 issues. Os status atuais são Backlog → Ready → In progress → Review → Done; o padrão de repositório recebido pede Todo → In progress → In review → Done e automações, ainda não aplicados.
-**Separação no Project:** `repo:code` nas 12 issues de `city-eyes-code`; `repo:docs` nas 3 issues de `city-eyes-docs`. `area:*`, `priority:*` e `type:*` continuam classificando o assunto, prioridade e natureza do trabalho.
+**Project:** [CITY EYES — MVP](https://github.com/orgs/City-Eyes/projects/1), público, com 17 issues. Status configurados: Todo → In progress → In review → Done. As automações nativas ainda precisam de configuração em uma sessão autenticada do GitHub.
+**Separação no Project:** `repo:code` nas 13 issues de `city-eyes-code`; `repo:docs` nas 4 issues de `city-eyes-docs`. `area:*`, `priority:*`, `type:*` e `workstream:*` classificam o assunto e a responsabilidade.
+**Frentes:** `workstream:city-problems`, `workstream:transparency` e `workstream:shared` registram a divisão de responsabilidade descrita em [TEAM-OWNERSHIP.md](TEAM-OWNERSHIP.md). As labels de frente não são atribuições pessoais.
+
+## Responsabilidades e paralelismo
+
+- **Usuário — problemas urbanos:** fotos, publicação, lista/detalhe, mapa, acompanhamento, triagem e resolução.
+- **Parceiro — transparência:** pesquisa, curadoria e validação de fontes; implementação só depois de aprovar o recorte.
+- **Compartilhado:** autenticação, cidades/localização, navegação, design system, contratos API/DB e CI; combinar interfaces e responsável antes de trabalho em paralelo.
+
+Issues atuais: docs #1 e #4 e code #1–#4 e #13 são compartilhadas; docs #2–#3 são transparência; code #5–#12 são problemas urbanos. O papel do parceiro foi registrado nas issues de transparência; a conta GitHub ainda não existe. Ainda não há issue de código de transparência porque F-13 não está aprovada.
 
 ## Decisões e pré-condições
 
@@ -38,7 +47,14 @@
 | ID | Título sugerido | Repo | Estado | Aceite / verificação |
 |---|---|---|---|---|
 | B-14 | Decidir o recorte inicial de transparência pública | docs | Decisão pendente | Usuário escolhe diretório/link-out ou dados agregados adicionais, define curadoria e revisores; até lá F-13 não muda P0 nem gera importação. US-T-01–05; T-27–T-34 são propostas. |
-| B-15 | Validar uma fonte municipal antes de qualquer conector | code + docs | Futuro, bloqueado | Confirmar base normativa/licença aplicável, URL HTTPS, formato/volume, esquema/IDs, cobertura, atualização, privacidade e retenção. Não baixar a exportação de licitações de Londrina sem limite verificável ou autorização explícita para volume maior. |
+| B-15 | Validar uma fonte municipal antes de qualquer conector | docs | Futuro, bloqueado | Confirmar base normativa/licença aplicável, URL HTTPS, formato/volume, esquema/IDs, cobertura, atualização, privacidade e retenção. Não baixar a exportação de licitações de Londrina sem limite verificável ou autorização explícita para volume maior. |
+
+## Estrutura pública dos repositórios
+
+| ID | Título sugerido | Repo | Prioridade | Dependências | Aceite / verificação |
+|---|---|---|---|---|---|
+| B-16 | Publicar a base revisada do repositório de código | code | Gate | B-17 | Histórico filtrado e normalizado, governança, CI e links aprovados; sem `.agents/`, `.conversation/` ou anexos. |
+| B-17 | Publicar a estrutura canônica do repositório documental | docs | Gate | Nenhuma | Índices e documentos revisados, links locais válidos, pesquisa com fonte/data/limite, sem notas internas ou capturas integrais de terceiros. |
 
 ## Já entregue — não abrir issue duplicada
 
@@ -66,3 +82,5 @@ Milestones `MVP do hackathon`: [código](https://github.com/City-Eyes/city-eyes-
 | B-13 | [Automatizar fluxos críticos e revisão mobile](https://github.com/City-Eyes/city-eyes-code/issues/12) |
 | B-14 | [Decidir o recorte inicial de transparência pública](https://github.com/City-Eyes/city-eyes-docs/issues/2) |
 | B-15 | [Validar uma fonte municipal antes de qualquer conector](https://github.com/City-Eyes/city-eyes-docs/issues/3) |
+| B-16 | [Publicar a base revisada do repositório de código](https://github.com/City-Eyes/city-eyes-code/issues/13) |
+| B-17 | [Publicar a estrutura canônica do repositório documental](https://github.com/City-Eyes/city-eyes-docs/issues/4) |
