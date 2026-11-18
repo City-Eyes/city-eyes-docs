@@ -16,7 +16,7 @@ O evento informado é o **Desafio Replit PUCPR 2026 — “Da ideia ao software�
 
 ## Acordos de trabalho e decisões
 
-O resumo-base indica que este é um projeto solo. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação e o repositório GitHub continuam pendentes. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês, nenhuma publicação/commit/push sem pedido explícito e nenhuma credencial em código.
+O resumo-base originalmente descrevia um projeto solo; em 17/11 o usuário informou que se juntou a um colega no hackathon. A divisão de trabalho ainda precisa ser combinada. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação e o repositório GitHub continuam pendentes. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês, nenhuma publicação/commit/push sem pedido explícito e nenhuma credencial em código.
 
 **Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados em 16/11 e aplicados a uma nova variante combinada no canvas. Revisão interativa/acessível e implementação Expo ainda são etapas separadas. Repo GitHub, issues, regras de branch e secrets só serão criados/configurados quando forem solicitados. Requisitos e testes terão IDs rastreáveis; decisões ainda não aprovadas ficam marcadas como propostas.
 
@@ -471,7 +471,7 @@ Ao final, revisar de forma independente **requisitos ↔ casos de uso ↔ protó
 
 ### Prioridades de desenvolvimento
 
-Tempo total do evento: 3 dias × 3h, solo, incluindo planejamento e pitch; não são nove horas exclusivas de programação. Ondas indicam ordem, não promessa de conclusão. Fazer verificações baratas de API/tipos por entrega e uma passagem coerente dos fluxos nativos ao estabilizar o conjunto, com smoke final nos dois sistemas; não repetir a suíte completa a cada edição.
+Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são nove horas exclusivas de programação. A estimativa original era solo; revisar a divisão com o colega antes de ampliar o compromisso de entrega. Ondas indicam ordem, não promessa de conclusão. Fazer verificações baratas de API/tipos por entrega e uma passagem coerente dos fluxos nativos ao estabilizar o conjunto, com smoke final nos dois sistemas; não repetir a suíte completa a cada edição.
 
 | Onda | Entrega | Requisitos | Critério de pronto |
 |---|---|---|---|
