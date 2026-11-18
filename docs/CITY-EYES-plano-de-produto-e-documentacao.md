@@ -1,10 +1,10 @@
 # CITY EYES — plano de produto e documentação do MVP
 
 **Baseline documental:** 18/11/2026 · **Contexto:** hackathon de 17–19/11/2026
-**Status:** direção visual, plataforma Expo, PostgreSQL, acesso e prioridades essenciais registrados como aprovados. Repositórios publicados e frentes de trabalho definidas. O módulo de transparência pública continua como proposta; autenticação gerenciada e limites municipais reais continuam pendentes.
+**Status:** direção visual, Expo, PostgreSQL, acesso e recorte de transparência pública por links oficiais registrados como decisões aprovadas para o MVP. A primeira fatia de consulta existe no workspace local, mas ainda não foi publicada na `main` do GitHub. Autenticação gerenciada e limites municipais reais continuam pendentes.
 **Produto:** plataforma de participação cidadã para registrar, priorizar e acompanhar problemas de infraestrutura urbana.
 
-**Revisão de consistência do workspace:** 18/11/2026. Esta cópia canônica integra os acordos aprovados, os protótipos, a pesquisa de transparência e a amostra fictícia de licitações. Não promove propostas a decisões aprovadas; os anexos originais foram preservados.
+**Revisão de consistência do workspace:** 18/11/2026. Esta cópia canônica integra os acordos aprovados, os protótipos, a pesquisa de transparência e a amostra fictícia de licitações. A decisão de transparência aprova somente o diretório/link-out descrito na seção 17; as fontes e integrações continuam sujeitas a validação própria.
 
 ## 0. Contexto do desafio PUCPR
 
@@ -16,17 +16,19 @@ O evento informado é o **Desafio Replit PUCPR 2026 — “Da ideia ao software�
 
 ## Acordos de trabalho e decisões
 
-O usuário e um parceiro desenvolverão o CITY EYES. O usuário lidera fotos, publicação e fluxos de problemas urbanos; o parceiro lidera transparência pública. Autenticação, cidades/localização, navegação, design system, contratos API/DB e CI são fundação compartilhada e exigem coordenação antes de edição paralela. A conta GitHub do parceiro ainda não está disponível; as issues registram seu papel, sem atribuição pessoal. Expo, backend e mapa foram registrados como escolhas para o MVP; o provedor de autenticação continua pendente. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês e nenhuma credencial em código.
+LucasStop lidera fotos, publicação e problemas urbanos; o parceiro lft21 lidera transparência pública. Autenticação, cidades/localização, navegação, design system, contratos API/DB e CI são fundação compartilhada e exigem coordenação antes de edição paralela. As issues estão atribuídas por frente, com as compartilhadas para ambos. Expo e backend modular foram escolhidos; o provedor de autenticação continua pendente, embora a pilha de PRs atual implemente Replit OIDC. Neste workspace, use **pnpm** e preserve `pnpm-lock.yaml`; não aplique regras de Yarn ou de remoção de lockfile vindas de outro projeto. Mantêm-se documentação em pt-BR, identificadores de código em inglês e nenhuma credencial em código.
 
-**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados e aplicados à variante combinada no canvas. Revisão interativa/acessível e implementação Expo ainda são etapas separadas. A organização `City-Eyes` possui dois repositórios públicos e um Project único; [documentação inicial](https://github.com/City-Eyes/city-eyes-docs/pull/5) e [código inicial](https://github.com/City-Eyes/city-eyes-code/pull/14) foram mesclados com CI aprovado. MIT cobre contribuições originais, com titular “contribuidores da organização”; as fontes externas mantêm seus direitos. O histórico público preserva a ordem das mudanças publicáveis de `main`, omite commits vazios por frente e normaliza autoria/mensagens; o backup pessoal permanece intacto. Proteções de `main`, merge commit como único método e exclusão de branch estão ativos. Auto-merge temporário foi autorizado enquanto só o proprietário tem acesso; a entrada do parceiro exige desativá-lo e ativar uma aprovação e CODEOWNERS. As automações nativas e a presença de `PROJECT_TOKEN` nos dois repos foram conferidas; o auto-add de documentos usa um workflow próprio. Consulte [responsabilidades](TEAM-OWNERSHIP.md) e o [inventário](GITHUB-ISSUE-BACKLOG.md) para rastreabilidade.
+**Processo:** o protótipo funcional e os fluxos foram registrados como aprovados na versão 0.9; a direção visual e os tokens foram aprovados e aplicados à variante combinada no canvas. A organização `City-Eyes` possui dois repositórios públicos e um Project único; [documentação inicial](https://github.com/City-Eyes/city-eyes-docs/pull/5) e [código inicial](https://github.com/City-Eyes/city-eyes-code/pull/14) foram mesclados com CI aprovado. MIT cobre contribuições originais, com titular “contribuidores da organização”; as fontes externas mantêm seus direitos. O histórico público preserva a ordem das mudanças publicáveis de `main`, omite commits vazios por frente e normaliza autoria/mensagens; o backup pessoal permanece intacto. Proteções de `main`, merge commit como único método e exclusão de branch estão ativos. Auto-merge está desligado; PRs exigem revisão humana e CODEOWNERS, sem bypass. As automações nativas e a presença de `PROJECT_TOKEN` nos dois repos foram conferidas; o auto-add de documentos usa um workflow próprio. Consulte [responsabilidades](TEAM-OWNERSHIP.md) e o [inventário](GITHUB-ISSUE-BACKLOG.md) para rastreabilidade.
 
 ### Estado técnico verificado
 
-Em 18/11/2026, o workspace é um monorepo **pnpm** com API Express 5 inicial, pacotes compartilhados de banco/API e artefatos de design e prototipagem. O servidor da API contém somente o health check; o schema Drizzle ainda não define tabelas CITY EYES; a especificação OpenAPI contém apenas o health check; não há app Expo nativo scaffoldado. Portanto, as telas web do sandbox são protótipos, não telas do app nem uma integração de dados.
+Em 18/11/2026, o workspace é um monorepo **pnpm** com API Express 5, pacotes compartilhados de banco/API, design system e prototipagem. O app Expo e a API agora incluem consulta pública, autenticação OIDC, envio de relatos com foto, autorização municipal por cidade e fila operacional. A pilha está em quatro PRs abertos (#23, #25, #26 e #24); não está integrada à `main` pública. A decisão do provedor de autenticação ainda está aberta, e a implementação atual escolhe Replit OIDC sem aprovação registrada. O estado por PR, validações e bloqueios de revisão estão no [inventário do backlog](GITHUB-ISSUE-BACKLOG.md).
+
+O workspace local contém o mesmo estado de código da pilha aberta, cujo PR final é #24; a `main` pública ainda não recebeu essas mudanças. Portanto, implementação em PR não equivale a integração nem fecha issue antes do merge. O typecheck do monorepo passou e os checks de CI dos quatro PRs estão verdes. A validação cobriu 17 testes de API (16 no nível do PR #25) e 2 testes mobile. As correções de segurança e isolamento foram publicadas na pilha de PRs sem reescrever histórico; replay contra Object Storage real, login em build nativo e revisão cruzada de lft21 continuam pendentes. Maestro, validação em dispositivo nativo e teste de carga seguem pendentes.
 
 O componente `ProcurementDemo` no sandbox mostra uma referência oficial da Prefeitura de Londrina/Equiplano e uma tabela de dados 100% fictícios, com busca e filtro por situação. Nenhuma linha foi importada da fonte oficial. O arquivo `artifacts/mockup-sandbox/tests/procurement-demo.test.mjs` cobre oito verificações da amostra e da interação; `node --test tests/procurement-demo.test.mjs` passou com 8/8 no diretório `artifacts/mockup-sandbox`. Isso valida somente a demonstração do sandbox, não uma funcionalidade de produção.
 
-### Recomendação provisória para decidir
+### Stack aprovada e decisões operacionais pendentes
 
 | Decisão | Recomendação inicial | Por quê / alternativa |
 |---|---|---|
@@ -79,20 +81,24 @@ O núcleo obrigatório é publicar com sessão, consultar lista/detalhe e atuali
 - Um perfil administrativo consegue alterar status e adicionar uma evidência/nota.
 - A tela pública reflete a atualização e mantém histórico legível.
 - A apresentação tem dados de demonstração, incluindo um caso resolvido.
+- A pessoa encontra fontes oficiais da cidade no diretório e vê órgão, categoria e data de conferência; cada link abre o portal original, sem sugerir que um relato foi enviado ou atendido pela prefeitura.
 
 ### Fora do MVP de amanhã
-Previsão de falhas, integração operacional real com prefeitura, ingestão contínua de dados de portais, encaminhamento de relatos ou pedidos e-SIC pelo CITY EYES, despacho de equipes, notificações por e-mail/SMS, múltiplos provedores de login (o MVP usa um único provedor gerenciado, mesmo que ele ofereça entrada via conta Google/Replit), moderação em escala, análise de vídeo, detector automático de autenticidade como autoridade, classificação automática juridicamente vinculante, confirmação de identidade e garantia de que uma obra foi concluída. São hipóteses de evolução, não capacidades prometidas. A proposta da seção 17, ainda não aprovada, é limitada a diretório/link-out e metadados de fontes.
+Previsão de falhas, integração operacional real com prefeitura, ingestão contínua de dados de portais, encaminhamento de relatos ou pedidos e-SIC pelo CITY EYES, despacho de equipes, notificações por e-mail/SMS, múltiplos provedores de login (o MVP usa um único provedor gerenciado, mesmo que ele ofereça entrada via conta Google/Replit), moderação em escala, análise de vídeo, detector automático de autenticidade como autoridade, classificação automática juridicamente vinculante, confirmação de identidade e garantia de que uma obra foi concluída. São hipóteses de evolução, não capacidades prometidas. O diretório de transparência por links oficiais é parte do MVP; integrações permanecem fora dele.
 
 ## 3. Atores e permissões
 
-| Ator | Objetivo | Permissões no MVP |
-|---|---|---|
-| Visitante | Consultar problemas sem cadastro | Escolher cidade e ver mapa, lista e detalhes públicos; não publica nem confirma relatos |
-| Cidadão autenticado | Relatar e acompanhar problemas | Todas as consultas públicas; publicar denúncia e confirmar problema ativo, se essa funcionalidade for implementada |
-| Operador municipal | Triar e acompanhar ocorrências da sua cidade | Ver fila apenas da cidade em que tem vínculo; alterar status; registrar nota; anexar evidência de resolução |
-| Administrador municipal | Gerenciar acesso e operação de uma cidade | Administrar operadores e registros somente da(s) cidade(s) em que tem papel de `city_admin` |
-| Administrador da plataforma | Operar configuração global | Acesso global excepcional; não necessário para a demonstração do MVP |
-| Serviço de IA | Apoiar a triagem | Ler imagem enviada e metadados mínimos; gerar sugestão estruturada; não publicar nem alterar status por conta própria |
+| ID | Ator | Permissão ID | Objetivo/permissão no MVP |
+|---|---|---|---|
+| ACT-01 | Visitante | PERM-01 | Escolher cidade e consultar apenas mapa/lista/detalhes públicos; não publica nem confirma |
+| ACT-02 | Cidadão autenticado | PERM-01, PERM-02, PERM-03 | Consultar conteúdo público, publicar relato e confirmar problema ativo; identidade deriva da sessão |
+| ACT-03 | Operador municipal | PERM-04 | Ver e alterar ocorrências apenas nas cidades vinculadas; registrar nota e evidência |
+| ACT-04 | Administrador municipal | PERM-05 | Administrar operadores/registros somente nas cidades em que tem papel `city_admin` |
+| ACT-05 | Administrador da plataforma | PERM-06 | Acesso global excepcional; não necessário para a demonstração do MVP |
+| ACT-06 | Serviço de IA | PERM-07 | Ler imagem e metadados mínimos; gerar sugestão estruturada; não publicar nem alterar status |
+| ACT-07 | Curador do catálogo (papel editorial, fora do app) | PERM-08 | Propor inclusão/atualização de links oficiais por PR revisado; não tem uma conta administrativa dentro do CITY EYES |
+
+**Permissões:** PERM-01 = leitura pública, inclusive do diretório de fontes; PERM-02 = publicar com sessão válida; PERM-03 = confirmar com sessão e limite de uma confirmação por conta/tipo; PERM-04 = triagem restrita à cidade vinculada; PERM-05 = gestão municipal restrita à cidade; PERM-06 = administração global excepcional; PERM-07 = análise consultiva sem escrita operacional; PERM-08 = propor atualização do catálogo por PR com revisão cruzada, sem privilégio de edição dentro do app.
 
 **Regras de autorização:** publicar e confirmar relatos exige sessão válida, verificada no backend; o autor é derivado da sessão, nunca aceito de um `reporter_id` arbitrário do cliente. Cada leitura e alteração administrativa valida a associação usuário–cidade; operador de uma cidade não pode ler notas internas nem alterar status de outra. A API verifica a cidade no servidor, não confia apenas no `city_id` enviado pelo app. Cidadãos podem reportar em qualquer cidade atendida, sem vínculo municipal de operador. Visitantes só consultam conteúdo público; cidadãos não mudam status operacional. Duplicidade é buscada dentro da mesma cidade. A IA é consultiva; conta não elimina a necessidade de rate limit, moderação e validação.
 
@@ -112,9 +118,9 @@ Previsão de falhas, integração operacional real com prefeitura, ingestão con
 | F-10 | Previsão de problemas futuros | P2 | Fora do hackathon; exige histórico e validação |
 | F-11 | Registrar origem da foto e localização | P0 | Distinguir câmera/galeria/demo e GPS/pin; sinal de contexto, não prova de autenticidade |
 | F-12 | Mapa interativo sincronizado com a lista | P1 | Pins e filtros da cidade selecionada; mapa pode ser cortado sem perder a lista |
-| F-13 | Contexto de transparência pública por cidade/ocorrência | Proposta — decisão pendente | Candidato: diretório de fontes oficiais, data de consulta e links externos; sem ingestão contínua nem encaminhamento automático |
+| F-13 | Diretório de transparência pública por cidade | P0 — MVP | Links externos oficiais curados, órgão/categoria, data em que o link foi conferido e data dos dados somente quando declarada; sem ingestão nem encaminhamento |
 
-**Regra de corte:** F-01, F-04, F-05 e F-11 formam o fluxo essencial. Se faltar tempo, cortar F-06–F-08, depois F-02/F-03 e F-12. F-13 não altera a ordem ou o escopo do MVP até ser aprovado. A análise simulada só aparece se estiver claramente rotulada; não sacrificar o fluxo de publicação e a autorização municipal por funcionalidades P1/P2.
+**Regra de corte:** F-01, F-04, F-05, F-11 e o diretório link-out de F-13 formam o escopo P0 do MVP. Se faltar tempo, entregar F-13 com menos categorias, mas somente com URLs verificadas e rótulos de proveniência; não substituir fonte ausente por dados inventados. Cortar F-06–F-08, depois F-02/F-03 e F-12. A análise simulada só aparece se estiver claramente rotulada.
 
 ## 5. Histórias de usuário e critérios de aceite
 
@@ -217,6 +223,20 @@ Estados: **aberta → em análise → em atendimento → resolvida**. Estados ad
 ## 8. Modelo de dados inicial
 
 PostgreSQL, IDs UUID, timestamps UTC; coordenadas em latitude/longitude. **PostGIS não será usado no MVP**; busca aproximada com geocell/geohash indexado e cálculo de distância no backend.
+
+IDs abaixo são referências de rastreabilidade do plano, não declaração de que todas as tabelas já existem. No workspace em 18/11/2026, apenas DATA-01 e DATA-02 têm tabelas implementadas.
+
+| ID | Entidade | Estado |
+|---|---|---|
+| DATA-01 | Cidade e bbox | Tabela de cidade existe; bbox real continua pendente |
+| DATA-02 | Relato | Tabela mínima de leitura existe; campos de escrita/estado permanecem no modelo planejado |
+| DATA-03 | Usuário/identidade externa | Planejada; depende de B-03 |
+| DATA-04 | Vínculo e papel municipal | Planejada; depende de autorização municipal |
+| DATA-05 | Mídia e proveniência | Planejada; depende de storage e política de dados |
+| DATA-06 | Evento de status | Planejada; usada por triagem e histórico |
+| DATA-07 | Confirmação cidadã | Planejada, P1 |
+| DATA-08 | Análise assistiva | Opcional, P1; não certifica autenticidade |
+| DATA-09 | Item do catálogo curado de fontes oficiais | Configuração estática revisada por PR; sem tabela, API ou ingestão no MVP |
 
 Não cadastrar todos os bairros manualmente. A coordenada e o limite municipal são os dados principais; `neighborhood_label` é opcional e só deve ser preenchido a partir de polígonos de bairros confiáveis. Sem esses dados, mostrar o pin/endereço disponível sem inventar bairro.
 
@@ -382,11 +402,18 @@ Cada tela deve ter estados de carregamento, vazio, erro e sucesso; registrar sta
 
 ## 11. UX e telas
 
-1. **Mapa público:** seletor de cidade visível; mapa como foco, lista alternativa acessível, legenda, filtros simples, botão “Reportar” e opção de localização manual.
-2. **Novo relato:** categoria, descrição, foto, localização editável, aviso de privacidade, sugestões de duplicata.
-3. **Detalhe da ocorrência:** status e linha do tempo, evidência, estimativa de IA com rótulo, confirmações e ação de acompanhamento.
-4. **Command Center:** cartões de contagem, fila ordenável, filtros, detalhe lateral e ações de status protegidas.
-5. **Estado vazio/erro:** cidade sem relatos, permissão de localização/câmera negada, upload falho, mapa sem tiles, IA indisponível e carregamento lento devem ter alternativa clara.
+| ID | Tela/estado | Escopo e estado |
+|---|---|---|
+| UI-00 | Estados compartilhados | Carregamento, erro, vazio e recuperação; implementados para consulta básica, validar acessibilidade |
+| UI-01 | Seleção de cidade | Contexto visível; consulta pública por cidade; existe no app local |
+| UI-02 | Lista de relatos da cidade | Lista paginada/fallback acessível; existe no app local |
+| UI-03 | Detalhe público do relato | Campos públicos e aviso de demonstração; existe no app local |
+| UI-04 | Novo relato | Categoria, descrição, foto, localização editável e aviso de privacidade; pendente |
+| UI-05 | Fila municipal | Lista por cidade, filtro básico, mudança de status e ações protegidas; pendente, issue B-18 (#19) |
+| UI-06 | Mapa e filtros | Pins/filtros sincronizados com UI-02; P1, pendente |
+| UI-07 | Revisão de sugestões | Resultado de IA/duplicatas rotulado como sugestão; P1, pendente |
+| UI-T-01 | Diretório de transparência da cidade | P0; links externos por cidade/categoria, órgão, data de conferência e data declarada pela fonte quando houver |
+| UI-T-02 | Aviso de origem no detalhe do relato | P0; separar conteúdo comunitário/demo de fonte oficial e informar que o relato não foi enviado à prefeitura |
 
 ## 12. Plano de testes e cenários
 
@@ -449,6 +476,7 @@ Flows sugeridos:
 - `E2E-05 Trocar cidade`: mudar entre cidades e confirmar que lista, mapa e filtro refletem somente a cidade ativa; cobertura de autorização entre cidades é obrigatória também na API.
 - `E2E-06 Origem da foto`: enviar uma imagem de fixture pela câmera/galeria de teste e validar que a interface mostra a origem sem afirmar autenticidade.
 - `E2E-07 Sessão`: validar cancelamento do login, logout e sessão expirada; consulta pública permanece disponível e publicação exige autenticação.
+- `E2E-08 Diretório de transparência`: selecionar cidade, abrir diretório, conferir proveniência e escopo da cidade, testar abertura/recusa de link com destino controlado e voltar ao app; conferir no detalhe “Relato não enviado à prefeitura”. Não depender da disponibilidade ao vivo dos portais municipais.
 - `VIS-01 Telas estáticas`: screenshots de telas sem mapa/conteúdo dinâmico, com uma baseline separada para cada plataforma e tamanho de tela.
 
 ### Revisão cruzada final — gate de entrega
@@ -473,28 +501,30 @@ Ao final, revisar de forma independente **requisitos ↔ casos de uso ↔ protó
 - Usar upload assinado ou endpoint de upload controlado; escanear/moderar antes de produção.
 - Minimizar dados pessoais e metadados de imagem; avisar que local e imagem poderão ser públicos.
 - Tratar análise de IA como estimativa sujeita a erro, vieses e condições da foto; oferecer revisão humana.
+- No diretório de transparência, guardar somente metadados editoriais e URLs oficiais; não coletar credenciais, pedidos, dados pessoais de portais nem conteúdo municipal no MVP. Abrir destinos externos em navegador do sistema e não alegar disponibilidade atual sem consulta.
 - Produção precisa de rate limiting, política de retenção, moderação, backups, observabilidade e canal para contestação/exclusão.
 
 ## 14. Plano de execução do hackathon e primeira build
 
 ### Prioridades de desenvolvimento
 
-Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são nove horas exclusivas de programação. A estimativa original era solo; revisar a divisão com o colega antes de ampliar o compromisso de entrega. Ondas indicam ordem, não promessa de conclusão. Fazer verificações baratas de API/tipos por entrega e uma passagem coerente dos fluxos nativos ao estabilizar o conjunto, com smoke final nos dois sistemas; não repetir a suíte completa a cada edição.
+Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são nove horas exclusivas de programação. A equipe é de duas pessoas, com frentes divididas por domínio. Ondas indicam ordem, não promessa de conclusão. Fazer verificações baratas de API/tipos por entrega e uma passagem coerente dos fluxos nativos ao estabilizar o conjunto, com smoke final nos dois sistemas; não repetir a suíte completa a cada edição.
 
 | Onda | Entrega | Requisitos | Critério de pronto |
 |---|---|---|---|
 | 1 | Seed de 4 cidades (bbox) + relatos demo; seletor de cidade; lista e detalhe públicos | F-04, US-09, T-19 | Trocar cidade muda a lista; detalhe abre |
 | 2 | Sessão e proteção de uploads/publicação; criar relato com foto, GPS/coordenadas manuais e bbox | F-01, F-11, US-01, T-01–T-03, T-16, T-20–T-22 | Relato autenticado aparece na lista; anônimo é negado |
-| 3 | Contas seed de operador; fila municipal, status com nota pública/interna, histórico | F-05, US-06, US-10, T-07, T-08, T-15, T-24, T-25 | Operador muda status na própria cidade; outra cidade é negada |
+| 3A | Contas seed de operador; fila municipal, status com nota pública/interna, histórico | F-05, US-05/06/10, T-07, T-08, T-15, T-24, T-25 | Operador muda status na própria cidade; outra cidade é negada |
+| 3B | Diretório de transparência com catálogo estático revisado e link-out | F-13, US-T-01/02/03/05/06, UC-T-01/02/03, T-27–T-34 | Links HTTPS aprovados, cidade e origem identificadas; o relato continua marcado como não enviado |
 | 4 | Mapa (`react-native-maps`) sincronizado com a lista e pin no formulário | F-12, US-04 | Pins da cidade ativa; lista continua como fallback |
 | 5 | Análise de IA (ou "Simulação" rotulada) + possível duplicata | F-02, F-03, T-04, T-05 | Falha de IA não perde relato; duplicata só sugere |
 | 6 | Evidência de reparo, confirmações, indicadores | F-06, F-07, F-08 | Caso resolvido com evidência visível ao público |
 
 **Fallback de autenticação:** validar o provedor antes da onda 2. Se não funcionar, usar identidades seed de cidadão e operadores com sessão emitida pelo servidor e seletor “Entrar como (modo demonstração)”. O servidor mapeia identidades predefinidas; nunca aceita papel, autor ou cidade arbitrários do cliente. Endpoint demo só existe em ambiente de demonstração explicitamente habilitado, sem dados reais, e fica desativado por padrão fora dele. O seletor permite impersonar contas de teste: não é autenticação segura para produção. Se forem usadas senhas seed, entram por Secrets, nunca no código. Rotular na tela e declarar no pitch.
 
-**Ordem de corte:** remover de baixo para cima (6 → 5 → 4). Ondas 1–3 não são cortáveis.
+**Ordem de corte:** remover de baixo para cima (6 → 5 → 4). Ondas 1–3A e o recorte link-out da 3B não são cortáveis; reduzir quantidade de categorias, nunca usar link sem fonte ou inventar dados.
 
-**Estado em 18/11/2026:** nenhuma onda do app nativo foi implementada no workspace. As ondas abaixo são critérios e ordem de execução, não afirmação de trabalho concluído. A estrutura GitHub e o backlog já existem; a fatia Expo começa após conectar o código ao repositório público e resolver as decisões de publicação.
+**Estado em 18/11/2026:** parte da onda 1 já foi implementada no workspace: quatro cidades e relatos sintéticos, consulta pública paginada, seleção de cidade, lista e detalhe no app Expo. As ondas 2–6 e 3B seguem pendentes; autenticação, publicação, triagem móvel, diretório, mapa, IA/duplicatas, resolução e confirmações não estão implementados. A fatia local ainda precisa ser revisada e publicada por PR antes de ser considerada entregue no GitHub.
 
 ### Agenda de referência — dia 1, 17/11: ideia para plano
 - Validar o problema e o público: cidadãos reportam, equipes municipais triagem e priorizam.
@@ -505,10 +535,10 @@ Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são n
 - Preparar registros de demonstração (categoria buraco) e as contas seed de operador.
 
 ### Agenda de referência — dia 2, 18/11: plano para app nativo
-- Antes da primeira build, colar o prompt completo abaixo no modo Power, depois de verificar o modo, a disponibilidade dos créditos e as condições de uso.
-- Seguir as ondas 1–3 primeiro; mapa só na onda 4, com a lista funcionando antes.
-- Ajustar falhas uma por vez; usar o modo Gratuito quando fizer sentido, como recomenda o guia.
-- Validar a entrega coerente no Simulator iOS e no aparelho Android, conforme o ambiente disponível; manter seed de demonstração e não confundir seed com funcionamento offline ou persistência real.
+- A primeira fatia da onda 1 foi construída no workspace: cidades, consulta pública e telas de cidade/lista/detalhe.
+- As próximas entregas seguem as ondas 2–3 antes de mapa, IA ou confirmações.
+- Ajustar falhas uma por vez; registrar o que foi efetivamente validado.
+- Validar a entrega coerente em iOS e Android quando os dispositivos/simuladores estiverem disponíveis; exportação JavaScript não substitui teste nativo.
 
 ### Agenda de referência — dia 3, 19/11: app para pitch
 - Corrigir somente problemas que atrapalhem o fluxo ao vivo; evitar novas funcionalidades.
@@ -516,7 +546,9 @@ Tempo total do evento: 3 dias × 3h, incluindo planejamento e pitch; não são n
 - Demonstrar o caso, o valor para gestão, a transparência da IA e o que ainda é hipótese.
 - Não apresentar dados de demonstração como impacto real nem uma sugestão de IA como decisão oficial.
 
-### Prompt completo para a primeira build
+### Prompt original da primeira build (referência histórica)
+
+O texto abaixo registra a intenção original; não é uma instrução para recriar o app do zero. Antes de usar qualquer trecho em uma nova tarefa, conferir o estado atual do workspace e as issues.
 
 ```text
 Crie um aplicativo mobile nativo multiplataforma chamado CITY EYES com Expo, React Native e TypeScript, em português do Brasil, para o Desafio Replit PUCPR “Da ideia ao software”. Deve funcionar em Android e iOS a partir de uma codebase compartilhada. É uma ferramenta de gestão da manutenção urbana apoiada por relatos de cidadãos. O objetivo da demonstração é mostrar um fluxo completo e confiável, não construir todas as ideias futuras.
@@ -575,7 +607,8 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 3. **Inteligência (40s):** explicar prioridade e possível duplicata com transparência sobre limites.
 4. **Operação (60s):** abrir Command Center, revisar e mudar status.
 5. **Confiança/impacto (40s):** mostrar evidência e histórico de resolução.
-6. **Visão futura (20s):** mapas de concentração e prevenção só depois de dados históricos confiáveis.
+6. **Transparência (30s):** abrir o diretório da cidade, identificar a fonte oficial e explicar que o relato comunitário não foi enviado à prefeitura.
+7. **Visão futura (20s):** mapas de concentração e prevenção só depois de dados históricos confiáveis.
 
 **Frase de posicionamento:** “CITY EYES transforma relatos locais em problemas visíveis, priorizáveis e acompanháveis — com IA ajudando a equipe, não substituindo a decisão humana.”
 
@@ -593,16 +626,17 @@ Se faltar tempo, remover previsões, notificações e confirmação avançada. N
 - Geodados: levantar bbox das quatro cidades de fonte identificada, com data e ordem latitude/longitude; bbox é aproximação, não polígono municipal. Não inventar coordenadas de limite.
 - Visual: testar acessibilidade e estados interativos da quarta variante; carregar Nunito Sans no app Expo.
 - Execução: confirmar acesso ao Mac/idb e Android/adb. Este container não controla automaticamente os dispositivos locais do usuário.
+- Transparência: incluída no MVP como diretório de links oficiais e proveniência; manter ingestão, scraping e encaminhamento municipal fora do escopo.
 - Gerenciador neste projeto: pnpm com lockfile preservado.
-- GitHub: organização `City-Eyes`, dois repositórios públicos e [Project único](https://github.com/orgs/City-Eyes/projects/1). Publicação inicial e automações concluídas; CI e PR são obrigatórios. Auto-merge temporário e mudança de política na entrada do parceiro seguem [TEAM-OWNERSHIP.md](TEAM-OWNERSHIP.md). O histórico público filtra memórias, sessões e anexos; auditoria por padrões não garante ausência de todo segredo. A reconciliação de cópias locais usa backup privado e a história pública como base, sem combinar os históricos nem usar force-push.
+- GitHub: organização `City-Eyes`, dois repositórios públicos e [Project único](https://github.com/orgs/City-Eyes/projects/1). Publicação inicial e automações concluídas; CI e PR são obrigatórios. Auto-merge está desligado e a revisão por CODEOWNERS é exigida; ver [TEAM-OWNERSHIP.md](TEAM-OWNERSHIP.md). O histórico público filtra memórias, sessões e anexos; auditoria por padrões não garante ausência de todo segredo. A reconciliação de cópias locais usa backup privado e a história pública como base, sem combinar os históricos nem usar force-push.
 - Categorias iniciais: buraco, iluminação, drenagem, calçada/acessibilidade e outro.
 - Idioma inicial: português do Brasil; acessibilidade e celular desde o começo.
 
 **Decisão de categorias:** o enum mantém as cinco categorias; dados seed e roteiro da demo usam só **buraco**, para a narrativa ficar concreta.
 
-## 17. Proposta de transparência pública (aguarda aprovação)
+## 17. MVP de transparência pública
 
-**Base da proposta:** [pesquisa comparativa de transparência pública](CITY-EYES-transparencia-publica.md) e [relatório e fontes consultadas](../research/transparencia-publica.md). A proposta não torna o CITY EYES um portal oficial, não substitui os portais/SICs municipais e não altera o MVP aprovado até uma decisão explícita.
+**Decisão do usuário em 18/11/2026:** incluir transparência pública no MVP como diretório por cidade, com links oficiais e proveniência básica. Isso não torna o CITY EYES um portal oficial, não substitui os portais/SICs municipais e não autoriza ingestão, scraping ou envio de solicitações. A especificação anterior e suas fontes estão em [desenho do módulo](CITY-EYES-transparencia-publica.md) e [pesquisa comparativa](../research/transparencia-publica.md).
 
 ### Objetivo e limites
 
@@ -614,66 +648,67 @@ Não reproduzir todo o portal municipal. Não afirmar que uma obra, contrato ou 
 
 | Fase | Escopo recomendado | Estado |
 |---|---|---|
-| MVP candidato | Diretório para Curitiba, Londrina, Maringá e Ponta Grossa; links para portal, dados abertos, obras e e-SIC/Ouvidoria; cartões de relatório com a origem comunitária, histórico CITY EYES e links oficiais relacionados quando houver referência confirmada | Proposta — precisa de aprovação |
-| Evolução | Conectores por cidade para APIs/arquivos abertos com formato, licença, cobertura e atualização verificados; cache e agregações no backend; atualização e falha visíveis | Futuro, depende de validação por fonte |
-| Fora do MVP atual | Scraping, ingestão de arquivos grandes no celular, envio de pedidos e-SIC pelo app, criação de ordem de serviço, painel fiscal completo, integração/encaminhamento em nome da prefeitura | Não aprovado |
+| MVP aprovado | Diretório para Curitiba, Londrina, Maringá e Ponta Grossa com links HTTPS oficiais manualmente conferidos; categorias Portal, Obras, Dados abertos e canais de acesso/serviço somente onde houver destino verificado; órgão/categoria, data de conferência e data declarada pela fonte quando disponível. Aviso de que relatos CITY EYES não são encaminhados à prefeitura. | P0; implementação pendente |
+| Evolução | Cartões de referência específica por ocorrência, edição no app, conectores por cidade, APIs/arquivos, snapshots, cache e agregações | Futuro; exige novo escopo e validação |
+| Fora do MVP atual | Scraping, ingestão de arquivos/dados financeiros, envio de pedidos e-SIC pelo app, criação de ordem de serviço, painel fiscal completo, integração/encaminhamento em nome da prefeitura | Não aprovado |
 
 ### Experimento de transparência no sandbox — não é integração
 
 O sandbox contém `ProcurementDemo`, um protótipo que mantém separadas a referência oficial da Prefeitura de Londrina/Equiplano e cinco linhas de exemplo fictícias (`DEMO-001` a `DEMO-005`). O dataset marca `synthetic_demo`, `not_official` e `dataAsOf: null`; nenhuma linha nem exportação municipal foi importada. O link externo foi conferido, mas isso não valida todos os registros da listagem.
 
-A lista atual da Prefeitura foi validada como fonte candidata para uma futura evolução, não como fonte liberada para ingestão. Ela mostra licitações a partir de 01/04/2026 e 8.173 registros declarados, com 10 por página; a amostra autorizada não estabeleceu se “Baixar tabela” pode ser limitada a 10 linhas, então a exportação não foi acionada. O Decreto Municipal 667/2024 estabelece termos gerais de reutilização para informações de transparência ativa, observados LGPD e Lei 14.129/2021, mas não atribui uma licença CC BY específica à plataforma atual. A coleta foi interrompida; manter link externo e metadados, sem conector, até que os critérios de [validação da fonte](CITY-EYES-transparencia-publica.md#9-validação-atual-das-fontes-municipais) sejam atendidos.
+A listagem atual de licitações de Londrina é um destino linkável candidato, não uma fonte para ingestão: apresenta 8.173 registros declarados, mas a exportação não foi acionada porque não se comprovou um limite de 10 linhas. O Decreto Municipal 667/2024 não atribui uma licença CC BY específica à plataforma atual. No MVP, não reproduzir nem importar essas linhas; incluir somente após conferência manual do destino HTTPS e identificá-la como link externo.
 
-O teste automatizado do sandbox passou 8/8 em 18/11/2026. Isso verifica somente a integridade da amostra sintética, busca, filtro de situação, filtros combinados e estado vazio acessível — não testa importação, API, dados reais nem o app nativo. A decisão sobre entrar no MVP continua em aberto.
+O teste automatizado do sandbox passou 8/8 em 18/11/2026. Isso verifica somente a integridade da amostra sintética, busca, filtro de situação, filtros combinados e estado vazio acessível — não testa importação, API, dados reais nem o app nativo. O diretório do MVP é uma entrega separada, ainda não implementada.
 
-### Atores, permissões e histórias propostas
+### Atores, permissões e histórias
 
-| Ator | Permissão proposta | Limite |
-|---|---|---|
-| Visitante | Consultar fontes públicas e abrir os portais oficiais sem cadastro | Não cria associação entre fonte e relato |
-| Cidadão autenticado | Consultar as mesmas informações e sugerir uma referência pública | Não altera dado oficial nem muda status municipal |
-| Operador municipal | Gerenciar apenas ocorrências CITY EYES da cidade à qual está vinculado; anexar referência pública com fonte e justificativa | A referência é identificada como vínculo revisado, não como ordem ou confirmação da prefeitura |
-| Curador de fontes (papel proposto) | Revisar URL, órgão, formato, licença, data e disponibilidade do catálogo municipal | Papel ainda não definido; não deve receber acesso global por padrão |
-| Portal/órgão oficial | Continua sendo a fonte de verdade dos dados municipais e pedidos de informação | O CITY EYES não representa nem fala em nome do órgão |
+| ID | Ator | Permissão | Limite no MVP |
+|---|---|---|---|
+| ACT-01 | Visitante | PERM-01: ler diretório e abrir links | Não precisa de conta; não cria vínculo oficial |
+| ACT-02 | Cidadão autenticado | PERM-01; demais permissões seguem a frente urbana | Não altera fonte oficial nem cria protocolo municipal |
+| ACT-03 | Operador municipal | PERM-04 para fila; PERM-01 para ler links | Não edita catálogo nem associa contrato a relato |
+| ACT-07 | Curador do catálogo (parceiro por papel, via repositório) | PERM-08: propor mudança via PR com revisão cruzada | Não é papel administrativo do app nem tem acesso municipal |
+| Entidade externa | Portal/órgão oficial | Nenhuma permissão no CITY EYES | É a fonte original; CITY EYES não fala em nome do órgão |
 
 - **US-T-01 — Encontrar fontes oficiais.** Como visitante, quero escolher uma cidade e encontrar seu portal de transparência, obras, dados abertos e canal de informação. Aceite: links identificam órgão/categoria e abrem a fonte oficial; nenhuma autenticação é exigida para consulta.
 - **US-T-02 — Distinguir relato e protocolo oficial.** Como cidadã, quero saber se minha ocorrência existe apenas no CITY EYES ou também em um canal oficial. Aceite: por padrão aparece “Relato da comunidade — não enviado à prefeitura”; só exibir protocolo/estado oficial com referência comprovada e atualização identificada.
 - **US-T-03 — Ver origem e atualidade.** Como pessoa usuária, quero entender de onde veio cada dado e quando foi conferido. Aceite: exibir órgão, URL, formato/licença conhecidos, data de consulta e data declarada pela fonte; datas ausentes são apresentadas como desconhecidas, nunca inventadas.
-- **US-T-04 — Revisar uma referência.** Como operador autorizado, quero anexar um link público relacionado a uma ocorrência. Aceite: só na cidade autorizada, com URL/identificador e justificativa; referência fica como pendente até revisão e mantém histórico de quem a confirmou.
-- **US-T-05 — Recuperar falha de fonte.** Como visitante, quero continuar usando o app quando o portal oficial estiver indisponível. Aceite: erro não se transforma em dado vazio “atual”; mostrar última consulta, aviso de indisponibilidade e link para tentar abrir a fonte original.
+- **US-T-04 — Relacionar fonte a ocorrência (futuro).** Exige identificador público, justificativa e revisão humana; não faz parte do MVP.
+- **US-T-05 — Lidar com link que não abre.** Como visitante, quero saber que o destino externo falhou sem perder o CITY EYES. Aceite: a lista permanece disponível, falha de abertura é comunicada quando o sistema a reportar e o app não afirma que a fonte está atual.
+- **US-T-06 — Manter o catálogo com revisão.** Como curador, quero propor atualização de link e metadados via PR. Aceite: cada item identifica cidade, órgão, categoria, URL e data de conferência; outro colaborador revisa antes de integrar; nenhum login ou segredo municipal é coletado.
 
 ### Casos de uso, telas e critérios
 
-1. **UC-T-01 — Consultar fontes da cidade:** selecionar uma das quatro cidades, abrir a seção “Transparência”, filtrar por portal/obras/dados abertos/acesso à informação e abrir a fonte oficial.
+1. **UC-T-01 — Consultar fontes da cidade:** selecionar uma das quatro cidades, abrir a seção “Transparência”, navegar por categoria (portal/obras/dados abertos/acesso à informação, conforme os links verificados) e abrir a fonte oficial.
 2. **UC-T-02 — Conferir contexto de uma ocorrência:** abrir o detalhe; separar o histórico de participação CITY EYES de qualquer referência oficial; mostrar fonte e datas; explicar quando não existe integração.
-3. **UC-T-03 — Fonte indisponível ou desatualizada:** manter o histórico do CITY EYES, exibir a falha e a última data conhecida e oferecer link-out; nunca apresentar cache como situação atual.
+3. **UC-T-03 — Link recusado ou não confirmado:** manter o histórico do CITY EYES, explicar que o destino não foi confirmado ou que a abertura falhou e oferecer retorno ao app; nunca afirmar disponibilidade ou atualização em tempo real.
 
-Telas candidatas: diretório por cidade; cartão “Fontes públicas” no detalhe da ocorrência; página externa no navegador/dispositivo. Um catálogo administrativo para manter as fontes é evolução e depende de definição do curador e das permissões.
+**UI-T-01 — Diretório por cidade:** mostra somente links verificados para a cidade ativa, por categoria; informa órgão, destino externo, data de conferência e data declarada pela fonte quando disponível. Categoria sem URL validada aparece como “fonte não confirmada”, não como placeholder.
 
-Critérios mínimos: toda informação municipal tem fonte e cidade; conteúdo comunitário, oficial e demonstrativo usa rótulos diferentes; referência nunca atravessa cidades sem validação; nenhum erro de fonte bloqueia consultas e denúncias; leitor de tela e layout mobile anunciam título, órgão, datas, estado e destino do link; estados carregando/vazio/erro são claros. As páginas de Ponta Grossa e o caminho de dados abertos de Londrina precisam de verificação manual antes de virarem links de produção, pois a captura automatizada nesta pesquisa teve limitações.
+**UI-T-02 — Aviso de origem no detalhe:** separa histórico comunitário/demo de fonte oficial; informa “Relato não enviado à prefeitura” e “Não há vínculo oficial confirmado”. O cartão não associa obra, contrato ou dado financeiro à ocorrência.
+
+Critérios mínimos: cada link publicado tem fonte oficial e cidade corretas; conteúdo comunitário, oficial e demonstrativo usa rótulos diferentes; nenhum erro de link bloqueia relatos ou fila; leitor de tela e layout mobile anunciam título, órgão, datas e destino externo; carregamento, vazio, link recusado e data desconhecida têm estado claro. A rota legada HTTP de Londrina não entra no catálogo; Ponta Grossa e destinos de Londrina com captura limitada precisam de conferência manual HTTPS antes da publicação.
 
 ### Dados, arquitetura, privacidade e testes propostos
 
-O modelo conceitual futuro pode incluir `public_sources` (cidade, órgão, tipo, URL oficial, formato, licença, método de obtenção, frequência declarada, `last_checked_at`, `data_as_of` e disponibilidade); `source_snapshots`/execuções (fonte, identificador de versão ou hash, datas, resultado e erro); e `report_public_references` (relato, fonte, identificador externo, tipo e justificativa do vínculo, estado pendente/verificado/contestado, pessoa revisora e data). Isso é uma proposta documental, não uma alteração do esquema PostgreSQL atual.
+**DATA-09 — Item do catálogo curado:** configuração estática sob controle de versão com cidade, órgão, categoria, título, URL HTTPS, `last_checked_at`, `data_as_of` opcional e estado da verificação. O MVP não precisa de `public_sources`, snapshots, tabela de vínculo, API nova ou migration. `source_snapshots` e `report_public_references` ficam como opções futuras após validação de integração e governança.
 
-No MVP com links, o cliente abre o portal original; não faz chamadas diretas a sites municipais nem scraping. Se houver conectores numa evolução, executá-los no backend, em tarefas limitadas, com paginação/agregação, cache, controle de origem, licença e atualização. Nunca enviar dumps grandes ao app: um exemplo de dataset municipal de atendimento tem tamanho de 129 MB; expor apenas recortes necessários e avaliar privacidade antes de reutilização. Aplicar minimização, finalidade clara, proteção de dados pessoais e segregação por cidade; não publicar endereço exato ou identidade de quem pediu serviço sem necessidade e autorização.
+O catálogo é mantido por PR com conferência do destino, revisão cruzada e proveniência. O app abre somente URLs HTTPS estáticas previamente aprovadas; não busca URLs fornecidas por usuários, não lê conteúdo remoto no cliente e não faz scraping. Link-out não exige chamada municipal por abertura nem nova tabela PostgreSQL. Qualquer futura reutilização de dados exige análise de finalidade, licença, privacidade, atualização e segurança antes de implementação.
 
 | ID | Cenário proposto | Resultado esperado |
 |---|---|---|
-| T-27 | Abrir fontes por cidade | Cada link aponta ao município correto e a fonte é rotulada como oficial |
+| T-27 | Abrir fontes por cidade | Cada link HTTPS aponta ao município correto e a fonte é rotulada como oficial |
 | T-28 | Abrir relato sem vínculo oficial | UI declara que o relato comunitário não foi enviado à prefeitura |
 | T-29 | Fonte sem data de atualização | Data fica “não informada”; app não afirma atualidade ou tempo real |
-| T-30 | Fonte indisponível/cache antigo | Aviso de indisponibilidade e data da última consulta; sem estado “atual” inferido |
-| T-31 | Referência de outra cidade | API bloqueia associação cruzada sem validação; operador não vê dados privados de outra cidade |
-| T-32 | Referência de obra/contrato sem identificador comum | Não associa automaticamente por proximidade ou texto semelhante |
-| T-33 | Dados municipais com endereço ou dado pessoal | Campos desnecessários são omitidos/agregados antes de exibir; consulta pública não revela identidade de cidadão |
+| T-30 | Link recusado ou indisponível | Diretório e relato continuam acessíveis; mensagem acessível não promete disponibilidade atual |
+| T-31 | Trocar de cidade no diretório | Só aparecem links mapeados à cidade ativa; itens da cidade anterior deixam de ser selecionáveis |
+| T-32 | Abrir portal genérico a partir de relato | UI não atribui obra/contrato à ocorrência por proximidade, categoria ou semelhança textual |
+| T-33 | Revisar catálogo antes do PR | Catálogo contém apenas metadados e URL oficial; sem dados pessoais, tokens ou conteúdo copiado |
 | T-34 | Fonte ou conteúdo de demonstração | Rótulo “demo”/“simulação” permanece visível e nunca se confunde com dado oficial |
 
-### Decisões ainda abertas
+### Restrições de implementação ainda pendentes
 
-1. A prioridade é um diretório de portais/canais, ou também um resumo de orçamento/obras dentro do CITY EYES? Recomendação: diretório + contexto por ocorrência primeiro.
-2. No MVP, todas as cidades recebem apenas links, ou uma cidade terá integração com conjunto aberto? Recomendação: links nas quatro; nenhum conector até aprovar disponibilidade e privacidade de uma fonte específica.
-3. O cidadão apenas abre canais oficiais ou o produto deve criar algum encaminhamento? Recomendação: link-out; submissão e-SIC/Ouvidoria integrada fica fora do MVP.
-4. Quem pode confirmar uma ligação entre relato e registro oficial? O papel de curador e o nível de evidência ainda precisam ser aprovados.
-5. Quais datasets/colunas podem ser reusados, sua licença e frequência? Confirmar por conjunto e município antes de qualquer coleta.
-6. Qual limite de atualização deve marcar uma fonte como desatualizada? Definir por fonte, sem regra global antes de medir as frequências declaradas.
+1. Conferir manualmente os destinos HTTPS de cada cidade/categoria; links que não puderem ser confirmados ficam marcados como indisponíveis e não como fonte atual.
+2. Registrar a data em que cada link foi conferido e separar a data declarada pela fonte; manter `data_as_of` desconhecida quando não houver evidência.
+3. A curadoria fica com o parceiro por papel, via PR e revisão cruzada; não existe papel de curador nem painel de edição dentro do app.
+4. Importação, conectores, snapshots, cartões de vínculo específico e envio e-SIC/Ouvidoria ficam fora do MVP e exigem novo escopo e validação por fonte.

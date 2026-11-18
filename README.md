@@ -10,7 +10,7 @@ Fonte canônica de produto, decisões e planejamento. O [código](https://github
 - [Decisões](docs/adr/README.md), [arquitetura](docs/arquitetura/README.md), [testes](docs/testes/README.md), [design](docs/design/README.md) e [transparência](docs/transparencia/README.md).
 - [Histórico documental](CHANGELOG.md), [auditoria de publicação](PUBLICATION-AUDIT.md).
 
-O app Expo ainda não foi implementado. Protótipos e licitações de demonstração são sintéticos. Transparência pública permanece proposta pendente de recorte.
+O app Expo já tem consulta demonstrativa de cidades e relatos no workspace; publicação e fila municipal ainda não foram implementadas. Protótipos e licitações de demonstração são sintéticos. Transparência pública foi aprovada para o MVP como diretório de links oficiais, ainda pendente de implementação.
 
 ## Referência e licença
 

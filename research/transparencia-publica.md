@@ -12,7 +12,7 @@ Transparência pública reúne publicação proativa de informações, atendimen
 
 Os quatro municípios oferecem referências úteis, mas não um contrato técnico uniforme. Curitiba separa portal fiscal e catálogo aberto e publica painel de obras; Londrina tem informações fiscais, arquivos abertos e caderno de ações e obras; Maringá organiza o portal por entidade e exercício; Ponta Grossa apresenta menus de obras, finanças e acesso à informação em seu portal oficial indexado. Isso sustenta um diretório municipal no CITY EYES, não comprova que já exista uma integração utilizável entre todos esses sistemas. [[5]](https://www.transparencia.curitiba.pr.gov.br/) [[6]](https://dadosabertos.curitiba.pr.gov.br/) [[7]](http://portaltransparencia.londrina.pr.gov.br:8080/transparencia/faq) [[8]](https://portal.londrina.pr.gov.br/caderno-de-acoes-e-obras-pml) [[9]](https://transparencia.maringa.pr.gov.br/) [[10]](https://servicos.pontagrossa.pr.gov.br/portaltransparencia/1/)
 
-**Recomendação de produto:** começar por fontes e canais oficiais nas quatro cidades, com órgão, URL, origem e datas visíveis. Manter relatos comunitários separados de registros municipais e dados demonstrativos. Qualquer catálogo importado, indicador financeiro ou associação com contrato/obra deve vir depois de validar uma fonte concreta. Essa recomendação é uma escolha de escopo, não um requisito legal nem decisão já aprovada pelo usuário.
+**Decisão de produto em 18/11/2026:** o usuário aprovou para o MVP um diretório de links oficiais nas quatro cidades, com órgão, URL e datas de proveniência visíveis. Isso aprova o recorte, não cada destino individual: a validação manual de URLs continua necessária antes da publicação. Relatos comunitários e dados demonstrativos permanecem separados de registros municipais. Catálogo importado, indicadores financeiros e associação com contrato/obra ficam fora do MVP.
 
 ## Contexto e conceitos
 
@@ -55,7 +55,7 @@ O exemplo de Curitiba também mostra uma oportunidade concreta: o catálogo já 
 
 O painel de obras de Curitiba relaciona obra, contrato e licitação dentro do sistema municipal; o caderno de Londrina descreve realizações e encaminha ao mapa de obras; Maringá disponibiliza áreas distintas de contratos e execução financeira. São referências de estrutura e navegação, não evidências de que um contrato específico financia um relato comunitário. Nenhuma fonte consultada demonstrou integração ou identificador comum com o CITY EYES. [[15]](https://www.transparencia.curitiba.pr.gov.br/sgp/obras.aspx) [[8]](https://portal.londrina.pr.gov.br/caderno-de-acoes-e-obras-pml) [[9]](https://transparencia.maringa.pr.gov.br/)
 
-**Consequência proposta:** no MVP, mostrar fontes da cidade e não atribuir valor monetário a uma ocorrência. Se futuramente houver vínculo, exigir identificador público, justificativa e revisão; distinguir “contexto municipal” de “registro específico confirmado”. Não usar IA ou correspondência de texto como autoridade para responsabilizar fornecedores, acusar irregularidade ou confirmar reparo.
+**Consequência para o MVP aprovado:** mostrar fontes da cidade e não atribuir valor monetário a uma ocorrência. Se futuramente houver vínculo, exigir identificador público, justificativa e revisão; distinguir “contexto municipal” de “registro específico confirmado”. Não usar IA ou correspondência de texto como autoridade para responsabilizar fornecedores, acusar irregularidade ou confirmar reparo.
 
 ### 4. Abertura de dados não elimina proteção e governança
 
@@ -71,9 +71,9 @@ O diretório é um recorte implementável sem depender de sistemas externos em c
 
 Um eventual módulo de dados precisa continuar dentro do monólito modular aprovado, não iniciar uma arquitetura de microserviços. Conectores por fonte podem validar arquivos em tarefas limitadas, persistir snapshots e expor leituras paginadas. Origem, cobertura, licença e data de corte tornam-se parte do contrato público, não apenas metadados internos. Importações parciais ou falhas não devem gerar zeros ou aparentes exclusões.
 
-Para indicadores financeiros, é necessário aprovar a semântica antes dos gráficos: orçamento, contratação e etapas de execução não são valores intercambiáveis. A proposta é evitar indicadores monetários no MVP de diretório e exigir validação de unidade, período, moeda e etapa antes de uma evolução. Isso é uma salvaguarda de produto, não análise contábil de qualquer município.
+Para indicadores financeiros, é necessário aprovar a semântica antes dos gráficos: orçamento, contratação e etapas de execução não são valores intercambiáveis. O MVP aprovado evita indicadores monetários; uma evolução exige validação de unidade, período, moeda e etapa. Isso é uma salvaguarda de produto, não análise contábil de qualquer município.
 
-Os requisitos, histórias, casos de uso, matriz de permissões, dados e testes especificados estão na [seção 17 do plano](../docs/CITY-EYES-plano-de-produto-e-documentacao.md#17-proposta-de-transparência-pública-aguarda-aprovação) e no [desenho complementar](../docs/CITY-EYES-transparencia-publica.md). Eles permanecem propostas até a decisão de escopo.
+Os requisitos, histórias, casos de uso, matriz de permissões, dados e testes estão na [seção 17 do plano](../docs/CITY-EYES-plano-de-produto-e-documentacao.md#17-mvp-de-transparência-pública) e no [desenho complementar](../docs/CITY-EYES-transparencia-publica.md). O escopo está aprovado; a implementação e a validação individual dos destinos seguem pendentes.
 
 ## Limitações
 
@@ -85,9 +85,9 @@ Londrina apresentou rotas diferentes, incluindo portal legado HTTP:8080 e refer�
 
 ## Recomendações e decisões
 
-**Para aprovar agora:** diretório nas quatro cidades, links externos e contexto separado por ocorrência, com rótulos de origem e datas. Não importar informação financeira nem oferecer envio e-SIC no primeiro recorte. Validar manualmente destinos de Londrina/Ponta Grossa antes de incluí-los em uma entrega pública.
+**Decisão aprovada em 18/11/2026:** diretório de links externos nas quatro cidades, com rótulos de origem e datas; o relato comunitário não é enviado à prefeitura. Não importar informação financeira nem oferecer envio e-SIC no primeiro recorte.
 
-**Antes de implementar:** escolher responsável pela curadoria, definir quem revisa vínculos, aprovar telas e estados do novo fluxo e aceitar critérios T-27–34. Não ampliar silenciosamente a lista de P0 do hackathon.
+**Antes de publicar o diretório:** validar manualmente cada URL HTTPS, registrar órgão/cidade/categoria/data de conferência, definir data declarada pela fonte apenas quando presente e não ampliar silenciosamente o escopo P0. Curadoria do catálogo ocorre por PR com revisão cruzada; não existe papel de edição dentro do app.
 
 **Para uma evolução:** escolher somente uma fonte com licença, esquema, atualização e privacidade confirmados; medir o custo de atualização; testar transformação e isolamento municipal. Só depois avaliar orçamento/obras dentro do aplicativo ou encaminhamento integrado mediante condições oficiais.
 

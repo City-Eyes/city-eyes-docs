@@ -11,13 +11,15 @@ Participação cidadã multicípio: moradores consultam e publicam relatos geolo
 - Demonstração: Curitiba, Londrina, Maringá e Ponta Grossa.
 - Paleta comunitária e quarta variante do design system aprovadas; usar tokens e componentes existentes.
 - Organização com dois repos públicos, MIT e Project único; issues separadas por `repo:code` e `repo:docs`.
+- Transparência pública no MVP como diretório de links oficiais por cidade; implementação pendente, sem ingestão ou envio municipal.
+- Frentes paralelas: LucasStop lidera relatos e fila (B-18); lft21 lidera curadoria e diretório (B-19); issues estão atribuídas por frente, com as compartilhadas para ambos. Revisar PRs um do outro e combinar o ponto de navegação compartilhado.
 
 ## Não confundir
 
 - Protótipo clicável não é app Expo, API persistente ou autenticação implementada.
 - Bbox não garante pertencimento a um limite municipal exato.
 - Câmera, metadados e detectores de IA não provam autenticidade.
-- Transparência pública segue como proposta; licitações de demonstração são fictícias.
+- Licitações de demonstração são fictícias; link oficial não significa integração nem prova de atualização dos dados.
 
 ## Fontes de verdade
 
