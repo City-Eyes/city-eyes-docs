@@ -5,3 +5,5 @@ Consulte [direções visuais](../CITY-EYES-direcoes-visuais.md) e o [design syst
 A quarta variante foi aprovada com paleta comunitária e Nunito Sans. Tokens e componentes do design system são a fonte visual única; não criar valores alternativos em telas.
 
 Fluxos, estados vazios, carregamento, erro, acessibilidade e adaptação Android/iOS devem acompanhar a implementação. A aprovação visual não significa integração do app nativo já concluída.
+
+Consulte também [telas e fluxos do app](telas.md).
