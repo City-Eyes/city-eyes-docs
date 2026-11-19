@@ -1,6 +1,6 @@
 # Telas e fluxos do app
 
-App mobile Expo/React Native, com piloto em Curitiba, Londrina, Maringá e Ponta Grossa. A consulta pública é realizada sem conta. Relatar e operar exigem login com conta Replit no app nativo; na versão web publicada o login não está disponível.
+App mobile Olhar Cidadão (nome visível; slug, esquema e identificadores seguem `city-eyes`), em Expo/React Native, com piloto em Curitiba, Londrina, Maringá e Ponta Grossa. A consulta pública é realizada sem conta. Relatar e operar exigem login com conta Replit no app nativo; na versão web publicada o login não está disponível.
 
 ## Inventário de telas
 
@@ -18,7 +18,7 @@ App mobile Expo/React Native, com piloto em Curitiba, Londrina, Maringá e Ponta
 
 ## Barra de abas
 
-Três ícones sem rótulo, alinhados na horizontal: lista (Relatos), + central (Publicar; se já houver cidade aberta, vai direto ao formulário) e selo (Prometeu cumpriu). A barra aparece nas três telas raiz; telas internas (cidade, relato, fila) abrem por cima, sem a barra.
+Barra flutuante própria (`FloatingTabBar`), na cor primária, com três abas com ícone e rótulo: lista (Relatos), + (Publicar; se já houver cidade aberta, vai direto ao formulário) e selo (Prometeu cumpriu). A aba ativa vira um botão circular em destaque, na cor de destaque, que desliza até ela com um recorte animado na barra. A barra aparece nas três telas raiz, que não somam o inset inferior que ela já cobre; telas internas (cidade, relato, fila) abrem por cima, sem a barra.
 
 ## Fluxos principais
 
